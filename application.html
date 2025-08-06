@@ -1,860 +1,1158 @@
 <!DOCTYPE html>
 <html lang="ne">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>अनलाइन आवेदन फाराम</title>
-    <!-- Tailwind CSS for styling -->
+<head> 
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Lokendra_Gaire</title>
+    <meta name="description" content="Lokendra Gaire's social and community engagement." />
+    <meta name="keywords" content="Lokendra Gaire, social engagement, community, politics, Nepal" />
+    <link rel="canonical" href="https://lokendragaire.com.np/politicaleng.html" />
+    <link rel="icon" type="image/x-icon" href="lok.ico" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LPGL4SRW14"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LPGL4SRW14');
+</script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Lato:wght@400;700;400italic;700italic&display=swap" rel="stylesheet" />
+    
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- React and ReactDOM from CDN -->
-    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <style>
+        /* Custom styles for social buttons and background colors not directly in Tailwind */
+        .btn-social {
+            /* Increased size: w-32 h-32 (96px) */
+            /* Increased icon font size: text-5xl (3rem) */
+            @apply inline-flex items-center justify-center w-32 h-32 rounded-full text-white text-5xl mx-1 transition-all duration-300 ease-in-out;
+        }
+        .btn-youtube { background-color: #FF0000; }
+        .btn-youtube:hover { background-color: #cc0000; transform: scale(1.1); }
+        .btn-facebook { background-color: #3b5998; }
+        .btn-facebook:hover { background-color: #2d4373; transform: scale(1.1); }
+        .btn-tiktok { background-color: #000000; }
+        .btn-tiktok:hover { background-color: #333333; transform: scale(1.1); }
+        .btn-linkedin { background-color: #0077B5; }
+        .btn-linkedin:hover { background-color: #005582; transform: scale(1.1); }
+        .btn-telegram { background-color: #0088cc; }
+        .btn-telegram:hover { background-color: #006699; transform: scale(1.1); }
+        .btn-meroshare { background-color: #4CAF50; } /* Example color */
+        .btn-meroshare:hover { background-color: #45a049; transform: scale(1.1); }
+        .btn-nepse { background-color: #f44336; } /* Example color */
+        .btn-nepse:hover { background-color: #d32f2f; transform: scale(1.1); }
+        .btn-map { background-color: #FFC107; color: #333; } /* Example color */
+        .btn-map:hover { background-color: #e0a800; transform: scale(1.1); }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #FFFFFF; /* White background */
+            color: #333; /* Dark text for contrast */
+            min-height: 100vh; /* Ensure enough height for scrolling */
+            display: flex;
+            flex-direction: column;
+        }
+        main {
+            flex: 1; /* Allow main content to grow and push footer down */
+        }
+        #mainNav {
+            background-color: #FFC0CB; /* Pink background for navbar */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: padding-top 0.3s ease-in-out, padding-bottom 0.3s ease-in-out;
+            z-index: 1000; /* Ensure navbar is on top */
+        }
+        #mainNav.navbar-shrink {
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
+        #mainNav .navbar-brand {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: #228B22; /* Forest Green for brand */
+        }
+        #mainNav .nav-link {
+            color: #333; /* Dark text for links */
+            font-weight: 600;
+            transition: color 0.3s ease-in-out;
+        }
+        #mainNav .nav-link:hover, #mainNav .nav-link.active {
+            color: #228B22; /* Forest Green Accent */
+        }
+        header.masthead {
+            /* Background image for the entire hero section */
+            background-image: url('https://raw.githubusercontent.com/lokendragaire/Lokendragaire.com.np/main/brp.jpg'); /* Updated background image URL */
+            background-size: contain; /* Ensures the entire image is visible without cropping */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: #cceeff; /* Changed to a slightly more blue color */
+            
+            padding: 8rem 0 0; /* Changed padding-bottom to 0 */
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-radius: 0 0 20px 20px; /* Rounded bottom corners */
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Overlay for text readability on background image */
+        header.masthead::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent dark overlay */
+            z-index: 1; /* Below content, above background image */
+        }
+        
+        .masthead-content {
+            z-index: 2; /* Ensure content is above the overlay */
+            position: relative; /* Ensure z-index works */
+            color: #FFFFFF; /* White text for contrast against potential dark image */
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5); /* Optional: add shadow for better readability */
+        }
+        .masthead-heading,
+        .masthead-subheading,
+        .masthead-bio,
+        .masthead-content h2 { /* Targeting all text elements in masthead */
+            color: #FFFFFF; /* Ensure all text within masthead is white */
+        }
+
+        .masthead-heading {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
+        }
+        .masthead-subheading {
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+        }
+        .masthead-bio {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+        .social-links h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .page-section {
+            padding: 4rem 0;
+            background-color: #FFFFFF;
+        }
+        .page-section h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #228B22;
+        }
+        .footer {
+            background-color: #F8F8F8;
+            padding: 2rem 0;
+            color: #333;
+            border-radius: 20px 20px 0 0;
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.1);
+        }
+        .footer h4 {
+            color: #228B22;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+        .footer p.lead {
+            color: #777;
+            font-size: 0.95rem;
+        }
+        .copyright {
+            background-color: #E6E6E6;
+            color: #555;
+            padding: 1rem 0;
+            font-size: 0.8rem;
+        }
+        /* Custom styles for dropdown */
+        .dropdown-menu {
+            position: absolute;
+            background-color: #FFC0CB; /* Same as navbar background */
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 8px;
+            padding: 0.5rem 0;
+            margin-top: 0.5rem; /* Space below the main nav item */
+            left: 50%; /* Center dropdown relative to parent li */
+            transform: translateX(-50%); /* Adjust for perfect centering */
+        }
+        .dropdown-menu a {
+            color: #333;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+            transition: background-color 0.3s ease;
+        }
+        .dropdown-menu a:hover {
+            background-color: #e0e0e0; /* Lighter shade on hover */
+            color: #228B22; /* Forest Green Accent */
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1023px) { /* For screens smaller than lg (1024px) */
+            #mainNav .navbar-brand {
+                margin-right: auto; /* Push brand to left */
+            }
+            #navbarResponsive {
+                width: 100%; /* Full width when collapsed */
+                flex-basis: 100%; /* Take full width */
+                flex-grow: 1;
+                align-items: flex-start; /* Align items to start */
+            }
+            #navbarResponsive ul {
+                flex-direction: column; /* Stack items vertically */
+                width: 100%; /* Full width for columns */
+                margin-left: 0; /* Remove auto margin */
+            }
+            #navbarResponsive ul li {
+                width: 100%; /* Full width for list items */
+                text-align: left; /* Align text to left */
+            }
+            .dropdown-menu {
+                position: static; /* Remove absolute positioning */
+                transform: none; /* Remove transform */
+                width: 100%; /* Make it full width */
+                box-shadow: none; /* Remove shadow for cleaner look */
+                border-radius: 0; /* Remove border-radius */
+                margin-top: 0; /* Remove margin-top */
+                background-color: #f0f0f0; /* Slightly different background for nested items */
+            }
+            .dropdown-menu a {
+                padding-left: 2.5rem; /* Indent nested items */
+            }
+            .navbar-toggler {
+                display: block; /* Show hamburger button on small screens */
+            }
+            .search-container {
+                width: 100%; /* Full width for search on small screens */
+                margin-top: 1rem; /* Add some space */
+            }
+            .search-container input { /* Adjust padding for icons */
+                padding-right: 4.5rem; /* Make space for both search and clear icons */
+            }
+            .search-container #searchActionButton {
+                right: 0.75rem; /* Adjust position for mobile */
+            }
+            .search-container #clearSearchIcon {
+                right: 2.5rem; /* Adjust position for mobile */
+            }
+        }
+        @media (min-width: 1024px) { /* For large screens (lg) and up */
+            .navbar-toggler {
+                display: none; /* Hide hamburger button on large screens */
+            }
+            #navbarResponsive {
+                display: flex !important; /* Ensure it's flex on large screens */
+            }
+            .search-container {
+                width: auto; /* Auto width on large screens */
+                margin-top: 0;
+                margin-left: 1rem; /* Space from other elements */
+            }
+            .search-container input {
+                padding-right: 4.5rem; /* Space for both icons */
+            }
+            .search-container #searchActionButton {
+                right: 0.75rem;
+            }
+            .search-container #clearSearchIcon {
+                right: 2.5rem;
+            }
+        }
+        .highlight {
+            background-color: yellow;
+            font-weight: bold;
+        }
+        /* Spinner styles */
+        .spinner {
+            border: 2px solid rgba(0, 0, 0, 0.1); /* Smaller border for smaller spinner */
+            border-left-color: #228B22; /* Forest Green */
+            border-radius: 50%;
+            width: 16px; /* Smaller size */
+            height: 16px; /* Smaller size */
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* New highlight styles for nav items and dropdown items */
+        .nav-item-highlight {
+            background-color: #a7f3d0; /* Light green for nav item */
+            border-radius: 8px;
+            padding: 0.5rem 0.75rem; /* Add padding to the highlighted link */
+        }
+        .dropdown-item-highlight {
+            background-color: #bfdbfe; /* Light blue for dropdown item */
+            border-radius: 4px;
+        }
+
+        /* Advertisement Slider Styles */
+        #adDisplayContainer {
+            position: relative;
+            width: 100%;
+            max-width: 250px; /* Thinner width for the ad */
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            height: 150px; /* Set a fixed height for a consistent look */
+        }
+
+        .slide {
+            min-width: 100%;
+            flex-shrink: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Prevents image cropping */
+            display: block;
+            cursor: pointer; /* Add a pointer cursor to indicate clickability */
+        }
+
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            padding: 0 0.5rem;
+        }
+
+        .nav-btn {
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 0.5rem;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .nav-btn:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .slider-dots {
+            position: absolute;
+            bottom: 0.5rem;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 0.25rem;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .dot.active {
+            background-color: white;
+        }
+
+        /* Modal styles */
+        .modal {
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            padding: 2rem;
+            border: 1px solid #888;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+    </style>
 </head>
-<body>
+<body id="page-top">
+    <!-- Navigation (Copied from index.html for consistency) -->
+    <nav class="navbar fixed-top py-3" id="mainNav"> 
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <a class="navbar-brand text-2xl font-bold" href="index.html">Your Useful Source</a>
+            
+            <!-- Search Bar -->
+            <div class="search-container relative flex items-center ml-4">
+                <input type="text" id="searchInput" placeholder="Search..." class="form-control rounded-full py-2 px-4 pr-18 focus:outline-none focus:ring-2 focus:ring-green-500 text-sm w-full lg:w-48">
+                <button id="searchActionButton" class="absolute right-0 top-0 mt-2 mr-3 text-gray-600 hover:text-green-700 focus:outline-none flex items-center justify-center">
+                    <i class="fas fa-search" id="searchIcon"></i>
+                    <i class="fas fa-times hidden" id="clearSearchIcon"></i>
+                    <div id="loadingSpinner" class="hidden spinner"></div>
+                </button>
+            </div>
 
-<div id="root"></div>
+            <!-- Navbar Toggler for mobile -->
+            <button class="navbar-toggler lg:hidden focus:outline-none ml-4" type="button" onclick="toggleNavbar()">
+                <i class="fas fa-bars text-3xl text-gray-700"></i>
+            </button>
 
-<script type="text/babel">
-    'use strict';
+            <div class="hidden lg:flex items-center w-auto" id="navbarResponsive"> 
+                <ul class="navbar-nav flex space-x-4 ml-auto"> 
+                    <li class="nav-item"><a class="nav-link py-2 px-3 block" href="About.html">About</a></li>
+                    
+                    <!-- First Column of Dropdowns -->
+                    <ul class="navbar-nav flex lg:space-x-4 lg:ml-auto">
+                        <!-- Portfolio Dropdown -->
+                        <li class="nav-item relative group">
+                            <a class="nav-link py-2 px-3 block cursor-pointer" onclick="toggleDropdown('portfolioDropdown')">Portfolio <i class="fas fa-caret-down ml-1"></i></a>
+                            <div id="portfolioDropdown" class="dropdown-menu hidden">
+                                <a href="portfolio.html#projects" class="flex items-center"><i class="fas fa-project-diagram mr-2 text-blue-600"></i>Projects</a>
+                                <a href="*****#achievements" class="flex items-center"><i class="fas fa-trophy mr-2 text-yellow-600"></i>Achievements</a>
+                                <a href="*******#skills" class="flex items-center"><i class="fas fa-code mr-2 text-red-600"></i>Skills</a>
+                                <a href="********#gallery" class="flex items-center"><i class="fas fa-images mr-2 text-purple-600"></i>Gallery</a>
+                            </div>
+                        </li>
 
-    // Main App component
-    const App = () => {
-        // State to manage form data
-        const [formData, setFormData] = React.useState({
-            advertisementNumber: '', // New field for advertisement number
-            appliedPosition: '', // Moved from a separate section
-            appliedLevel: '',    // Moved from a separate section
-            fullName: '',
-            fullNameEnglish: '',
-            gender: '',
-            maritalStatus: '',
-            citizenshipNo: '',
-            citizenshipIssuedDistrict: '',
-            permanentAddressWard: '',
-            permanentAddressMunicipality: '',
-            permanentAddressDistrict: '',
-            correspondenceAddressWard: '',
-            correspondenceAddressMunicipality: '',
-            correspondenceAddressDistrict: '',
-            fatherMotherName: '',
-            dob: '',
-            email: '',
-            phoneNumber: '',
-            religion: '',
-            caste: '',
-            applicationDate: '',
+                        <!-- Social Engagement Dropdown - Now a dropdown -->
+                        <li class="nav-item relative group">
+                            <a class="nav-link py-2 px-3 block cursor-pointer" onclick="toggleDropdown('socialEngagementDropdown')">Social Engagement <i class="fas fa-caret-down ml-1"></i></a>
+                            <div id="socialEngagementDropdown" class="dropdown-menu hidden">
+                                <a href="fsu.html" class="flex items-center"><i class="fas fa-graduation-cap mr-2 text-green-700"></i>गलकोट बहुमुखी क्याम्पस: निवर्तमान अध्यक्ष (स्वतन्त्र विद्यार्थी युनियन)</a>
+    
+                                <a href="#" class="flex items-center"><i class="fas fa-users mr-2 text-blue-700"></i>निजामती कर्मचारी युनियन: गलकोट सदस्य</a>
+                                <a href="#" class="flex items-center"><i class="fas fa-running mr-2 text-purple-700"></i>जनजागृति युवा क्लब: सहसचिव</a>
+                                <a href="#" class="flex items-center"><i class="fas fa-hand-holding-heart mr-2 text-orange-700"></i>लायन्स क्लब अफ गलकोट घुम्टे: Charter Member</a>
+                                <a href="#" class="flex items-center"><i class="fas fa-globe-americas mr-2 text-red-700"></i>रोट्र्याक्ट क्लब अफ गलकोट बागलुङ: International Development Chair</a>
+                               
+                            </div>
+                        </li>
+                        
+                        <!-- Trading Dropdown -->
+                        <li class="nav-item relative group">
+                            <a class="nav-link py-2 px-3 block cursor-pointer" onclick="toggleDropdown('tradingDropdown')">Trading <i class="fas fa-caret-down ml-1"></i></a>
+                            <div id="tradingDropdown" class="dropdown-menu hidden">
+                                <a href="https://meroshare.cdsc.com.np/" target="_blank" class="flex items-center"><i class="fas fa-chart-line mr-2 text-green-600"></i>MeroShare</a>
+                                <a href="https://www.nepalstock.com.np/" target="_blank" class="flex items-center"><i class="fas fa-chart-area mr-2 text-red-600"></i>NEPSE</a>
+                            <a href="news.p" target="_blank" class="flex items-center"><i class="fas fa-chart-area mr-2 text-red-600"></i>NEws portal Hamro sansar</a>
+
+                            </div>
+                        </li>
+                    </ul>
+
+                    <!-- Second Column of Dropdowns -->
+                    <ul class="navbar-nav flex lg:space-x-4 lg:ml-auto">
+                        <!-- Banking services Dropdown -->
+                        <li class="nav-item relative group">
+                            <a class="nav-link py-2 px-3 block cursor-pointer" onclick="toggleDropdown('Banking servicesDropdown')">Banking services <i class="fas fa-caret-down ml-1"></i></a>
+                            <div id="Banking servicesDropdown" class="dropdown-menu hidden"> 
+                                 <a href="commercialbank.html" class="flex items-center"><i class="fas fa-building mr-2 text-blue-600"></i>वाणिज्य बैँहरुको सेवा</a>
+                                 <a href="developmentbank.html" class="flex items-center"><i class="fas fa-building mr-2 text-green-600"></i>विकास बैँक बैँहरुको सेवा</a>
+<a href="wallet.html" class="flex items-center"><i class="fas fa-building mr-2 text-green-900"></i>Wallet service</a>
+                            </div>
+                        </li>
+
+                        <!-- Government Uses sites Dropdown -->
+                        <li class="nav-item relative group">
+                            <a class="nav-link py-2 px-3 block cursor-pointer" onclick="toggleDropdown('governmentSitesDropdown')">Government Uses sites <i class="fas fa-caret-down ml-1"></i></a>
+                            <div id="governmentSitesDropdown" class="dropdown-menu hidden"> 
+                                <a href="e-services.html" class="flex items-center"><i class="fas fa-earth mr-2 text-blue-600"></i>विद्युतिय सेवाहरु</a>
+                                <a href="https://sutra.fcgo.gov.np" target="_blank" class="flex items-center"><i class="fas fa-globe mr-2 text-indigo-600"></i>सूत्र (Sutra)</a>
+                                <a href="https://ipfms.fcgo.gov.np" target="_blank" class="flex items-center"><i class="fas fa-building mr-2 text-green-600"></i>IPFMS</a>
+                                <a href="https://ss.donidcr.gov.np/" target="_blank" class="flex items-center"><i class="fas fa-sign-in-alt mr-2 text-blue-500"></i>सामाजिक सुरक्षा भत्ता प्रणाली login</a>
+                                <a href="https://online.donidcr.gov.np/" target="_blank" class="flex items-center"><i class="fas fa-sign-in-alt mr-2 text-blue-500"></i>व्यक्तिगत घटना दर्ता प्रणाली login</a>
+                                <a href="https://versrpt.donidcr.gov.np/.donidcr.gov.np/" target="_blank" class="flex items-center"><i class="fas fa-sign-in-alt mr-2 text-blue-500"></i>हाल र साविक ठेगाना परिवर्तन</a>
+                                <a href="https://attendance.gov.np" target="_blank" class="flex items-center"><i class="fas fa-globe mr-2 text-indigo-600"></i>विद्युतिय हाजिरी प्रणाली (E-hajiri)</a>
+                                <a href="https://newpams.fcgo.gov.np/#/Login" target="_blank" class="flex items-center"><i class="fas fa-sign-in-alt mr-2 text-blue-500"></i>Lmbis Login</a>
+                                <a href="https://lmbis.gov.np//#/Login" target="_blank" class="flex items-center"><i class="fas fa-sign-in-alt mr-2 text-blue-500"></i>New PAMS Login</a>
+                                <a href="https://hmis.gov.np/hmis/dhis-web-commons/security/login.action/Login" target="_blank" class="flex items-center"><i class="fas fa-sign-in-alt mr-2 text-blue-500"></i>स्वास्थ्य व्यवस्थापन सूचना प्रणाली</a>
+                                <a href="https://ehmishttps://ehmis.org/" target="_blank" class="flex items-center"><i class="fas fa-sign-in-alt mr-2 text-blue-500"></i>ehmis portal</a>
+                                
+                            </div>
+                        </li> 
+
+                        <!-- Important Links Dropdown -->
+                        <li class="nav-item relative group">
+                            <a class="nav-link py-2 px-3 block cursor-pointer" onclick="toggleDropdown('importantLinksDropdown')">Important Links <i class="fas fa-caret-down ml-1"></i></a>
+                            <div id="importantLinksDropdown" class="dropdown-menu hidden">
+                                <a href="link.html" class="flex items-center"><i class="fas fa-briefcase mr-2 text-blue-600"></i>आवश्यक पोर्टलहरू</a>
+                                <a href="edu.html" class="flex items-center"><i class="fas fa-book mr-2 text-yellow-600"></i>शिक्षा सम्बन्धित पोर्टलहरू</a>
+                                <a href="finance.html" class="flex items-center"><i class="fas fa-coins mr-2 text-orange-600"></i>वित्तीय सेवाहरू</a>
+                                <a href="health.html" class="flex items-center"><i class="fas fa-plus-circle mr-2 text-red-600"></i>स्वास्थ्य सम्बन्धित पोर्टलहरू</a>
+                                <a href="karmachari.html" class="flex items-center"><i class="fas fa-user-tie mr-2 text-purple-600"></i>शिक्षक कर्मचारी पोर्टल</a>
+                                <a href="bi.html" class="flex items-center"><i class="fas fa-building mr-2 text-indigo-600"></i>बैँक, विमा कम्पनी तथा पुनर्विमा कम्पनीहरु</a>
+                            </div>
+                        </li>
+                        
+                        <!-- Direct Contact Dropdown -->
+                        <li class="nav-item relative group">
+                            <a class="nav-link py-2 px-3 block cursor-pointer" onclick="toggleDropdown('directContactDropdown')">Direct Contact <i class="fas fa-caret-down ml-1"></i></a>
+                            <div id="directContactDropdown" class="dropdown-menu hidden">
+                                <a href="tel:+9779869065252" class="flex items-center"><i class="fas fa-phone mr-2 text-green-500"></i>+977 9869065252</a>
+                                <a href="/cdn-cgi/l/email-protection#d0bcbfbbb5beb4a2b1feb7b1b9a2b5fee7e090b7bdb1b9bcfeb3bfbd" class="flex items-center"><i class="fas fa-envelope mr-2 text-red-500"></i><span class="__cf_email__" data-cfemail="9af6f5f1fff4fee8fbb4fdfbf3e8ffb4adaadafdf7fbf3f6b4f9f5f7">[email&#160;protected]</span></a>
+                                <a href="https://maps.google.com/?q=Galkot+Municipality-2,+Baglung,+Nepal" target="_blank" class="flex items-center"><i class="fas fa-map-marker-alt mr-2 text-blue-500"></i>Galkot Municipality-2, Baglung</a>
+                            </div>
+                        </li>
+                    </ul>
+                    <!-- Login/Logout button -->
+                    <li class="nav-item">
+                        <button id="loginButton" class="nav-link py-2 px-3 block text-blue-700 font-bold hover:bg-blue-100 rounded-md">
+                            <i class="fas fa-sign-in-alt mr-1"></i> लगइन
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Masthead (Hero Section) - Copied from index.html -->
+    <header class="masthead relative">
+        <div class="container mx-auto px-4 flex flex-col lg:flex-row items-center justify-center lg:justify-start relative z-20">
+            <div class="masthead-content text-center lg:text-left lg:w-1/2 p-4 lg:p-8">
+                <h2 class="text-xl mb-2">WELCOME TO MY WORLD</h2>
+                <h1 class="masthead-heading text-uppercase font-bold mb-2">Hi, I'm Lokendra Gaire</h1>
+                <h2 class="masthead-subheading font-bold text-black">MIS Operator</h2>
+                <h2 class="masthead-heading text-uppercase font-bold mb-2 text-blue-500">Head of Department</h2>
+                <p class="masthead-bio mt-4 text-white">
+                    Social Security and Vital Registration Department <br> Galkot Municipality Office <br> Galkot, Baglung, Nepal
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Social Media Links Section -->
+        <section class="page-section text-center py-8">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold mb-6 text-gray-800">Find me on social media</h2>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a class="btn-social btn-youtube" href="https://www.youtube.com/@hamrogalkot9" target="_blank" aria-label="YouTube">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    <a class="btn-social btn-facebook" href="https://www.facebook.com/lokendragaire7" target="_blank" aria-label="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a class="btn-social btn-tiktok" href="https://www.tiktok.com/@mr.gairelokendra" target="_blank" aria-label="TikTok">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                    <a class="btn-social btn-linkedin" href="https://www.linkedin.com/in/lokendra-gaire-70b1b1275/" target="_blank" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a class="btn-social btn-telegram" href="https://t.me/lokendragaire70" target="_blank" aria-label="Telegram">
+                        <i class="fab fa-telegram-plane"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Login Modal -->
+        <div id="loginModal" class="modal hidden">
+            <div class="modal-content">
+                <h3 class="text-2xl font-bold mb-4 text-center text-gray-800">लगइन गर्नुहोस्</h3>
+                <form id="loginForm">
+                    <div class="mb-4">
+                        <label for="usernameInput" class="block text-sm font-medium text-gray-700 mb-1">प्रयोगकर्ता नाम:</label>
+                        <input type="text" id="usernameInput" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="passwordInput" class="block text-sm font-medium text-gray-700 mb-1">पासवर्ड:</label>
+                        <input type="password" id="passwordInput" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500" required>
+                    </div>
+                    <div id="loginError" class="text-red-500 text-sm mb-4 hidden">गलत प्रयोगकर्ता नाम वा पासवर्ड।</div>
+                    <button type="submit" class="w-full bg-green-500 text-white py-2 px-4 rounded-md font-semibold hover:bg-green-600 transition-colors">
+                        लगइन
+                    </button>
+                    <button type="button" id="closeModalBtn" class="w-full bg-gray-300 text-gray-800 py-2 px-4 rounded-md font-semibold hover:bg-gray-400 transition-colors mt-2">
+                        रद्द गर्नुहोस्
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+<h2 class="text-3xl font-bold mb-6 text-gray-800">विभिन्न निवेदन तथा पत्र तयार गर्न यहाँ जानु होस</h2>
+                <div class="flex flex-wrap justify-center gap-4">
+                               <a href="renew.html" class="flex items-center"><i class="fas fa-envelope mr-2 text-blue-600"></i>सामाजिक सुरक्षा भत्ता नविकरणको लागी निवेदन। </a>
+                    <a href="letter.html" class="flex items-center"><i class="fas fa-envelope mr-2 text-blue-600"></i>सामाजिक सुरक्षा भत्ता सम्बन्धी बैँकलाई लेख्ने पत्र। </a>
+                    <a href="tamsuk.html" class="flex items-center"><i class="fas fa-envelope mr-2 text-blue-600"></i>कपाली तमसुक तयार गर्नुहोस। </a>
+<a href="birth.html" class="flex items-center"><i class="fas fa-envelope mr-2 text-blue-600"></i>जन्म प्रमाणित प्रमाणपत्र तयार गर्नुहोस।</a>
+                    <a href="application.html" class="flex items-center"><i class="fas fa-envelope mr-2 text-blue-600"></i>दरखास्त आवेदन दिनुहोस। </a>
+                     <a href="sif.html" class="flex items-center"><i class="fas fa-envelope mr-2 text-blue-600"></i>व्यवसाय दर्ता सिफारिस। </a>
+    <!-- Footer (Copied from index.html for consistency) -->
+    <footer class="footer py-2">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-wrap justify-center text-center">
+                <div class="w-full lg:w-1/2 mb-4 lg:mb-0">
+                    <h4 class="text-uppercase mb-2">Location</h4>
+                    <p class="lead text-sm text-gray-700">
+                        Galkot Municipality Office
+                        <br />
+                        Galkot, Baglung, Nepal
+                    </p>
+                    <div class="mt-4"> 
+                        <a href="https://www.google.com/maps/search/Galkot+Municipality-2,+Baglung,+Nepal" target="_blank" title="View Galkot Municipality on Google Maps">
+                            <img src="image_f958e4.png" alt="Map of Galkot Municipality-2, Baglung" class="mx-auto rounded-lg shadow-md" style="max-width: 300px;">
+                        </a>
+                        <p class="text-xs text-gray-600 mt-2">Click the map to view location on Google Maps.</p>
+                    </div>
+                </div>
+                <div class="w-full lg:w-1/2">
+                    <h4 class="text-uppercase mb-2">Website Description</h4>
+                    <p class="lead text-sm text-gray-700">A personal website to showcase my professional and social journey.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- ग्यालेरी शीर्षक यहाँ थपिएको छ -->
+    <h2 class="text-3xl font-bold text-gray-800 text-center mt-8 mb-4">ग्यालेरी</h2>
+    <!-- This container holds the copyright and the newly positioned advertisement section -->
+    <div class="bg-gray-100 flex flex-col lg:flex-row justify-between items-center py-2 px-4">
+        <!-- The original copyright section -->
+        <div class="text-center text-gray-700 w-full lg:w-auto mb-4 lg:mb-0">
+            <small>Copyright © Lokendra Gaire 2024</small>
+        </div>
+        
+        <!-- Ad Slider Display Container - Now always visible to show the space -->
+        <div id="adDisplayContainer" class="w-full lg:w-1/4 max-w-sm mx-auto my-4 lg:my-0 lg:ml-4">
+             <!-- Advertisement Management Section - Only visible if logged in -->
+            <div id="adSection" class="mb-4 hidden">
+                <!-- 'विज्ञापन तथा समाचार' लाई 'विज्ञापन तथा सूचना' मा परिवर्तन गरिएको छ -->
+                <h3 class="text-sm font-bold mb-2 text-gray-800">विज्ञापन तथा सूचना</h3>
+                <p class="text-xs text-gray-600 mt-2">यो भागमा विज्ञापन तथा समाचारहरू देखाइनेछन्। नयाँ फोटोहरू थप्नको लागि, कृपया आफ्नो GitHub repository मा `photo1.jpg`, `photo2.jpg` जस्ता नाममा फोटोहरू अपलोड गर्नुहोस्।</p>
+            </div>
+            
+            <div class="slider-container">
+                <div id="adSlider" class="slider">
+                    <!-- Default placeholder images or uploaded images will be added here by JS -->
+                    <div class="slide"><img src="photo1.jpg" alt="Placeholder Advertisement"></div>
+                    <div class="slide"><img src="photo2.jpg" alt="Placeholder Advertisement"></div>
+                    <div class="slide"><img src="photo3.jpg" alt="Placeholder Advertisement"></div>
+                </div>
+                <div class="slider-nav">
+                    <button class="nav-btn" id="prevAdBtn"><i class="fas fa-chevron-left"></i></button>
+                    <button class="nav-btn" id="nextAdBtn"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="slider-dots" id="adDots"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // JavaScript for toggling the dropdown menu
+        function toggleDropdown(dropdownId) {
+            const dropdown = document.getElementById(dropdownId);
+            const allDropdowns = document.getElementsByClassName("dropdown-menu");
+
+            // Close all other dropdowns
+            for (let i = 0; i < allDropdowns.length; i++) {
+                let openDropdown = allDropdowns[i];
+                if (openDropdown.id !== dropdownId && !openDropdown.classList.contains('hidden')) {
+                    openDropdown.classList.add('hidden');
+                }
+            }
+
+            // Toggle the clicked dropdown
+            dropdown.classList.toggle("hidden");
+        }
+
+        // JavaScript for toggling the main navbar on mobile
+        function toggleNavbar() {
+            const navbar = document.getElementById("navbarResponsive");
+            navbar.classList.toggle("hidden");
+            navbar.classList.toggle("flex"); // Toggle flex to show/hide
+            navbar.classList.toggle("flex-col"); // Ensure vertical stacking when open
+        }
+
+        // Get references to search elements and spinner
+        const searchInput = document.getElementById('searchInput');
+        const searchActionButton = document.getElementById('searchActionButton');
+        const searchIcon = document.getElementById('searchIcon');
+        const clearSearchIcon = document.getElementById('clearSearchIcon');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+
+        // Function to show/hide spinner
+        function showSpinner() {
+            searchIcon.classList.add('hidden');
+            clearSearchIcon.classList.add('hidden'); // Hide clear icon if showing
+            loadingSpinner.classList.remove('hidden');
+        }
+
+        function hideSpinner() {
+            loadingSpinner.classList.add('hidden');
+            // Decide whether to show search icon or clear icon based on input value
+            if (searchInput.value.length > 0) {
+                clearSearchIcon.classList.remove('hidden');
+            } else {
+                searchIcon.classList.remove('hidden');
+            }
+        }
+
+        // Function to remove all existing highlights (general text)
+        function removeTextHighlights() {
+            const highlights = document.querySelectorAll('.highlight');
+            highlights.forEach(span => {
+                const parent = span.parentNode;
+                // Replace the span with its text content
+                parent.replaceChild(document.createTextNode(span.textContent), span);
+                parent.normalize(); // Merge adjacent text nodes
+            });
+        }
+
+        // Function to remove nav and dropdown item highlights
+        function removeNavHighlights() {
+            document.querySelectorAll('#navbarResponsive .nav-link.nav-item-highlight').forEach(el => el.classList.remove('nav-item-highlight'));
+            document.querySelectorAll('.dropdown-item-highlight').forEach(el => el.classList.remove('dropdown-item-highlight'));
+            // Also ensure all dropdowns are closed when clearing highlights, unless a search specifically opens them
+            const allDropdowns = document.getElementsByClassName("dropdown-menu");
+            for (let i = 0; i < allDropdowns.length; i++) {
+                allDropdowns[i].classList.add('hidden');
+            }
+        }
+
+        // Combined search and highlight function
+        function performSearchAndHighlight(query) {
+            showSpinner();
+            removeTextHighlights(); // Clear general text highlights
+            removeNavHighlights(); // Clear nav/dropdown highlights
+
+            if (!query) {
+                hideSpinner();
+                return;
+            }
+
+            const regex = new RegExp(query, 'gi'); // Case-insensitive global search
+
+            // 1. Highlight main content (excluding navbar)
+            function highlightNode(node) {
+                if (node.nodeType === Node.TEXT_NODE) {
+                    const parentTagName = node.parentNode.tagName;
+                    if (parentTagName !== 'SCRIPT' && parentTagName !== 'STYLE') {
+                        const match = node.nodeValue.match(regex);
+                        if (match) {
+                            const fragment = document.createDocumentFragment();
+                            let lastIndex = 0;
+                            node.nodeValue.replace(regex, (match, offset) => {
+                                fragment.appendChild(document.createTextNode(node.nodeValue.substring(lastIndex, offset)));
+                                const span = document.createElement('span');
+                                span.className = 'highlight';
+                                span.textContent = match;
+                                fragment.appendChild(span);
+                                lastIndex = offset + match.length;
+                                return match;
+                            });
+                            fragment.appendChild(document.createTextNode(node.nodeValue.substring(lastIndex)));
+                            node.parentNode.replaceChild(fragment, node);
+                        }
+                    }
+                } else if (node.nodeType === Node.ELEMENT_NODE) {
+                    if (node.tagName !== 'SCRIPT' && node.tagName !== 'STYLE' && node.tagName !== 'NOSCRIPT' && node.id !== 'mainNav') { // Exclude mainNav from general content search
+                        for (let i = 0; i < node.childNodes.length; i++) {
+                            highlightNode(node.childNodes[i]);
+                        }
+                    }
+                }
+            }
+            highlightNode(document.body); // Start from body
+
+            // 2. Highlight Nav Items and Dropdown Items specifically
+            const navItems = document.querySelectorAll('#navbarResponsive .nav-item');
+            navItems.forEach(navItem => {
+                const navLink = navItem.querySelector('.nav-link');
+                const dropdownMenu = navItem.querySelector('.dropdown-menu');
+                let navItemMatched = false;
+
+                // Get only the text content of the navLink, excluding child elements like the icon
+                let navLinkText = '';
+                if (navLink) {
+                    for (let child of navLink.childNodes) {
+                        if (child.nodeType === Node.TEXT_NODE) {
+                            navLinkText += child.nodeValue;
+                        }
+                    }
+                }
+
+                if (navLinkText.match(regex)) {
+                    navLink.classList.add('nav-item-highlight');
+                    navItemMatched = true;
+                }
+
+                // Check dropdown items if it's a dropdown
+                if (dropdownMenu) {
+                    const dropdownLinks = dropdownMenu.querySelectorAll('a');
+                    dropdownLinks.forEach(dropdownLink => {
+                        if (dropdownLink.textContent.match(regex)) {
+                            dropdownLink.classList.add('dropdown-item-highlight');
+                            // Ensure parent dropdown is open
+                            dropdownMenu.classList.remove('hidden');
+                            // Highlight the parent nav item if not already
+                            if (!navItemMatched) {
+                                navLink.classList.add('nav-item-highlight');
+                            }
+                        }
+                    });
+                }
+            });
+
+            // Highlight the social media section links (only the remaining ones)
+            const socialLinksSection = document.querySelector('main .page-section .flex.flex-wrap');
+            if (socialLinksSection) {
+                const socialLinks = socialLinksSection.querySelectorAll('a');
+                socialLinks.forEach(link => {
+                    if (link.textContent.match(regex) || (link.getAttribute('aria-label') && link.getAttribute('aria-label').match(regex))) {
+                        link.classList.add('highlight'); // Use general highlight for these buttons
+                    }
+                });
+            }
+
+
+            setTimeout(() => {
+                hideSpinner();
+            }, 50); // Small delay to show spinner
+        }
+
+        // Function to clear search and highlights
+        function clearSearch() {
+            searchInput.value = '';
+            removeTextHighlights();
+            removeNavHighlights(); // Clear nav and dropdown highlights
+            // Also remove highlights from social media section
+            document.querySelectorAll('main .page-section .flex.flex-wrap .highlight').forEach(el => el.classList.remove('highlight'));
+            clearSearchIcon.classList.add('hidden');
+            searchIcon.classList.remove('hidden');
+        }
+
+        // Event listener for search action button click
+        searchActionButton.addEventListener('click', () => {
+            if (clearSearchIcon.classList.contains('hidden')) { // If search icon is visible, perform search
+                performSearchAndHighlight(searchInput.value);
+            } else { // If clear icon is visible, clear search
+                clearSearch();
+            }
         });
 
-        // State to manage dynamic education and experience entries
-        const [educationEntries, setEducationEntries] = React.useState([{}]);
-        const [experienceEntries, setExperienceEntries] = React.useState([{}]);
+        // Event listener for Enter key in search input
+        searchInput.addEventListener('keypress', (event) => {
+            if (event.key === 'Enter') {
+                performSearchAndHighlight(searchInput.value);
+            }
+        });
 
-        // State for photo preview visibility.
-        const [previewVisible, setPreviewVisible] = React.useState(false);
+        // Event listener for input changes to show/hide clear icon
+        searchInput.addEventListener('input', () => {
+            if (searchInput.value.length > 0) {
+                searchIcon.classList.add('hidden');
+                clearSearchIcon.classList.remove('hidden');
+            } else {
+                searchIcon.classList.remove('hidden');
+                clearSearchIcon.classList.add('hidden');
+                removeTextHighlights(); // Also remove highlights when input is cleared manually
+                removeNavHighlights(); // Clear nav and dropdown highlights when input is cleared
+                // Also remove highlights from social media section when input is cleared
+                document.querySelectorAll('main .page-section .flex.flex-wrap .highlight').forEach(el => el.classList.remove('highlight'));
+            }
+        });
 
-        // Handle all form input changes
-        const handleInputChange = (e) => {
-            const { name, value } = e.target;
-            setFormData(prevData => ({ ...prevData, [name]: value }));
-        };
-
-        // Handle adding a new education entry
-        const handleAddEducation = () => {
-            setEducationEntries([...educationEntries, {}]);
-        };
-
-        // Handle removing an education entry
-        const handleRemoveEducation = (indexToRemove) => {
-            setEducationEntries(educationEntries.filter((_, index) => index !== indexToRemove));
-        };
-
-        // Handle changes in education entries
-        const handleEducationChange = (index, e) => {
-            const { name, value } = e.target;
-            const fieldName = name.split('[')[0]; // Extract the field name (e.g., 'educationLevel' or 'otherEducationalTitle')
-            const updatedEntries = educationEntries.map((entry, i) =>
-                i === index ? { ...entry, [fieldName]: value } : entry
-            );
-            setEducationEntries(updatedEntries);
-        };
-
-        // Handle adding a new experience entry
-        const handleAddExperience = () => {
-            setExperienceEntries([...experienceEntries, {}]);
-        };
-
-        // Handle removing an experience entry
-        const handleRemoveExperience = (indexToRemove) => {
-            setExperienceEntries(experienceEntries.filter((_, index) => index !== indexToRemove));
-        };
-
-        // Handle changes in experience entries
-        const handleExperienceChange = (index, e) => {
-            const { name, value } = e.target;
-            const updatedEntries = experienceEntries.map((entry, i) =>
-                i === index ? { ...entry, [name.split('[')[0]]: value } : entry
-            );
-            setExperienceEntries(updatedEntries);
-        };
-        
-        // Function to convert a number to its Nepali numeral equivalent
-        const toNepaliNumber = (number) => {
-            if (typeof number !== 'string' && typeof number !== 'number') return '';
-            const nepaliDigits = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९'];
-            return String(number).split('').map(digit => {
-                if (digit >= '0' && digit <= '9') {
-                    return nepaliDigits[parseInt(digit, 10)];
+        // Close dropdowns and navbar if the user clicks outside of them
+        window.onclick = function(event) {
+            // Close dropdowns
+            if (!event.target.matches('.nav-link') && !event.target.closest('.dropdown-menu') && !event.target.closest('.search-container')) {
+                const dropdowns = document.getElementsByClassName("dropdown-menu");
+                for (let i = 0; i < dropdowns.length; i++) {
+                    const openDropdown = dropdowns[i];
+                    if (!openDropdown.classList.contains('hidden')) {
+                        openDropdown.classList.add('hidden');
+                    }
                 }
-                return digit;
-            }).join('');
-        };
+                // Also remove nav/dropdown highlights if clicking outside
+                removeNavHighlights();
+            }
+
+            // Close navbar if click is outside navbar and it's open
+            const navbar = document.getElementById("mainNav");
+            const navbarResponsive = document.getElementById("navbarResponsive");
+            const navbarToggler = document.querySelector('.navbar-toggler');
+            const searchContainer = document.querySelector('.search-container');
+
+            if (!navbar.contains(event.target) && !navbarToggler.contains(event.target) && !searchContainer.contains(event.target)) {
+                if (!navbarResponsive.classList.contains('hidden')) {
+                    navbarResponsive.classList.add('hidden');
+                    navbarResponsive.classList.remove('flex', 'flex-col');
+                }
+            }
+        }
         
-        // The following CSS is for styling the application, including form elements,
-        // the preview section, and the print-specific styles.
-        return (
-            <>
-                <style>
-                    {`
-                        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-                        body { font-family: 'Inter', sans-serif; background-color: #f0f2f5; color: #333; }
-                        .container { max-width: 1000px; margin: 0 auto; padding: 2rem; }
-                        .form-section-title { font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem; color: #1a202c; border-bottom: 2px solid #edf2f7; padding-bottom: 0.5rem; }
-                        .form-group label { font-weight: 500; color: #4a5568; }
-                        .btn-primary { background-color: #4299e1; color: #fff; border: none; }
-                        .btn-primary:hover { background-color: #3182ce; transform: translateY(-1px); }
-                        .btn-secondary { background-color: #e2e8f0; color: #2d3748; border: 1px solid #cbd5e0; }
-                        .btn-secondary:hover { background-color: #cbd5e0; transform: translateY(-1px); }
-                        .photo-paste-box {
-                            border: 2px dashed #a0aec0; padding: 1.5rem; border-radius: 0.5rem;
-                            text-align: center; color: #718096;
-                            height: 150px;
-                            display: flex; flex-direction: column; align-items: center; justify-content: center;
-                        }
-                        .admission-card {
-                            border: 2px solid #2b6cb0; border-radius: 12px; padding: 1.5rem; margin-top: 2rem; background-color: #ebf8ff; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08); position: relative; overflow: hidden;
-                            display: flex; flex-direction: column; gap: 1rem;
-                        }
-                        /* Updated CSS for the admission card header to use a grid for perfect centering */
-                        .admission-card .header-top {
-                            display: grid;
-                            grid-template-columns: 2cm 1fr 2cm; /* Logo column, centered text column, and a blank column for balance */
-                            align-items: center;
-                        }
-                        .admission-card .header-center {
-                            text-align: center;
-                            /* No need for padding-left or absolute positioning */
-                        }
-                        .admission-card .header-details {
-                            display: flex;
-                            justify-content: space-between;
-                            align-items: center;
-                            font-size: 0.95rem;
-                            margin-top: -0.5rem; /* Reduce space */
-                        }
-                        .admission-card .photo-box {
-                            border: 1px solid #ccc; width: 120px; height: 150px; display: flex; align-items: center; justify-content: center; background-color: #fff; overflow: hidden; text-align: center;
-                        }
-                        .admission-card .photo-box img { max-width: 100%; max-height: 100%; object-fit: contain; }
-                        .admission-card h3 { font-size: 1.7rem; font-weight: 700; color: #2b6cb0; margin-bottom: 0.5rem; text-align: center; }
-                        .admission-card p { font-size: 1.1rem; margin-bottom: 0.3rem; color: #2d3748; }
-                        /* Updated preview-form-layout to reduce gap between elements */
-                        .preview-form-layout { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem 1rem; font-size: 0.95rem; }
-                        .preview-form-layout .full-width { grid-column: 1 / -1; }
-                        .preview-form-layout .section-heading { grid-column: 1 / -1; font-weight: bold; margin-top: 0.5rem; margin-bottom: 0.25rem; border-bottom: 1px solid #ccc; padding-bottom: 0.25rem; }
-                        .preview-form-layout table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; grid-column: 1 / -1; }
-                        .preview-form-layout table th, .preview-form-layout table td { border: 1px solid #ccc; padding: 0.5rem; text-align: left; vertical-align: top; }
-                        .preview-form-layout table th { background-color: #e2e8f0; font-weight: 600; }
-                        /* Updated CSS for the preview photo box */
-                        .photo-box-preview {
-                            border: 1px solid #000;
-                            width: 35mm;
-                            height: 45mm;
-                            display: flex;
-                            flex-direction: column;
-                            align-items: center;
-                            justify-content: center;
-                            background-color: #fff;
-                            overflow: hidden;
-                            text-align: center;
-                            font-size: 0.7rem;
-                            padding: 5px;
-                            line-height: 1.2;
-                        }
-                        /* Adjusted preview-form-header to reduce gap */
-                        .preview-form-header {
-                            display: grid;
-                            grid-template-columns: 1fr 2fr 1fr;
-                            align-items: start;
-                            gap: 0.5rem;
-                            margin-bottom: 1rem;
-                            position: relative;
-                        }
-                        .preview-form-header .header-text {
-                            text-align: center;
-                        }
-                        .preview-form-header .header-right-column {
-                            display: flex;
-                            flex-direction: column;
-                            align-items: flex-end;
-                        }
-                        .preview-form-header h3 { font-size: 1.5rem; font-weight: bold; margin-bottom: 0.5rem; color: #2d3748; }
-                        .preview-form-header p { font-size: 0.9rem; color: #4a5568; }
-                        .preview-form-header .municipality-logo {
-                            justify-self: start;
-                            width: 80px; height: auto;
-                        }
-                        .thumbprint-box { border: 1px solid #000; width: 3cm; height: 3cm; display: flex; align-items: center; justify-content: center; text-align: center; font-size: 0.75rem; line-height: 1.2; padding: 5px; }
-                        @media print {
-                            body * { visibility: hidden; }
-                            .print-area, .print-area * { visibility: visible; }
-                            .print-area { position: absolute; left: 0; top: 0; width: 100%; padding: 1rem; }
-                            .container { box-shadow: none; border: none; margin: 0; padding: 0; }
-                            .preview-section { display: block; margin: 0; padding: 0; border: none; background-color: #fff; }
-                            .button-group { display: none; }
-                            .admission-card { page-break-before: always; border: 1px solid #000; padding: 1rem; margin-top: 1rem; }
-                            .admission-card .photo-box { border: 1px solid #000; }
-                            .preview-form-layout table th, .preview-form-layout table td { border: 1px solid #000; }
-                            .preview-form-layout .photo-box-preview { border: 1px solid #000; }
-                            
-                            /* START OF FIX: Ensure the personal details grid layout and boxes are preserved on print */
-                            .preview-content .grid {
-                                display: grid !important;
-                                grid-template-columns: repeat(3, 1fr) !important;
-                                gap: 0.5rem !important;
+        // ==========================================
+        //  Advertisement Slider & Login Logic
+        // ==========================================
+        document.addEventListener('DOMContentLoaded', () => {
+            const adSlider = document.getElementById('adSlider');
+            const prevAdBtn = document.getElementById('prevAdBtn');
+            const nextAdBtn = document.getElementById('nextAdBtn');
+            const adDots = document.getElementById('adDots');
+            const adSection = document.getElementById('adSection');
+            const adDisplayContainer = document.getElementById('adDisplayContainer');
+
+            const loginButton = document.getElementById('loginButton');
+            const loginModal = document.getElementById('loginModal');
+            const closeModalBtn = document.getElementById('closeModalBtn');
+            const loginForm = document.getElementById('loginForm');
+            const loginError = document.getElementById('loginError');
+            
+            // This is the interval ID for the automatic slide.
+            let slideInterval;
+
+            // GitHub repository details - **IMPORTANT: These must match your repo's details**
+            // **महत्त्वपूर्ण: यी मानहरू तपाईंको वास्तविक GitHub रिपोजिटरीको विवरणसँग मिल्नुपर्छ।**
+            // <<== यहाँ आफ्नो GitHub username राख्नुहोस्
+            const githubRepoOwner = 'lokendragaire'; 
+            // <<== यहाँ आफ्नो रिपोजिटरीको नाम राख्नुहोस् (यो 'Lokendragaire.com.np' मा परिवर्तन गरिएको छ)
+            const githubRepoName = 'Lokendragaire.com.np'; 
+            const githubBranch = 'main';
+            const githubBaseUrl = `https://raw.githubusercontent.com/${githubRepoOwner}/${githubRepoName}/${githubBranch}/`;
+            const githubLoginUrl = `https://github.com/${githubRepoOwner}/${githubRepoName}/`; // Changed to the repo's main page
+            
+            // Log the constructed URL for debugging purposes
+            console.log(`Debug: The base URL being used is: ${githubBaseUrl}`);
+
+            let images = []; // Array to store image URLs
+            let currentSlideIndex = 0;
+
+            // Login Modal Functions
+            const openLoginModal = () => {
+                loginModal.classList.remove('hidden');
+            };
+
+            const closeLoginModal = () => {
+                loginModal.classList.add('hidden');
+                loginError.classList.add('hidden');
+                loginForm.reset();
+            };
+
+            // Login form submission handler
+            loginForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const username = document.getElementById('usernameInput').value;
+                const password = document.getElementById('passwordInput').value;
+
+                // Hardcoded credentials for demonstration
+                // Replace with a real authentication system if needed
+                if (username === 'lokendra' && password === 'password123') {
+                    // Simulate successful login
+                    localStorage.setItem('isLoggedIn', 'true');
+                    closeLoginModal();
+                    // Open a new tab to the GitHub repository page where they can manage files
+                    window.open(githubLoginUrl, '_blank');
+                    checkLoginStatus();
+                } else {
+                    loginError.classList.remove('hidden');
+                }
+            });
+
+            closeModalBtn.addEventListener('click', closeLoginModal);
+
+            // Function to handle the logout
+            const handleLogout = () => {
+                localStorage.removeItem('isLoggedIn');
+                checkLoginStatus();
+            };
+
+            // Function to check login status from localStorage and update UI
+            const checkLoginStatus = () => {
+                const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+                
+                if (isLoggedIn) {
+                    loginButton.innerHTML = '<i class="fas fa-sign-out-alt mr-1"></i> लगआउट';
+                    loginButton.classList.remove('text-blue-700', 'hover:bg-blue-100');
+                    loginButton.classList.add('text-red-700', 'hover:bg-red-100');
+                    adSection.classList.remove('hidden'); // Show ad management for logged-in user
+                    loginButton.onclick = handleLogout; // Set logout function
+                } else {
+                    loginButton.innerHTML = '<i class="fas fa-in-alt mr-1"></i> लगइन';
+                    loginButton.classList.remove('text-red-700', 'hover:bg-red-100');
+                    loginButton.classList.add('text-blue-700', 'hover:bg-blue-100');
+                    adSection.classList.add('hidden'); // Hide ad management for logged-out user
+                    loginButton.onclick = openLoginModal; // Open modal for login
+                }
+                
+                // Always fetch images to display the slider, regardless of login status
+                fetchImagesFromGitHub();
+            };
+
+            // Function to fetch images from GitHub based on filenames
+            const fetchImagesFromGitHub = async () => {
+                images = []; // Clear existing images
+                const imageFilenames = [];
+                for (let i = 1; i <= 10; i++) { // Check for photo1.jpg to photo10.jpg
+                    imageFilenames.push(`photo${i}.jpg`);
+                }
+
+                const promises = imageFilenames.map(filename => {
+                    const imageUrl = `${githubBaseUrl}${filename}`;
+                    
+                    // Log the URL being fetched for debugging
+                    console.log(`Fetching image from: ${imageUrl}`);
+
+                    return fetch(imageUrl)
+                        .then(response => {
+                            if (response.ok) {
+                                console.log(`Successfully loaded image from: ${imageUrl}`);
+                                return imageUrl;
+                            } else {
+                                console.error(`Failed to load image from: ${imageUrl} (Status: ${response.status})`);
+                                return null;
                             }
-                            .preview-content .grid > div {
-                                border: 1px solid #000 !important;
-                                padding: 0.5rem !important;
-                            }
-                            .preview-content .grid .col-span-full {
-                                grid-column: 1 / -1 !important;
-                            }
-                            /* END OF FIX */
+                        })
+                        .catch(error => {
+                            console.error(`Error fetching image from ${imageUrl}:`, error);
+                            return null;
+                        });
+                });
 
-                            /* START OF NEW FIX: Remove borders from the "Office Use Only" section for printing */
-                            .office-use-only {
-                                display: block !important;
-                            }
-                            .office-use-only p, .office-use-only div {
-                                border: none !important;
-                                background-color: transparent !important;
-                            }
-                            .office-use-only .grid > div {
-                                border: none !important;
-                            }
-                            /* END OF NEW FIX */
-                        }
-                        /* Adjusted CSS to place the photo box on the right and reduced the gap */
-                        .admission-details-grid {
-                          display: grid;
-                          grid-template-columns: 1fr auto; /* This will place the photo on the right */
-                          gap: 0.5rem;
-                          align-items: start;
-                        }
-                        /* Signature and Stamp footer styling */
-                        .admission-footer {
-                            display: flex;
-                            justify-content: space-between;
-                            align-items: end;
-                            margin-top: 2rem;
-                        }
-                        .signature-box {
-                            text-align: center;
-                            min-width: 150px;
-                        }
-                        .signature-line {
-                            border-bottom: 1px solid #000;
-                            margin-bottom: 0.25rem;
-                            height: 1em;
-                        }
-                        /* New styling for the table in the form */
-                        .form-table-container {
-                            margin-top: 1rem;
-                            margin-bottom: 1rem;
-                        }
-                        .form-table-container table {
-                            width: 100%;
-                            border-collapse: collapse;
-                        }
-                        .form-table-container th, .form-table-container td {
-                            border: 1px solid #ccc;
-                            padding: 0.5rem;
-                            text-align: left;
-                        }
-                        .form-table-container th {
-                            background-color: #e2e8f0;
-                            font-weight: 600;
-                            font-size: 0.875rem; /* text-sm */
-                        }
-                        .form-table-container td input,
-                        .form-table-container td select {
-                            border: 1px solid #e2e8f0;
-                            padding: 0.25rem;
-                            width: 100%;
-                            border-radius: 0.25rem;
-                        }
-                        .form-table-container .remove-button {
-                            background-color: #ef4444; /* red-500 */
-                            color: white;
-                            padding: 0.25rem 0.5rem;
-                            border-radius: 0.25rem;
-                            font-size: 0.75rem;
-                            line-height: 1;
-                        }
-                        /* New style for the logo in the admission card */
-                        .emblem-logo {
-                            width: 2cm;
-                            height: 2cm;
-                            object-fit: contain; /* Ensures the image fits without distortion */
-                        }
-                        /* START OF FIX: Add a print-specific rule to make the "Office Use Only" section invisible when printing */
-                        @media print {
-                            /* NOTE: This rule is specifically for the 'office-use-only' section
-                             * to remove borders from its nested elements during printing,
-                             * while keeping the borders for the main form.
-                             */
-                            .office-use-only .grid > div {
-                                border: none !important;
-                                background-color: transparent !important;
-                                padding: 0 !important;
-                            }
-                            .office-use-only strong {
-                                font-weight: normal !important;
-                            }
-                            /* Updated styles for the signature lines and spaces, so they print properly. */
-                            .preview-content .full-width > p:nth-of-type(1) + div > div:nth-child(2) > .signature-line {
-                                display: block;
-                                border-bottom: 1px solid #000;
-                            }
-                            .preview-content .full-width > p:nth-of-type(1) + div > div:nth-child(2) > p {
-                                margin-top: 0;
-                            }
-                            .preview-content .full-width > div:nth-child(3) > div:nth-child(2) {
-                                display: none;
-                            }
-                            .preview-content .full-width > div:nth-child(3) > div:nth-child(1) {
-                                margin-right: 0;
-                            }
-                        }
-                        /* END OF FIX */
-                    `}
-                </style>
-                <div className="container">
-                    <h1 className="text-3xl font-bold text-center mb-8 text-gray-800">अनलाइन फाराम</h1>
+                const loadedImages = await Promise.all(promises);
+                images = loadedImages.filter(url => url !== null); // Keep only valid URLs
+                
+                if (images.length === 0) {
+                    console.warn("No valid images found on GitHub. Displaying placeholder.");
+                }
+                
+                renderSlider();
+                
+                // Start auto-slide only if there are images
+                // यदि १ भन्दा बढी फोटो छ भने मात्र स्लाइडर चलाउने
+                if (images.length > 1) {
+                    startAutoSlide();
+                } else {
+                    // यदि १ वा सो भन्दा कम फोटो छ भने, स्लाइडर रोक्ने
+                    clearInterval(slideInterval);
+                }
+            };
+            
+            // Function to render the slider based on the images array
+            const renderSlider = () => {
+                adSlider.innerHTML = '';
+                adDots.innerHTML = '';
+                
+                if (images.length > 0) {
+                    images.forEach((src, index) => {
+                        const slide = document.createElement('div');
+                        slide.className = 'slide relative'; 
+                        
+                        const img = document.createElement('img');
+                        img.src = src;
+                        img.alt = `Advertisement Image ${index + 1}`;
+                        img.onclick = () => {
+                            window.open(src, '_blank');
+                        };
+                        // यदि छवि लोड हुन सकेन भने, त्रुटि सन्देशसहितको खाली (placeholder) छवि देखाउनुहोस्।
+                        img.onerror = () => {
+                            // व्यक्तिगत बिग्रिएका छविहरूको लागि एक प्लेसहोल्डर छवि प्रयोग गर्नुहोस्
+                            img.src = `https://placehold.co/250x150/E0E0E0/888888?text=Image+Not+Found`;
+                            img.alt = `Image Not Found`;
+                        };
+                        slide.appendChild(img);
+                        adSlider.appendChild(slide);
 
-                    {!previewVisible && (
-                        <form className="space-y-6">
-                            {/* New fields for Advertisement Number, Position, and Level */}
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                <div className="form-group">
-                                    <label htmlFor="advertisementNumber">विज्ञापन नं.:</label>
-                                    <input type="text" id="advertisementNumber" name="advertisementNumber" value={formData.advertisementNumber} onChange={handleInputChange} placeholder="विज्ञापन नम्बर" className="rounded-lg p-2 border border-gray-300 w-full" />
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="appliedPosition">आवेदन दिइएको पद:</label>
-                                    <input type="text" id="appliedPosition" name="appliedPosition" value={formData.appliedPosition} onChange={handleInputChange} placeholder="आवेदन दिइएको पद प्रविष्ट गर्नुहोस्" className="rounded-lg p-2 border border-gray-300 w-full" />
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="appliedLevel">आवेदन दिइएको तह:</label>
-                                    <input type="text" id="appliedLevel" name="appliedLevel" value={formData.appliedLevel} onChange={handleInputChange} placeholder="आवेदन दिइएको तह प्रविष्ट गर्नुहोस्" className="rounded-lg p-2 border border-gray-300 w-full" />
-                                </div>
-                            </div>
-                            
-                            <div className="flex flex-col md:flex-row gap-6">
-                                {/* Photo paste box on the left */}
-                                <div className="md:w-1/4">
-                                    <div className="form-section-title">फोटो</div>
-                                    <div className="photo-paste-box">
-                                        <span>फाराम प्रिन्ट गरेपछि यहाँ पासपोर्ट साइजको फोटो टाँस्नुहोस्।</span>
-                                        <span className="mt-2 text-xs text-center">(फोटो टाँसेपछि फोटोमाथि हस्ताक्षर गर्नुपर्नेछ।)</span>
-                                    </div>
-                                </div>
-                                {/* Personal details on the right */}
-                                <div className="md:w-3/4 space-y-6">
-                                    <div className="form-section-title">व्यक्तिगत विवरण</div>
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                        <div className="form-group">
-                                            <label htmlFor="fullName">नाम, थर (देवनागरीमा): <span className="text-red-500">*</span></label>
-                                            <input type="text" id="fullName" name="fullName" value={formData.fullName} onChange={handleInputChange} placeholder="पूरा नाम प्रविष्ट गर्नुहोस्" className="rounded-lg p-2 border border-gray-300 w-full" />
-                                        </div>
-                                        <div className="form-group">
-                                            <label htmlFor="fullNameEnglish">नाम (अंग्रेजी ठूलो अक्षरमा):</label>
-                                            <input type="text" id="fullNameEnglish" name="fullNameEnglish" value={formData.fullNameEnglish} onChange={handleInputChange} placeholder="FULL NAME IN ENGLISH" className="rounded-lg p-2 border border-gray-300 w-full uppercase" />
-                                        </div>
-                                    </div>
+                        const dot = document.createElement('span');
+                        dot.className = 'dot';
+                        dot.addEventListener('click', () => {
+                            currentSlideIndex = index;
+                            showSlide();
+                        });
+                        adDots.appendChild(dot);
+                    });
+                    
+                    showSlide(); // Show the first slide
+                    prevAdBtn.style.display = 'block';
+                    nextAdBtn.style.display = 'block';
+                } else {
+                    // Display placeholder if no images and hide controls
+                    adSlider.innerHTML = '<div class="slide"><img src="https://placehold.co/800x400/CCCCCC/333333?text=No+Photos+Found" alt="Placeholder Advertisement"></div>';
+                    prevAdBtn.style.display = 'none';
+                    nextAdBtn.style.display = 'none';
+                }
+            };
 
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                        <div className="form-group">
-                                            <label>लिङ्ग: <span className="text-red-500">*</span></label>
-                                            <div className="flex items-center space-x-4">
-                                                <label className="inline-flex items-center">
-                                                    <input type="radio" name="gender" value="पुरुष" checked={formData.gender === 'पुरुष'} onChange={handleInputChange} className="form-radio text-blue-600" />
-                                                    <span className="ml-2">पुरुष</span>
-                                                </label>
-                                                <label className="inline-flex items-center">
-                                                    <input type="radio" name="gender" value="महिला" checked={formData.gender === 'महिला'} onChange={handleInputChange} className="form-radio text-blue-600" />
-                                                    <span className="ml-2">महिला</span>
-                                                </label>
-                                                <label className="inline-flex items-center">
-                                                    <input type="radio" name="gender" value="अन्य" checked={formData.gender === 'अन्य'} onChange={handleInputChange} className="form-radio text-blue-600" />
-                                                    <span className="ml-2">अन्य</span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div className="form-group">
-                                            <label>विवाहित/अविवाहित: <span className="text-red-500">*</span></label>
-                                            <div className="flex items-center space-x-4">
-                                                <label className="inline-flex items-center">
-                                                    <input type="radio" name="maritalStatus" value="विवाहित" checked={formData.maritalStatus === 'विवाहित'} onChange={handleInputChange} className="form-radio text-blue-600" />
-                                                    <span className="ml-2">विवाहित</span>
-                                                </label>
-                                                <label className="inline-flex items-center">
-                                                    <input type="radio" name="maritalStatus" value="अविवाहित" checked={formData.maritalStatus === 'अविवाहित'} onChange={handleInputChange} className="form-radio text-blue-600" />
-                                                    <span className="ml-2">अविवाहित</span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
+            // Function to show a specific slide
+            const showSlide = () => {
+                const slides = document.querySelectorAll('#adSlider .slide');
+                const dots = document.querySelectorAll('#adDots .dot');
 
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                        <div className="form-group">
-                                            <label htmlFor="citizenshipNo">नागरिकता नम्बर: <span className="text-red-500">*</span></label>
-                                            <input type="text" id="citizenshipNo" name="citizenshipNo" value={formData.citizenshipNo} onChange={handleInputChange} placeholder="नागरिकता नम्बर प्रविष्ट गर्नुहोस्" className="rounded-lg p-2 border border-gray-300 w-full" />
-                                        </div>
-                                        <div className="form-group">
-                                            <label htmlFor="citizenshipIssuedDistrict">जारी जिल्ला:</label>
-                                            <input type="text" id="citizenshipIssuedDistrict" name="citizenshipIssuedDistrict" value={formData.citizenshipIssuedDistrict} onChange={handleInputChange} placeholder="जारी जिल्ला" className="rounded-lg p-2 border border-gray-300 w-full" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                if (slides.length === 0) return;
 
-                            <div className="form-group">
-                                <label htmlFor="permanentAddress">स्थायी ठेगाना: <span className="text-red-500">*</span></label>
-                                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                    <input type="text" id="permanentAddressWard" name="permanentAddressWard" value={formData.permanentAddressWard} onChange={handleInputChange} placeholder="वडा नं." className="rounded-lg p-2 border border-gray-300 w-full" />
-                                    <input type="text" id="permanentAddressMunicipality" name="permanentAddressMunicipality" value={formData.permanentAddressMunicipality} onChange={handleInputChange} placeholder="गा.पा./न.पा." className="rounded-lg p-2 border border-gray-300 w-full" />
-                                    <input type="text" id="permanentAddressDistrict" name="permanentAddressDistrict" value={formData.permanentAddressDistrict} onChange={handleInputChange} placeholder="जिल्ला" className="rounded-lg p-2 border border-gray-300 w-full" />
-                                </div>
-                            </div>
+                // Loop the index if it goes out of bounds
+                if (currentSlideIndex >= slides.length) {
+                    currentSlideIndex = 0;
+                }
+                if (currentSlideIndex < 0) {
+                    currentSlideIndex = slides.length - 1;
+                }
 
-                            <div className="form-group">
-                                <label htmlFor="correspondenceAddress">पत्राचार गर्ने ठेगाना:</label>
-                                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                    <input type="text" id="correspondenceAddressWard" name="correspondenceAddressWard" value={formData.correspondenceAddressWard} onChange={handleInputChange} placeholder="वडा नं." className="rounded-lg p-2 border border-gray-300 w-full" />
-                                    <input type="text" id="correspondenceAddressMunicipality" name="correspondenceAddressMunicipality" value={formData.correspondenceAddressMunicipality} onChange={handleInputChange} placeholder="गा.पा./न.पा." className="rounded-lg p-2 border border-gray-300 w-full" />
-                                    <input type="text" id="correspondenceAddressDistrict" name="correspondenceAddressDistrict" value={formData.correspondenceAddressDistrict} onChange={handleInputChange} placeholder="जिल्ला" className="rounded-lg p-2 border border-gray-300 w-full" />
-                                </div>
-                            </div>
+                adSlider.style.transform = `translateX(-${currentSlideIndex * 100}%)`;
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div className="form-group">
-                                    <label htmlFor="fatherMotherName">बाबु/आमाको नाम, थर:</label>
-                                    <input type="text" id="fatherMotherName" name="fatherMotherName" value={formData.fatherMotherName} onChange={handleInputChange} placeholder="बाबु/आमाको पूरा नाम" className="rounded-lg p-2 border border-gray-300 w-full" />
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="dob">जन्म मिति (वि.सं.): <span className="text-red-500">*</span></label>
-                                    {/* Changed input type to 'text' and added placeholder */}
-                                    <input type="text" id="dob" name="dob" value={formData.dob} onChange={handleInputChange} placeholder="yyyy/mm/dd" className="rounded-lg p-2 border border-gray-300 w-full" />
-                                </div>
-                            </div>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div className="form-group">
-                                    <label htmlFor="email">इमेल:</label>
-                                    <input type="email" id="email" name="email" value={formData.email} onChange={handleInputChange} placeholder="इमेल प्रविष्ट गर्नुहोस्" className="rounded-lg p-2 border border-gray-300 w-full" />
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="phoneNumber">फोन नं:</label>
-                                    <input type="text" id="phoneNumber" name="phoneNumber" value={formData.phoneNumber} onChange={handleInputChange} placeholder="फोन नम्बर" className="rounded-lg p-2 border border-gray-300 w-full" />
-                                </div>
-                            </div>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div className="form-group">
-                                    <label htmlFor="religion">धर्म:</label>
-                                    <input type="text" id="religion" name="religion" value={formData.religion} onChange={handleInputChange} placeholder="धर्म" className="rounded-lg p-2 border border-gray-300 w-full" />
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="caste">जात:</label>
-                                    <input type="text" id="caste" name="caste" value={formData.caste} onChange={handleInputChange} placeholder="जात" className="rounded-lg p-2 border border-gray-300 w-full" />
-                                </div>
-                            </div>
+                // Update active dot
+                dots.forEach(dot => dot.classList.remove('active'));
+                if(dots[currentSlideIndex]) {
+                    dots[currentSlideIndex].classList.add('active');
+                }
+            };
 
-                            <div className="form-group">
-                                <label htmlFor="applicationDate">फाराम भरेको मिति (वि.सं.): <span className="text-red-500">*</span></label>
-                                {/* Changed input type to 'text' and added placeholder */}
-                                <input type="text" id="applicationDate" name="applicationDate" value={formData.applicationDate} onChange={handleInputChange} placeholder="yyyy/mm/dd" className="rounded-lg p-2 border border-gray-300 w-full" />
-                            </div>
+            // Function to go to the next slide
+            const nextSlide = () => {
+                console.log(`Debug: Advancing to next slide. Current index: ${currentSlideIndex}`);
+                currentSlideIndex++;
+                showSlide();
+            };
 
-                            {/* --- Table for Educational Qualification/Training in the main form --- */}
-                            <div className="form-section-title">शैक्षिक योग्यता/तालिम</div>
-                            <div className="overflow-x-auto form-table-container">
-                                <table className="w-full text-sm table-auto">
-                                    <thead>
-                                        <tr className="bg-gray-100">
-                                            <th className="p-2 border">शैक्षिक योग्यता</th>
-                                            <th className="p-2 border">विद्यालय/बोर्ड/तालिम दिने संस्था</th>
-                                            <th className="p-2 border">शैक्षिक उपाधि/तालिम</th>
-                                            <th className="p-2 border">संकाय</th>
-                                            <th className="p-2 border">श्रेणी/अंकिकृत</th>
-                                            <th className="p-2 border">मुख्य विषय</th>
-                                            <th className="p-2 border">उत्तीर्ण साल</th>
-                                            <th className="p-2 border">प्रतिशत/जिपिए</th>
-                                            <th className="p-2 border w-10"></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {educationEntries.map((entry, index) => (
-                                            <tr key={index}>
-                                                <td className="p-2 border">
-                                                    <select name={`educationLevel[${index}]`} value={entry.educationLevel || ''} onChange={(e) => handleEducationChange(index, e)}>
-                                                        <option value="">छान्नुहोस्</option>
-                                                        <option value="SLC/SEE">SLC/SEE</option>
-                                                        <option value="10+2">१०+२</option>
-                                                        <option value="Bachelor">स्नातक</option>
-                                                        <option value="Master">स्नातकोत्तर</option>
-                                                        <option value="PhD">पीएच.डी.</option>
-                                                        <option value="Other">अन्य</option> {/* Added 'Other' option */}
-                                                    </select>
-                                                    {/* Conditionally render the input for 'Other' */}
-                                                    {entry.educationLevel === 'Other' && (
-                                                        <input
-                                                            type="text"
-                                                            name={`otherEducationalTitle[${index}]`}
-                                                            value={entry.otherEducationalTitle || ''}
-                                                            onChange={(e) => handleEducationChange(index, e)}
-                                                            placeholder="अन्य योग्यता उल्लेख गर्नुहोस्"
-                                                            className="mt-2 rounded-lg p-2 border border-gray-300 w-full text-sm"
-                                                        />
-                                                    )}
-                                                </td>
-                                                <td className="p-2 border"><input type="text" name={`institution[${index}]`} value={entry.institution || ''} onChange={(e) => handleEducationChange(index, e)} placeholder="संस्था" /></td>
-                                                <td className="p-2 border"><input type="text" name={`educationalTitle[${index}]`} value={entry.educationalTitle || ''} onChange={(e) => handleEducationChange(index, e)} placeholder="उपाधि" /></td>
-                                                <td className="p-2 border"><input type="text" name={`faculty[${index}]`} value={entry.faculty || ''} onChange={(e) => handleEducationChange(index, e)} placeholder="संकाय" /></td>
-                                                <td className="p-2 border"><input type="text" name={`grade[${index}]`} value={entry.grade || ''} onChange={(e) => handleEducationChange(index, e)} placeholder="श्रेणी" /></td>
-                                                <td className="p-2 border"><input type="text" name={`majorSubject[${index}]`} value={entry.majorSubject || ''} onChange={(e) => handleEducationChange(index, e)} placeholder="मुख्य विषय" /></td>
-                                                <td className="p-2 border"><input type="text" name={`passingYear[${index}]`} value={entry.passingYear || ''} onChange={(e) => handleEducationChange(index, e)} placeholder="साल" /></td>
-                                                <td className="p-2 border"><input type="text" name={`percentage[${index}]`} value={entry.percentage || ''} onChange={(e) => handleEducationChange(index, e)} placeholder="प्रतिशत/जिपिए" /></td>
-                                                <td className="p-2 border"><button type="button" onClick={() => handleRemoveEducation(index)} className="remove-button">हटाउनुहोस्</button></td>
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
-                            </div>
-                            <button type="button" onClick={handleAddEducation} className="btn btn-secondary mt-2">थप शैक्षिक योग्यता थप्नुहोस्</button>
+            // Function to go to the previous slide
+            const prevSlide = () => {
+                currentSlideIndex--;
+                showSlide();
+            };
 
-                            {/* --- Table for Work Experience in the main form --- */}
-                            <div className="form-section-title">कार्य अनुभव</div>
-                            <div className="overflow-x-auto form-table-container">
-                                <table className="w-full text-sm table-auto">
-                                    <thead>
-                                        <tr className="bg-gray-100">
-                                            <th className="p-2 border">कार्यालय</th>
-                                            <th className="p-2 border">पद</th>
-                                            <th className="p-2 border">सेवा/समूह/उपसमूह</th>
-                                            <th className="p-2 border">श्रेणी/तह</th>
-                                            <th className="p-2 border">स्थायी/अस्थायी/करार</th>
-                                            <th className="p-2 border">देखि</th>
-                                            <th className="p-2 border">अवधि</th>
-                                            <th className="p-2 border w-10"></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {experienceEntries.map((entry, index) => (
-                                            <tr key={index}>
-                                                <td className="p-2 border"><input type="text" name={`organization[${index}]`} value={entry.organization || ''} onChange={(e) => handleExperienceChange(index, e)} placeholder="कार्यालय" /></td>
-                                                <td className="p-2 border"><input type="text" name={`position[${index}]`} value={entry.position || ''} onChange={(e) => handleExperienceChange(index, e)} placeholder="पद" /></td>
-                                                <td className="p-2 border"><input type="text" name={`serviceGroup[${index}]`} value={entry.serviceGroup || ''} onChange={(e) => handleExperienceChange(index, e)} placeholder="सेवा/समूह" /></td>
-                                                <td className="p-2 border"><input type="text" name={`level[${index}]`} value={entry.level || ''} onChange={(e) => handleExperienceChange(index, e)} placeholder="श्रेणी/तह" /></td>
-                                                <td className="p-2 border">
-                                                    <select name={`employmentType[${index}]`} value={entry.employmentType || ''} onChange={(e) => handleExperienceChange(index, e)}>
-                                                        <option value="">छान्नुहोस्</option>
-                                                        <option value="स्थायी">स्थायी</option>
-                                                        <option value="अस्थायी">अस्थायी</option>
-                                                        <option value="करार">करार</option>
-                                                    </select>
-                                                </td>
-                                                <td className="p-2 border"><input type="text" name={`fromDate[${index}]`} value={entry.fromDate || ''} onChange={(e) => handleExperienceChange(index, e)} placeholder="yyyy/mm/dd" /></td>
-                                                <td className="p-2 border"><input type="text" name={`duration[${index}]`} value={entry.duration || ''} onChange={(e) => handleExperienceChange(index, e)} placeholder="अवधि" /></td>
-                                                <td className="p-2 border"><button type="button" onClick={() => handleRemoveExperience(index)} className="remove-button">हटाउनुहोस्</button></td>
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
-                            </div>
-                            <button type="button" onClick={handleAddExperience} className="btn btn-secondary mt-2">थप कार्य अनुभव थप्नुहोस्</button>
+            // Start the auto-slide interval
+            const startAutoSlide = () => {
+                console.log("Debug: Attempting to start auto-slide interval.");
+                clearInterval(slideInterval); // Clear any existing interval
+                if (images.length > 1) {
+                    slideInterval = setInterval(nextSlide, 5000); // Change slide every 5 seconds
+                    console.log("Debug: Auto-slide started successfully.");
+                } else {
+                    console.log("Debug: Not enough images to start auto-slide.");
+                }
+            };
 
-                            <div className="flex justify-end gap-4 mt-8">
-                                <button type="button" onClick={() => setPreviewVisible(true)} className="btn btn-primary">पूर्वावलोकन देखाउनुहोस्</button>
-                                <button type="reset" onClick={() => {
-                                    setFormData({
-                                        advertisementNumber: '', appliedPosition: '', appliedLevel: '', fullName: '', fullNameEnglish: '', gender: '', maritalStatus: '', citizenshipNo: '', citizenshipIssuedDistrict: '', permanentAddressWard: '', permanentAddressMunicipality: '', permanentAddressDistrict: '', correspondenceAddressWard: '', correspondenceAddressMunicipality: '', correspondenceAddressDistrict: '', fatherMotherName: '', dob: '', email: '', phoneNumber: '', religion: '', caste: '', applicationDate: '',
-                                    });
-                                    setEducationEntries([{}]);
-                                    setExperienceEntries([{}]);
-                                }} className="btn btn-secondary">फाराम खाली गर्नुहोस्</button>
-                            </div>
-                        </form>
-                    )}
+            // Event listeners for navigation buttons
+            nextAdBtn.addEventListener('click', nextSlide);
+            prevAdBtn.addEventListener('click', prevSlide);
 
-                    {previewVisible && (
-                        <div id="previewSection" className="mt-8 p-8 bg-gray-50 rounded-xl shadow-lg border border-gray-200">
-                            <h2 className="text-2xl font-bold text-center mb-6 text-gray-800">फाराम पूर्वावलोकन र प्रवेशपत्र</h2>
-                            <div className="print-area">
-                                <div className="preview-content p-6 bg-white rounded-lg border border-dashed border-gray-400">
-                                    <div className="preview-form-header">
-                                        <img src="" alt="" className="municipality-logo" />
-                                        <div className="header-text">
-                                            <h3 className="text-xl font-bold">गलकोट नगरपालिका</h3>
-                                            <p className="text-sm">नगर कार्यपालिकाको कार्यालय</p>
-                                            <p className="text-sm">गण्डकी प्रदेश, नेपाल</p>
-                                            <h4 className="text-lg font-bold w-full text-center mt-4">करारको लागि दरखास्त फाराम</h4>
-                                        </div>
-                                        <div className="header-right-column">
-                                            <div className="photo-box-preview">
-                                                <span>हालसालै खिचेको पासपोर्ट साइजको <br /> फोटो टाँस्ने र फोटो र फाराममा <br /> पनि सही गर्ने उम्मेदवारले</span>
-                                            </div>
-                                            {/* Corrected: Using toNepaliNumber directly on the user-entered date */}
-                                            <p className="mt-2 text-sm text-right">मिति: <span id="previewFormDate">{toNepaliNumber(formData.applicationDate) || 'N/A'}</span></p>
-                                        </div>
-                                    </div>
-                                    
-                                    {/* New details section for Advertisement No., Position, and Level */}
-                                    <div className="full-width mt-4 text-sm font-semibold">
-                                        <p>विज्ञापन नं.: {toNepaliNumber(formData.advertisementNumber) || 'N/A'}</p>
-                                        <p>आवेदन दिइएको पद: {formData.appliedPosition || 'N/A'}</p>
-                                        <p>तह: {formData.appliedLevel || 'N/A'}</p>
-                                    </div>
-
-                                    {/* Updated Section: Personal details now displayed in bordered boxes */}
-                                    <div className="section-heading full-width mt-4">क) बैयक्तिक विवरण</div>
-                                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 mt-2 text-sm">
-                                        <div className="border border-gray-300 rounded-md p-2 bg-gray-50">
-                                            <strong>नाम, थर (देवनागरीमा):</strong> {formData.fullName || 'N/A'}
-                                        </div>
-                                        <div className="border border-gray-300 rounded-md p-2 bg-gray-50">
-                                            <strong>नाम (अंग्रेजी ठूलो अक्षरमा):</strong> {formData.fullNameEnglish || 'N/A'}
-                                        </div>
-                                        <div className="border border-gray-300 rounded-md p-2 bg-gray-50">
-                                            <strong>लिङ्ग:</strong> {formData.gender || 'N/A'}
-                                        </div>
-                                        <div className="border border-gray-300 rounded-md p-2 bg-gray-50">
-                                            <strong>विवाहित/अविवाहित:</strong> {formData.maritalStatus || 'N/A'}
-                                        </div>
-                                        <div className="border border-gray-300 rounded-md p-2 bg-gray-50">
-                                            <strong>नागरिकता नं:</strong> {toNepaliNumber(formData.citizenshipNo) || 'N/A'}
-                                        </div>
-                                        <div className="border border-gray-300 rounded-md p-2 bg-gray-50">
-                                            <strong>जारी जिल्ला:</strong> {formData.citizenshipIssuedDistrict || 'N/A'}
-                                        </div>
-                                        <div className="border border-gray-300 rounded-md p-2 bg-gray-50 col-span-full">
-                                            <strong>स्थायी ठेगाना:</strong> <br />
-                                            जिल्ला: {formData.permanentAddressDistrict || 'N/A'}, गा.पा./न.पा.: {formData.permanentAddressMunicipality || 'N/A'}, वडा नं.: {toNepaliNumber(formData.permanentAddressWard) || 'N/A'}
-                                        </div>
-                                        <div className="border border-gray-300 rounded-md p-2 bg-gray-50 col-span-full">
-                                            <strong>पत्राचार गर्ने ठेगाना:</strong> <br />
-                                            जिल्ला: {formData.correspondenceAddressDistrict || 'N/A'}, गा.पा./न.पा.: {formData.correspondenceAddressMunicipality || 'N/A'}, वडा नं.: {toNepaliNumber(formData.correspondenceAddressWard) || 'N/A'}
-                                        </div>
-                                        <div className="border border-gray-300 rounded-md p-2 bg-gray-50">
-                                            <strong>बाबु/आमाको नाम, थर:</strong> {formData.fatherMotherName || 'N/A'}
-                                        </div>
-                                        <div className="border border-gray-300 rounded-md p-2 bg-gray-50">
-                                            <strong>जन्म मिति (वि.सं.मा):</strong> {toNepaliNumber(formData.dob) || 'N/A'}
-                                        </div>
-                                        <div className="border border-gray-300 rounded-md p-2 bg-gray-50">
-                                            <strong>इमेल:</strong> {formData.email || 'N/A'}
-                                        </div>
-                                        <div className="border border-gray-300 rounded-md p-2 bg-gray-50">
-                                            <strong>फोन नं:</strong> {toNepaliNumber(formData.phoneNumber) || 'N/A'}
-                                        </div>
-                                        <div className="border border-gray-300 rounded-md p-2 bg-gray-50">
-                                            <strong>धर्म:</strong> {formData.religion || 'N/A'}
-                                        </div>
-                                        <div className="border border-gray-300 rounded-md p-2 bg-gray-50">
-                                            <strong>जात:</strong> {formData.caste || 'N/A'}
-                                        </div>
-                                    </div>
-
-                                    <div className="section-heading full-width mt-4">ख) शैक्षिक योग्यता/तालिम</div>
-                                    <table className="w-full text-sm">
-                                        <thead>
-                                            <tr>
-                                               <th className="p-2 border">शैक्षिक योग्यता</th>
-                                                <th className="p-2 border">विद्यालय/बोर्ड/तालिम दिने संस्था</th>
-                                                <th className="p-2 border">शैक्षिक उपाधि/तालिम</th>
-                                               <th className="p-2 border">संकाय</th>
-                                                <th className="p-2 border">श्रेणी/अंकिकृत</th>
-                                                <th className="p-2 border">मुख्य विषय</th>
-                                                <th className="p-2 border">उत्तीर्ण साल</th>
-                                                <th className="p-2 border">प्रतिशत/जिपिए</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {educationEntries.map((entry, index) => (
-                                                <tr key={index}>
-                                                    <td className="p-2 border">{entry.educationLevel === 'Other' ? (entry.otherEducationalTitle || 'N/A') : (entry.educationLevel || 'N/A')}</td>
-                                                    <td className="p-2 border">{entry.institution || 'N/A'}</td>
-                                                    <td className="p-2 border">{entry.educationalTitle || 'N/A'}</td>
-                                                    <td className="p-2 border">{entry.faculty || 'N/A'}</td>
-                                                    <td className="p-2 border">{entry.grade || 'N/A'}</td>
-                                                   <td className="p-2 border">{entry.majorSubject || 'N/A'}</td>
-                                                   <td className="p-2 border">{toNepaliNumber(entry.passingYear) || 'N/A'}</td>
-                                                    <td className="p-2 border">{toNepaliNumber(entry.percentage) || 'N/A'}</td>
-                                                </tr>
-                                            ))}
-                                        </tbody>
-                                    </table>
-
-                                    <div className="section-heading full-width mt-4">ग) अनुभव सम्बन्धी विवरण</div>
-                                    <table className="w-full text-sm">
-                                        <thead>
-                                            <tr>
-                                               <th className="p-2 border">कार्यालय/संस्था</th>
-                                                <th className="p-2 border">पद</th>
-                                                <th className="p-2 border">सेवा/समूह/उपसमूह</th>
-                                                 <th className="p-2 border">श्रेणी/तह</th>
-                                                <th className="p-2 border">स्थायी/अस्थायी/करार</th>
-                                               <th className="p-2 border">देखि</th>
-                                               <th className="p-2 border">अवधि</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {experienceEntries.map((entry, index) => (
-                                                <tr key={index}>
-                                                    <td className="p-2 border">{entry.organization || 'N/A'}</td>
-                                                    <td className="p-2 border">{entry.position || 'N/A'}</td>
-                                                    <td className="p-2 border">{entry.serviceGroup || 'N/A'}</td>
-                                                    <td className="p-2 border">{entry.level || 'N/A'}</td>
-                                                    <td className="p-2 border">{entry.employmentType || 'N/A'}</td>
-                                                    {/* Corrected: Using toNepaliNumber directly on the user-entered date */}
-                                                    <td className="p-2 border">{toNepaliNumber(entry.fromDate) || 'N/A'}</td>
-                                                    <td className="p-2 border">{entry.duration || 'N/A'}</td>
-                                                </tr>
-                                            ))}
-                                        </tbody>
-                                    </table>
-
-                                    <div className="full-width mt-4 text-sm">
-                                        <p>मैले यस दरखास्तमा खुलाएका सम्पूर्ण विवरणहरु सत्य छन् । दरखास्त बुझाएको पदको सूचनाको लागि अयोग्अय ठहरिने गरी कुनै सजाय पाएको छैन। कुनै कुरा ढाँटे वा लुकाएको ठहरिएमा प्रचलित कानून बमोजिम सहने छु/बुझाउने छु। उम्मेद्वारले पालना गर्ने भनी प्रचलित कानून तथा यस दरखासत फारामका पृष्ठहरुमा उल्लेखित सबै शर्त तथा नियमहरु पालना गर्न मन्जुर गर्दछु। साथै करारमा उल्लेखित शर्तहरु पूर्ण रुपमा पालना गर्नेछु र करारको समयभन्दा अगावै करारको समयभन्दा अगावै करारको अन्त्य गर्दा कम्तिमा ३ महिनाको पूर्व सूचना दिई कार्यालयमा निवेदन दिनेछु ।</p>
-                                        
-                                        {/* Updated section to place signature and thumbprints on the same line */}
-                                        <div className="flex justify-between mt-8">
-                                            <div className="flex flex-col items-center">
-                                                <div className="flex gap-4">
-                                                    <div className="thumbprint-box">दायाँ ल्याप्चे सहिछाप</div>
-                                                    <div className="thumbprint-box">बायाँ ल्याप्चे सहिछाप</div>
-                                                </div>
-                                                <p className="text-center mt-1">उम्मेदवारको सहिछाप</p>
-                                            </div>
-                                            <div className="flex flex-col items-center">
-                                                <div className="signature-line w-48 h-8"></div>
-                                                <p className="text-center mt-1">उम्मेदवारको दस्तखत</p>
-                                            </div>
-                                        </div>
-
-                                        <div className="office-use-only">
-                                            <div className="flex justify-between gap-4 mt-8">
-                                                <div><strong>कार्यालयले भर्ने:</strong></div>
-                                                <div><strong>रोल नं:</strong> _________________________</div>
-                                            </div>
-                                            <div className="text-right"><strong>मिति:</strong> {toNepaliNumber(formData.applicationDate) || 'N/A'}</div>
-                                            <div className="flex justify-between gap-4 mt-1">
-                                                <div><strong>रसिद वा भौचर नं.</strong></div>
-                                            </div>
-                                            
-                                            <p className="mt-4"><strong>दरखास्त अस्वीकृत भए सोको कारण:</strong></p>
-                                            <div className="grid grid-cols-2 gap-4 mt-2">
-                                                <div><strong>दरखास्त रुजु गर्नेको नाम र दस्तखत:</strong></div>
-                                                <div><strong>दरखास्त स्वीकृत/अस्वीकृत गर्नेको दस्तखत:</strong></div>
-                                                <div><strong>मितिः</strong></div>
-                                                <div><strong>मिति:</strong></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="admission-card">
-                                    {/* Updated header with grid layout for perfect centering */}
-                                    <div className="header-top">
-                                        {/* Placeholder for the logo with 2cm x 2cm size */}
-                                        <img src="emblem.png" alt="संस्थाको लोगो" className="emblem-logo" />
-                                        <div className="header-center">
-                                            <p className="text-xs">(अनुसूची २)</p>
-                                            <p className="text-xs">(दफा ५ को उपदफा (१) सँग सम्बन्धित)</p>
-                                            <h2 className="text-xl font-bold text-blue-800">गलकोट नगरपालिका</h2>
-                                            <p className="text-lg font-semibold">नगर कार्यपालिकाको कार्यालय</p>
-                                            <p className="text-md">गलकोट, बागलुङ</p>
-                                        </div>
-                                        {/* Empty div to balance the logo's width and center the text */}
-                                        <div></div>
-                                    </div>
-                                    
-                                    <div className="header-details">
-                                        <div>
-                                            <p><strong>पत्र संख्या:</strong> {toNepaliNumber(2077)}/{toNepaliNumber(78)}</p>
-                                            <p><strong>चलानी नम्बर:</strong></p>
-                                        </div>
-                                        <div className="text-right">
-                                            <p>गण्डकी प्रदेश, नेपाल</p>
-                                        </div>
-                                    </div>
-
-                                    <h3 className="text-2xl font-bold text-center mt-2 mb-2">प्रवेश-पत्र</h3>
-
-                                    {/* This grid positions the details on the left and the photo on the right. */}
-                                    <div className="admission-details-grid">
-                                        <div className="text-base">
-                                           
-                                            <p><strong>नाम, थर:</strong> <span className="font-bold text-blue-700">{formData.fullName || 'N/A'}</span></p>
-                                            <p><strong>विज्ञापन नं.:</strong> <span className="font-bold text-blue-700">{toNepaliNumber(formData.advertisementNumber) || 'N/A'}</span></p>
-                                             <p><strong>पद:</strong> <span className="font-bold text-blue-700">{formData.appliedPosition || 'N/A'}</span></p>
-                                            <p><strong>तह:</strong> <span className="font-bold text-blue-700">{formData.appliedLevel || 'N/A'}</span></p>
-                                            <p><strong>रोल नम्बर:</strong> _________________________</p>
-                                        </div>
-                                        <div className="photo-box">
-                                            <span className="text-sm text-gray-500">पासपोर्ट साइजको फोटो</span>
-                                        </div>
-                                    </div>
-
-                                    <div className="description col-span-full mt-4">
-                                        <p>नगर कार्यपालिकाको कार्यालयले भने : यस कार्यालयबाट लिइने उक्तपदको परीक्षामा तपाइँलाई सम्मिलित हुन अनुमति दिइएको छ । विज्ञापनमा तोकिएको शर्त नपुगेको ठहर भएमा जुनसुकै अवस्थामा पनि यो अनुमति रद्द हुनेछ ।</p>
-                                    </div>
-
-                                    {/* Updated footer section with flexbox for alignment */}
-                                    <div className="admission-footer">
-                                        {/* Left: Candidate Signature */}
-                                        <div className="signature-box text-sm">
-                                            <div className="signature-line w-full h-8"></div>
-                                            <p className="mt-2">उम्मेदवारको दस्तखत</p>
-                                        </div>
-                                        {/* Center: Office Stamp Box with a placeholder box on top */}
-                                        <div className="flex flex-col items-center">
-                                            <div className="border border-gray-400 w-32 h-16 mb-2"></div>
-                                            <p className="text-center text-sm">(कार्यालयको छाप)</p>
-                                        </div>
-                                        {/* Right: Certifying Officer Signature */}
-                                        <div className="signature-box text-sm">
-                                            <div className="signature-line w-full h-8"></div>
-                                            <p className="mt-2">प्रमाणित गर्नेको दस्तखत</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="flex justify-end gap-4 mt-8">
-                                <button type="button" onClick={() => setPreviewVisible(false)} className="btn btn-secondary">सम्पादन गर्नुहोस्</button>
-                                <button type="button" onClick={() => window.print()} className="btn btn-primary">प्रिन्ट गर्नुहोस्</button>
-                            </div>
-                        </div>
-                    )}
-                </div>
-            </>
-        );
-    };
-
-    // Render the App component into the root element
-    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
-
-</script>
+            // Initial check and render on page load
+            checkLoginStatus();
+        });
+    </script>
 </body>
 </html>
