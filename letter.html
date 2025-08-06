@@ -1,845 +1,1157 @@
 <!DOCTYPE html>
 <html lang="ne">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>सामाजिक सुरक्षा भत्ता सम्बन्धी पत्र</title>
-    <!-- Tailwind CSS CDN -->
+<head> 
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Lokendra_Gaire</title>
+    <meta name="description" content="Lokendra Gaire's social and community engagement." />
+    <meta name="keywords" content="Lokendra Gaire, social engagement, community, politics, Nepal" />
+    <link rel="canonical" href="https://lokendragaire.com.np/politicaleng.html" />
+    <link rel="icon" type="image/x-icon" href="lok.ico" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LPGL4SRW14"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LPGL4SRW14');
+</script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Lato:wght@400;700;400italic;700italic&display=swap" rel="stylesheet" />
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        /* Custom styles for social buttons and background colors not directly in Tailwind */
+        .btn-social {
+            /* Increased size: w-32 h-32 (96px) */
+            /* Increased icon font size: text-5xl (3rem) */
+            @apply inline-flex items-center justify-center w-32 h-32 rounded-full text-white text-5xl mx-1 transition-all duration-300 ease-in-out;
+        }
+        .btn-youtube { background-color: #FF0000; }
+        .btn-youtube:hover { background-color: #cc0000; transform: scale(1.1); }
+        .btn-facebook { background-color: #3b5998; }
+        .btn-facebook:hover { background-color: #2d4373; transform: scale(1.1); }
+        .btn-tiktok { background-color: #000000; }
+        .btn-tiktok:hover { background-color: #333333; transform: scale(1.1); }
+        .btn-linkedin { background-color: #0077B5; }
+        .btn-linkedin:hover { background-color: #005582; transform: scale(1.1); }
+        .btn-telegram { background-color: #0088cc; }
+        .btn-telegram:hover { background-color: #006699; transform: scale(1.1); }
+        .btn-meroshare { background-color: #4CAF50; } /* Example color */
+        .btn-meroshare:hover { background-color: #45a049; transform: scale(1.1); }
+        .btn-nepse { background-color: #f44336; } /* Example color */
+        .btn-nepse:hover { background-color: #d32f2f; transform: scale(1.1); }
+        .btn-map { background-color: #FFC107; color: #333; } /* Example color */
+        .btn-map:hover { background-color: #e0a800; transform: scale(1.1); }
+
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f0f2f5;
+            font-family: 'Montserrat', sans-serif;
+            background-color: #FFFFFF; /* White background */
+            color: #333; /* Dark text for contrast */
+            min-height: 100vh; /* Ensure enough height for scrolling */
+            display: flex;
+            flex-direction: column;
+        }
+        main {
+            flex: 1; /* Allow main content to grow and push footer down */
+        }
+        #mainNav {
+            background-color: #FFC0CB; /* Pink background for navbar */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: padding-top 0.3s ease-in-out, padding-bottom 0.3s ease-in-out;
+            z-index: 1000; /* Ensure navbar is on top */
+        }
+        #mainNav.navbar-shrink {
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
+        #mainNav .navbar-brand {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: #228B22; /* Forest Green for brand */
+        }
+        #mainNav .nav-link {
+            color: #333; /* Dark text for links */
+            font-weight: 600;
+            transition: color 0.3s ease-in-out;
+        }
+        #mainNav .nav-link:hover, #mainNav .nav-link.active {
+            color: #228B22; /* Forest Green Accent */
+        }
+        header.masthead {
+            /* Background image for the entire hero section */
+            background-image: url('https://raw.githubusercontent.com/lokendragaire/Lokendragaire.com.np/main/brp.jpg'); /* Updated background image URL */
+            background-size: contain; /* Ensures the entire image is visible without cropping */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: #cceeff; /* Changed to a slightly more blue color */
+            
+            padding: 8rem 0 0; /* Changed padding-bottom to 0 */
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-radius: 0 0 20px 20px; /* Rounded bottom corners */
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Overlay for text readability on background image */
+        header.masthead::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent dark overlay */
+            z-index: 1; /* Below content, above background image */
+        }
+        
+        .masthead-content {
+            z-index: 2; /* Ensure content is above the overlay */
+            position: relative; /* Ensure z-index works */
+            color: #FFFFFF; /* White text for contrast against potential dark image */
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5); /* Optional: add shadow for better readability */
+        }
+        .masthead-heading,
+        .masthead-subheading,
+        .masthead-bio,
+        .masthead-content h2 { /* Targeting all text elements in masthead */
+            color: #FFFFFF; /* Ensure all text within masthead is white */
+        }
+
+        .masthead-heading {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
+        }
+        .masthead-subheading {
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+        }
+        .masthead-bio {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+        .social-links h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .page-section {
+            padding: 4rem 0;
+            background-color: #FFFFFF;
+        }
+        .page-section h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #228B22;
+        }
+        .footer {
+            background-color: #F8F8F8;
+            padding: 2rem 0;
+            color: #333;
+            border-radius: 20px 20px 0 0;
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.1);
+        }
+        .footer h4 {
+            color: #228B22;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+        .footer p.lead {
+            color: #777;
+            font-size: 0.95rem;
+        }
+        .copyright {
+            background-color: #E6E6E6;
+            color: #555;
+            padding: 1rem 0;
+            font-size: 0.8rem;
+        }
+        /* Custom styles for dropdown */
+        .dropdown-menu {
+            position: absolute;
+            background-color: #FFC0CB; /* Same as navbar background */
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 8px;
+            padding: 0.5rem 0;
+            margin-top: 0.5rem; /* Space below the main nav item */
+            left: 50%; /* Center dropdown relative to parent li */
+            transform: translateX(-50%); /* Adjust for perfect centering */
+        }
+        .dropdown-menu a {
+            color: #333;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+            transition: background-color 0.3s ease;
+        }
+        .dropdown-menu a:hover {
+            background-color: #e0e0e0; /* Lighter shade on hover */
+            color: #228B22; /* Forest Green Accent */
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1023px) { /* For screens smaller than lg (1024px) */
+            #mainNav .navbar-brand {
+                margin-right: auto; /* Push brand to left */
+            }
+            #navbarResponsive {
+                width: 100%; /* Full width when collapsed */
+                flex-basis: 100%; /* Take full width */
+                flex-grow: 1;
+                align-items: flex-start; /* Align items to start */
+            }
+            #navbarResponsive ul {
+                flex-direction: column; /* Stack items vertically */
+                width: 100%; /* Full width for columns */
+                margin-left: 0; /* Remove auto margin */
+            }
+            #navbarResponsive ul li {
+                width: 100%; /* Full width for list items */
+                text-align: left; /* Align text to left */
+            }
+            .dropdown-menu {
+                position: static; /* Remove absolute positioning */
+                transform: none; /* Remove transform */
+                width: 100%; /* Make it full width */
+                box-shadow: none; /* Remove shadow for cleaner look */
+                border-radius: 0; /* Remove border-radius */
+                margin-top: 0; /* Remove margin-top */
+                background-color: #f0f0f0; /* Slightly different background for nested items */
+            }
+            .dropdown-menu a {
+                padding-left: 2.5rem; /* Indent nested items */
+            }
+            .navbar-toggler {
+                display: block; /* Show hamburger button on small screens */
+            }
+            .search-container {
+                width: 100%; /* Full width for search on small screens */
+                margin-top: 1rem; /* Add some space */
+            }
+            .search-container input { /* Adjust padding for icons */
+                padding-right: 4.5rem; /* Make space for both search and clear icons */
+            }
+            .search-container #searchActionButton {
+                right: 0.75rem; /* Adjust position for mobile */
+            }
+            .search-container #clearSearchIcon {
+                right: 2.5rem; /* Adjust position for mobile */
+            }
+        }
+        @media (min-width: 1024px) { /* For large screens (lg) and up */
+            .navbar-toggler {
+                display: none; /* Hide hamburger button on large screens */
+            }
+            #navbarResponsive {
+                display: flex !important; /* Ensure it's flex on large screens */
+            }
+            .search-container {
+                width: auto; /* Auto width on large screens */
+                margin-top: 0;
+                margin-left: 1rem; /* Space from other elements */
+            }
+            .search-container input {
+                padding-right: 4.5rem; /* Space for both icons */
+            }
+            .search-container #searchActionButton {
+                right: 0.75rem;
+            }
+            .search-container #clearSearchIcon {
+                right: 2.5rem;
+            }
+        }
+        .highlight {
+            background-color: yellow;
+            font-weight: bold;
+        }
+        /* Spinner styles */
+        .spinner {
+            border: 2px solid rgba(0, 0, 0, 0.1); /* Smaller border for smaller spinner */
+            border-left-color: #228B22; /* Forest Green */
+            border-radius: 50%;
+            width: 16px; /* Smaller size */
+            height: 16px; /* Smaller size */
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* New highlight styles for nav items and dropdown items */
+        .nav-item-highlight {
+            background-color: #a7f3d0; /* Light green for nav item */
+            border-radius: 8px;
+            padding: 0.5rem 0.75rem; /* Add padding to the highlighted link */
+        }
+        .dropdown-item-highlight {
+            background-color: #bfdbfe; /* Light blue for dropdown item */
+            border-radius: 4px;
+        }
+
+        /* Advertisement Slider Styles */
+        #adDisplayContainer {
+            position: relative;
+            width: 100%;
+            max-width: 250px; /* Thinner width for the ad */
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            height: 150px; /* Set a fixed height for a consistent look */
+        }
+
+        .slide {
+            min-width: 100%;
+            flex-shrink: 0;
             display: flex;
             justify-content: center;
-            align-items: flex-start;
-            min-height: 100vh;
-            padding: 5px;
-        }
-        .container {
-            background-color: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            padding: 15px;
-            width: 100%;
-            max-width: 800px;
-            margin-top: 10px;
-            margin-bottom: 10px;
-            position: relative; /* Crucial for absolute positioning of watermark */
-        }
-        .form-section, .preview-section {
-            display: none;
-        }
-        .form-section.active {
-            display: block;
-        }
-        .preview-section.active {
-            display: block;
-        }
-
-        /* A4 size for printing */
-        @media print {
-            body {
-                background: none;
-                margin: 0;
-                padding: 0;
-            }
-            .container {
-                box-shadow: none;
-                border-radius: 0;
-                width: 210mm; /* A4 width */
-                min-height: 297mm; /* A4 height */
-                margin: 0 auto;
-                padding: 10mm; /* Reduced print padding */
-                page-break-after: always;
-                position: relative;
-            }
-            .form-section, .buttons-container, #errorModal { /* Hide error modal during print */
-                display: none !important;
-            }
-            .preview-section {
-                display: block !important;
-                position: relative;
-            }
-            .letter-content {
-                position: relative;
-                z-index: 10;
-            }
-            .watermark-positioned {
-                display: block !important;
-                position: absolute;
-                top: 60% !important; /* Adjusted for printing */
-                left: 50% !important;
-                transform: translate(-50%, -50%) !important;
-                width: 90% !important; /* Increased watermark size for print */
-                height: auto !important;
-                opacity: 0.08 !important;
-                pointer-events: none;
-                z-index: 1;
-            }
-            .field-value {
-                white-space: normal !important;
-                overflow: visible !important;
-                text-overflow: clip !important;
-            }
-            .header-left-align {
-                text-align: left !important;
-            }
-            .header-right-align {
-                text-align: right !important;
-            }
-        }
-
-        /* Watermark styling */
-        .watermark-positioned {
-            position: absolute;
-            top: 60%; /* Adjusted to be below the heading */
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 90%; /* Increased watermark size for screen */
-            height: auto;
-            opacity: 0.08;
-            object-fit: contain;
-            pointer-events: none;
-            z-index: 1; /* Ensure it's behind the text */
-        }
-        .letter-content {
-            position: relative; /* This is crucial for positioning the watermark */
-            z-index: 10;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-            font-size: 1rem;
-        }
-        .field-row {
-            display: flex;
-            align-items: baseline;
-            margin-bottom: 8px;
-            flex-wrap: wrap;
-        }
-        .field-label {
-            flex-shrink: 0;
-            margin-right: 5px;
-            white-space: nowrap;
-        }
-        .field-value {
-            flex-grow: 1;
-            white-space: normal;
-        }
-        .header-top-right p {
-            margin-bottom: 2px;
-        }
-        .header-center p {
-            margin-bottom: 2px;
-        }
-        .header-left-align {
-            text-align: left;
-        }
-        .header-right-align {
-            text-align: right;
-        }
-        .header-flex-item {
-            flex-basis: 33.33%;
-            display: flex;
-            flex-direction: column;
             align-items: center;
         }
-        .header-flex-item.left {
-            align-items: flex-start;
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Prevents image cropping */
+            display: block;
+            cursor: pointer; /* Add a pointer cursor to indicate clickability */
         }
-        .header-flex-item.right {
-            align-items: flex-end;
-        }
-        .header-main-row {
+
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
+            transform: translateY(-50%);
+            padding: 0 0.5rem;
+        }
+
+        .nav-btn {
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 0.5rem;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .nav-btn:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .slider-dots {
+            position: absolute;
+            bottom: 0.5rem;
             width: 100%;
-            position: relative;
-        }
-        .header-bottom-left {
-            text-align: left;
-            width: 50%;
-        }
-        .header-bottom-right {
-            text-align: right;
-            width: 50%;
-        }
-        .header-top-section {
             display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
+            justify-content: center;
+            gap: 0.25rem;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .dot.active {
+            background-color: white;
+        }
+
+        /* Modal styles */
+        .modal {
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
             width: 100%;
-            margin-bottom: 10px;
-        }
-        .header-top-section .left-col {
-            flex-basis: 20%;
-            text-align: left;
-        }
-        .header-top-section .center-col {
-            flex-basis: 60%;
-            text-align: center;
-        }
-        .header-top-section .right-col {
-            flex-basis: 20%;
-            text-align: right;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
             display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            align-items: flex-end;
+            justify-content: center;
+            align-items: center;
         }
-        .header-top-section .right-col p {
-            margin-bottom: 2px;
-        }
-        .header-center p {
-            white-space: normal;
-            word-break: break-word;
-            font-size: 0.875rem;
-            line-height: 1.25rem;
-        }
-        .header-center p.text-lg {
-            font-size: 1.125rem;
-            line-height: 1.75rem;
-        }
-
-        .header-flex-item.left, .header-flex-item.right {
-            flex-basis: 15%;
-            max-width: 15%;
-        }
-        .header-flex-item.center {
-            flex-basis: 70%;
-            max-width: 70%;
-        }
-
-        /* Error Modal Styles */
-        #errorModal {
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 100;
-        }
-        #errorModal > div {
-            background-color: #fff;
-            border-radius: 0.5rem;
-            padding: 1.5rem;
-            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-        }
-
-        /* New flex class to push content down */
-        .flex-grow-content {
-            flex-grow: 1; /* This div will expand and push the footer down */
-            display: flex; /* Make its content also flex to manage internal spacing if needed */
-            flex-direction: column;
-            justify-content: flex-start; /* Align content to top within this growing div */
-        }
-        /* Ensure the hr is positioned correctly at the bottom of the flex-grow-content */
-        .flex-grow-content hr {
-            margin-top: auto; /* This will push the hr to the bottom of flex-grow-content */
+        .modal-content {
+            background-color: #fefefe;
+            padding: 2rem;
+            border: 1px solid #888;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <!-- Form Section -->
-        <div id="formSection" class="form-section active">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">सामाजिक सुरक्षा भत्ता विवरण प्रविष्ट गर्नुहोस्</h2>
-            <form id="letterForm" class="space-y-6">
-                <div>
-                    <label for="officeName" class="block text-sm font-medium text-gray-700">कार्यालयको नाम:</label>
-                    <input type="text" id="officeName" name="officeName" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="उदाहरण: वडा कार्यालय">
-                </div>
-                <div>
-                    <label for="officeAddress" class="block text-sm font-medium text-gray-700">कार्यालयको ठेगाना:</label>
-                    <input type="text" id="officeAddress" name="officeAddress" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="उदाहरण: हटिया">
-                </div>
-                <div>
-                    <label for="fiscalYear" class="block text-sm font-medium text-gray-700">आ.व. (आर्थिक वर्ष):</label>
-                    <select id="fiscalYear" name="fiscalYear" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                        <option value="">आ.व. छान्नुहोस्</option>
-                        <option value="२०७९/८०">२०७९/८०</option>
-                        <option value="२०८०/८१">२०८०/८१</option>
-                        <option value="२०८१/८२">२०८१/८२</option>
-                        <option value="२०८२/८३">२०८२/८३</option>
-                         <option value="२०८३/८४">२०८३/८४</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="patraSankhya" class="block text-sm font-medium text-gray-700">पत्र संख्याः</label>
-                    <input type="text" id="patraSankhya" name="patraSankhya" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="आ.व. छनोट गरेपछि स्वतः आउनेछ" readonly>
-                </div>
-                <div>
-                    <label for="miti" class="block text-sm font-medium text-gray-700">मितिः</label>
-                    <input type="text" id="miti" name="miti" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="YYYY/MM/DD (वि.सं.)" maxlength="10">
-                </div>
-                <div>
-                    <label for="chalanNo" class="block text-sm font-medium text-gray-700">च.नं.:</label>
-                    <input type="text" id="chalanNo" name="chalanNo" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="चलानी नं.">
-                </div>
-                <div>
-                    <label for="bankName" class="block text-sm font-medium text-gray-700">बैंकको नाम:</label>
-                    <select id="bankName" name="bankName" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                        <option value="">बैंक छान्नुहोस्</option>
-                        <option value="प्रभु बैँक लि.">प्रभु बैँक लि.</option>
-                        <option value="नेपाल बैँक लि.">नेपाल बैँक लि.</option>
-                        <option value="कामना सेवा विकास बैँक लि.">कामना सेवा विकास बैँक लि.</option>
-                        <option value="ग्लोबल आइएमइ बैँक लि">ग्लोबल आइएमइ बैँक लि</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="wardNo" class="block text-sm font-medium text-gray-700">वडा नं.:</label>
-                    <select id="wardNo" name="wardNo" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                        <option value="">वडा नं. छान्नुहोस्</option>
-                        <script>
-                            for (let i = 1; i <= 11; i++) {
-                                document.write(`<option value="${i}">${i}</option>`);
-                            }
-                        </script>
-                    </select>
-                </div>
-                <div>
-                    <label for="ssbId" class="block text-sm font-medium text-gray-700">सामाजिक सुरक्षा भत्ता परिचयपत्र नं.:</label>
-                    <input type="text" id="ssbId" name="ssbId" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="परिचयपत्र नं." maxlength="13">
-                </div>
-                <div>
-                    <label for="personName" class="block text-sm font-medium text-gray-700">व्यक्तिगत नाम:</label>
-                    <input type="text" id="personName" name="personName" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="श्री/श्रीमती/कुमारी">
-                </div>
-                <div>
-                    <label for="deathDate" class="block text-sm font-medium text-gray-700">मृत्यु मिति:</label>
-                    <input type="text" id="deathDate" name="deathDate" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="YYYY/MM/DD (वि.सं.)" maxlength="10">
-                </div>
-                <div>
-                    <label for="deathRegDate" class="block text-sm font-medium text-gray-700">मृत्युदर्ता मिति:</label>
-                    <input type="text" id="deathRegDate" name="deathRegDate" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="YYYY/MM/DD (वि.सं.)" maxlength="10">
-                </div>
-                <div>
-                    <label for="quarter" class="block text-sm font-medium text-gray-700">त्रैमासिक:</label>
-                    <select id="quarter" name="quarter" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                        <option value="">त्रैमासिक छान्नुहोस्</option>
-                        <option value="प्रथम">प्रथम</option>
-                        <option value="दोस्रो">दोस्रो</option>
-                        <option value="तेस्रो">तेस्रो</option>
-                        <option value="चौथो">चौथो</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="amount" class="block text-sm font-medium text-gray-700">रकम रु.:</label>
-                    <input type="text" id="amount" name="amount" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="रकम">
-                </div>
-                <div>
-                    <label for="relationship" class="block text-sm font-medium text-gray-700">सम्बन्ध:</label>
-                    <select id="relationship" name="relationship" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                        <option value="">सम्बन्ध छान्नुहोस्</option>
-                        <option value="श्रीमान">श्रीमान</option>
-                        <option value="श्रीमती">श्रीमती</option>
-                        <option value="छोरा">छोरा</option>
-                        <option value="छोरी">छोरी</option>
-                        <option value="बुहारी">बुहारी</option>
-                        <option value="नाती">नाती</option>
-                        <option value="नातिनी">नातिनी</option>
-                    </select>
-                </div>
-                <div id="relatedPersonNameContainer" class="hidden">
-                    <label for="relatedPersonName" class="block text-sm font-medium text-gray-700">सम्बन्धित व्यक्तिको नाम:</label>
-                    <input type="text" id="relatedPersonName" name="relatedPersonName" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="सम्बन्धित व्यक्तिको नाम">
-                </div>
-                <div>
-                    <label for="citizenshipNo" class="block text-sm font-medium text-gray-700">ना.प्र.नं.:</label>
-                    <input type="text" id="citizenshipNo" name="citizenshipNo" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="नागरिकता प्रमाण पत्र नं.">
-                </div>
-                <div>
-                    <label for="citizenshipIssueDate" class="block text-sm font-medium text-gray-700">जारी मिति:</label>
-                    <input type="text" id="citizenshipIssueDate" name="citizenshipIssueDate" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="YYYY/MM/DD (वि.सं.)" maxlength="10">
-                </div>
-                <div>
-                    <label for="remainingAmount" class="block text-sm font-medium text-gray-700">बाँकी रकम रु.:</label>
-                    <input type="text" id="remainingAmount" name="remainingAmount" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="बाँकी रकम">
-                </div>
-                <div>
-                    <label for="remainingAmountAksharu" class="block text-sm font-medium text-gray-700">अक्षेरुपीःरु. (बाँकी रकम):</label>
-                    <input type="text" id="remainingAmountAksharu" name="remainingAmountAksharu" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-100 text-gray-600" readonly placeholder="अक्षेरुपी रकम स्वतः आउनेछ">
-                </div>
-                <div>
-                    <label for="depositAccount" class="block text-sm font-medium text-gray-700">दाखिला गर्ने खाता:</label>
-                    <select id="depositAccount" name="depositAccount" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                        <option value="">खाता छान्नुहोस्</option>
-                        <option value="कोलेनिकाको बजेट खर्च खाता">कोलेनिका बजेट खर्च खाता</option>
-                        <option value="सैघीय बेरुजू खाता">सैघीय बेरुजू खाता</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="signerName" class="block text-sm font-medium text-gray-700">हस्ताक्षर गर्नेको नाम:</label>
-                    <input type="text" id="signerName" name="signerName" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="नाम">
-                </div>
-                <div>
-                    <label for="signerPost" class="block text-sm font-medium text-gray-700">पद:</label>
-                    <input type="text" id="signerPost" name="signerPost" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="पद">
-                </div>
+<body id="page-top">
+    <!-- Navigation (Copied from index.html for consistency) -->
+    <nav class="navbar fixed-top py-3" id="mainNav"> 
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <a class="navbar-brand text-2xl font-bold" href="index.html">Your Useful Source</a>
+            
+            <!-- Search Bar -->
+            <div class="search-container relative flex items-center ml-4">
+                <input type="text" id="searchInput" placeholder="Search..." class="form-control rounded-full py-2 px-4 pr-18 focus:outline-none focus:ring-2 focus:ring-green-500 text-sm w-full lg:w-48">
+                <button id="searchActionButton" class="absolute right-0 top-0 mt-2 mr-3 text-gray-600 hover:text-green-700 focus:outline-none flex items-center justify-center">
+                    <i class="fas fa-search" id="searchIcon"></i>
+                    <i class="fas fa-times hidden" id="clearSearchIcon"></i>
+                    <div id="loadingSpinner" class="hidden spinner"></div>
+                </button>
+            </div>
 
-                <div class="flex justify-center">
-                    <button type="submit" class="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-200">
-                        पूर्वावलोकन हेर्नुहोस्
-                    </button>
-                </div>
-            </form>
-        </div>
+            <!-- Navbar Toggler for mobile -->
+            <button class="navbar-toggler lg:hidden focus:outline-none ml-4" type="button" onclick="toggleNavbar()">
+                <i class="fas fa-bars text-3xl text-gray-700"></i>
+            </button>
 
-        <!-- Preview Section -->
-        <div id="previewSection" class="preview-section">
-            <div class="letter-content text-gray-800 leading-relaxed text-base relative">
-                <!-- Watermark Image - Using emblem.png for watermark -->
-                <!-- NOTE: तपाईंको emblem.png फाइललाई वेबमा होस्ट (जस्तै GitHub Pages, Imgur, वा तपाईंको आफ्नै सर्भर) गरेपछि,
-                    src="emblem.png" को सट्टा होस्ट गरिएको URL प्रयोग गर्नुहोस्।
-                    उदाहरण: src="https://raw.githubusercontent.com/your-username/your-repo/main/emblem.png"
-                -->
-                <img src="emblem.png" alt="Watermark" class="watermark-positioned" onerror="this.onerror=null;this.src='https://placehold.co/80x80/E0E0E0/000000?text=LOGO'; console.error('Error loading watermark image.');">
-                
-                <!-- This div will contain all content that should push the footer down -->
-                <div class="flex-grow-content z-10">
-                    <div class="header-main-row mb-4">
-                        <!-- Emblem -->
-                        <div class="header-flex-item left">
-                            <!-- NOTE: तपाईंको emblem.png फाइललाई वेबमा होस्ट (जस्तै GitHub Pages, Imgur, वा तपाईंको आफ्नै सर्भर) गरेपछि,
-                                src="emblem.png" को सट्टा होस्ट गरिएको URL प्रयोग गर्नुहोस्।
-                                उदाहरण: src="https://raw.githubusercontent.com/your-username/your-repo/main/emblem.png"
-                            -->
-                            <img src="emblem.png" alt="Emblem" class="w-28 h-28 object-contain" onerror="this.onerror=null;this.src='https://placehold.co/80x80/E0E0E0/000000?text=LOGO'; console.error('Error loading logo image.');">
-                        </div>
+            <div class="hidden lg:flex items-center w-auto" id="navbarResponsive"> 
+                <ul class="navbar-nav flex space-x-4 ml-auto"> 
+                    <li class="nav-item"><a class="nav-link py-2 px-3 block" href="About.html">About</a></li>
+                    
+                    <!-- First Column of Dropdowns -->
+                    <ul class="navbar-nav flex lg:space-x-4 lg:ml-auto">
+                        <!-- Portfolio Dropdown -->
+                        <li class="nav-item relative group">
+                            <a class="nav-link py-2 px-3 block cursor-pointer" onclick="toggleDropdown('portfolioDropdown')">Portfolio <i class="fas fa-caret-down ml-1"></i></a>
+                            <div id="portfolioDropdown" class="dropdown-menu hidden">
+                                <a href="portfolio.html#projects" class="flex items-center"><i class="fas fa-project-diagram mr-2 text-blue-600"></i>Projects</a>
+                                <a href="*****#achievements" class="flex items-center"><i class="fas fa-trophy mr-2 text-yellow-600"></i>Achievements</a>
+                                <a href="*******#skills" class="flex items-center"><i class="fas fa-code mr-2 text-red-600"></i>Skills</a>
+                                <a href="********#gallery" class="flex items-center"><i class="fas fa-images mr-2 text-purple-600"></i>Gallery</a>
+                            </div>
+                        </li>
+
+                        <!-- Social Engagement Dropdown - Now a dropdown -->
+                        <li class="nav-item relative group">
+                            <a class="nav-link py-2 px-3 block cursor-pointer" onclick="toggleDropdown('socialEngagementDropdown')">Social Engagement <i class="fas fa-caret-down ml-1"></i></a>
+                            <div id="socialEngagementDropdown" class="dropdown-menu hidden">
+                                <a href="fsu.html" class="flex items-center"><i class="fas fa-graduation-cap mr-2 text-green-700"></i>गलकोट बहुमुखी क्याम्पस: निवर्तमान अध्यक्ष (स्वतन्त्र विद्यार्थी युनियन)</a>
+    
+                                <a href="#" class="flex items-center"><i class="fas fa-users mr-2 text-blue-700"></i>निजामती कर्मचारी युनियन: गलकोट सदस्य</a>
+                                <a href="#" class="flex items-center"><i class="fas fa-running mr-2 text-purple-700"></i>जनजागृति युवा क्लब: सहसचिव</a>
+                                <a href="#" class="flex items-center"><i class="fas fa-hand-holding-heart mr-2 text-orange-700"></i>लायन्स क्लब अफ गलकोट घुम्टे: Charter Member</a>
+                                <a href="#" class="flex items-center"><i class="fas fa-globe-americas mr-2 text-red-700"></i>रोट्र्याक्ट क्लब अफ गलकोट बागलुङ: International Development Chair</a>
+                               
+                            </div>
+                        </li>
                         
-                        <div class="header-flex-item center text-red-600">
-                            <p class="text-lg font-bold">गलकोट नगरपालिका</p>
-                            <p class="text-base font-bold"><span id="displayOfficeName"></span> कार्यालय</p>
-                            <p class="text-base"><span id="displayOfficeAddress"></span>, बागलुङ</p>
-                            <p class="text-base">गण्डकी प्रदेश, नेपाल</p>
-                        </div>
+                        <!-- Trading Dropdown -->
+                        <li class="nav-item relative group">
+                            <a class="nav-link py-2 px-3 block cursor-pointer" onclick="toggleDropdown('tradingDropdown')">Trading <i class="fas fa-caret-down ml-1"></i></a>
+                            <div id="tradingDropdown" class="dropdown-menu hidden">
+                                <a href="https://meroshare.cdsc.com.np/" target="_blank" class="flex items-center"><i class="fas fa-chart-line mr-2 text-green-600"></i>MeroShare</a>
+                                <a href="https://www.nepalstock.com.np/" target="_blank" class="flex items-center"><i class="fas fa-chart-area mr-2 text-red-600"></i>NEPSE</a>
+                            <a href="news.p" target="_blank" class="flex items-center"><i class="fas fa-chart-area mr-2 text-red-600"></i>NEws portal Hamro sansar</a>
 
-                        <div class="header-flex-item right">
-                            <!-- Empty div to push content to center/left -->
-                        </div>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <!-- Second Column of Dropdowns -->
+                    <ul class="navbar-nav flex lg:space-x-4 lg:ml-auto">
+                        <!-- Banking services Dropdown -->
+                        <li class="nav-item relative group">
+                            <a class="nav-link py-2 px-3 block cursor-pointer" onclick="toggleDropdown('Banking servicesDropdown')">Banking services <i class="fas fa-caret-down ml-1"></i></a>
+                            <div id="Banking servicesDropdown" class="dropdown-menu hidden"> 
+                                 <a href="commercialbank.html" class="flex items-center"><i class="fas fa-building mr-2 text-blue-600"></i>वाणिज्य बैँहरुको सेवा</a>
+                                 <a href="developmentbank.html" class="flex items-center"><i class="fas fa-building mr-2 text-green-600"></i>विकास बैँक बैँहरुको सेवा</a>
+<a href="wallet.html" class="flex items-center"><i class="fas fa-building mr-2 text-green-900"></i>Wallet service</a>
+                            </div>
+                        </li>
+
+                        <!-- Government Uses sites Dropdown -->
+                        <li class="nav-item relative group">
+                            <a class="nav-link py-2 px-3 block cursor-pointer" onclick="toggleDropdown('governmentSitesDropdown')">Government Uses sites <i class="fas fa-caret-down ml-1"></i></a>
+                            <div id="governmentSitesDropdown" class="dropdown-menu hidden"> 
+                                <a href="e-services.html" class="flex items-center"><i class="fas fa-earth mr-2 text-blue-600"></i>विद्युतिय सेवाहरु</a>
+                                <a href="https://sutra.fcgo.gov.np" target="_blank" class="flex items-center"><i class="fas fa-globe mr-2 text-indigo-600"></i>सूत्र (Sutra)</a>
+                                <a href="https://ipfms.fcgo.gov.np" target="_blank" class="flex items-center"><i class="fas fa-building mr-2 text-green-600"></i>IPFMS</a>
+                                <a href="https://ss.donidcr.gov.np/" target="_blank" class="flex items-center"><i class="fas fa-sign-in-alt mr-2 text-blue-500"></i>सामाजिक सुरक्षा भत्ता प्रणाली login</a>
+                                <a href="https://online.donidcr.gov.np/" target="_blank" class="flex items-center"><i class="fas fa-sign-in-alt mr-2 text-blue-500"></i>व्यक्तिगत घटना दर्ता प्रणाली login</a>
+                                <a href="https://versrpt.donidcr.gov.np/.donidcr.gov.np/" target="_blank" class="flex items-center"><i class="fas fa-sign-in-alt mr-2 text-blue-500"></i>हाल र साविक ठेगाना परिवर्तन</a>
+                                <a href="https://attendance.gov.np" target="_blank" class="flex items-center"><i class="fas fa-globe mr-2 text-indigo-600"></i>विद्युतिय हाजिरी प्रणाली (E-hajiri)</a>
+                                <a href="https://newpams.fcgo.gov.np/#/Login" target="_blank" class="flex items-center"><i class="fas fa-sign-in-alt mr-2 text-blue-500"></i>Lmbis Login</a>
+                                <a href="https://lmbis.gov.np//#/Login" target="_blank" class="flex items-center"><i class="fas fa-sign-in-alt mr-2 text-blue-500"></i>New PAMS Login</a>
+                                <a href="https://hmis.gov.np/hmis/dhis-web-commons/security/login.action/Login" target="_blank" class="flex items-center"><i class="fas fa-sign-in-alt mr-2 text-blue-500"></i>स्वास्थ्य व्यवस्थापन सूचना प्रणाली</a>
+                                <a href="https://ehmishttps://ehmis.org/" target="_blank" class="flex items-center"><i class="fas fa-sign-in-alt mr-2 text-blue-500"></i>ehmis portal</a>
+                                
+                            </div>
+                        </li> 
+
+                        <!-- Important Links Dropdown -->
+                        <li class="nav-item relative group">
+                            <a class="nav-link py-2 px-3 block cursor-pointer" onclick="toggleDropdown('importantLinksDropdown')">Important Links <i class="fas fa-caret-down ml-1"></i></a>
+                            <div id="importantLinksDropdown" class="dropdown-menu hidden">
+                                <a href="link.html" class="flex items-center"><i class="fas fa-briefcase mr-2 text-blue-600"></i>आवश्यक पोर्टलहरू</a>
+                                <a href="edu.html" class="flex items-center"><i class="fas fa-book mr-2 text-yellow-600"></i>शिक्षा सम्बन्धित पोर्टलहरू</a>
+                                <a href="finance.html" class="flex items-center"><i class="fas fa-coins mr-2 text-orange-600"></i>वित्तीय सेवाहरू</a>
+                                <a href="health.html" class="flex items-center"><i class="fas fa-plus-circle mr-2 text-red-600"></i>स्वास्थ्य सम्बन्धित पोर्टलहरू</a>
+                                <a href="karmachari.html" class="flex items-center"><i class="fas fa-user-tie mr-2 text-purple-600"></i>शिक्षक कर्मचारी पोर्टल</a>
+                                <a href="bi.html" class="flex items-center"><i class="fas fa-building mr-2 text-indigo-600"></i>बैँक, विमा कम्पनी तथा पुनर्विमा कम्पनीहरु</a>
+                            </div>
+                        </li>
+                        
+                        <!-- Direct Contact Dropdown -->
+                        <li class="nav-item relative group">
+                            <a class="nav-link py-2 px-3 block cursor-pointer" onclick="toggleDropdown('directContactDropdown')">Direct Contact <i class="fas fa-caret-down ml-1"></i></a>
+                            <div id="directContactDropdown" class="dropdown-menu hidden">
+                                <a href="tel:+9779869065252" class="flex items-center"><i class="fas fa-phone mr-2 text-green-500"></i>+977 9869065252</a>
+                                <a href="/cdn-cgi/l/email-protection#d0bcbfbbb5beb4a2b1feb7b1b9a2b5fee7e090b7bdb1b9bcfeb3bfbd" class="flex items-center"><i class="fas fa-envelope mr-2 text-red-500"></i><span class="__cf_email__" data-cfemail="9af6f5f1fff4fee8fbb4fdfbf3e8ffb4adaadafdf7fbf3f6b4f9f5f7">[email&#160;protected]</span></a>
+                                <a href="https://maps.google.com/?q=Galkot+Municipality-2,+Baglung,+Nepal" target="_blank" class="flex items-center"><i class="fas fa-map-marker-alt mr-2 text-blue-500"></i>Galkot Municipality-2, Baglung</a>
+                            </div>
+                        </li>
+                    </ul>
+                    <!-- Login/Logout button -->
+                    <li class="nav-item">
+                        <button id="loginButton" class="nav-link py-2 px-3 block text-blue-700 font-bold hover:bg-blue-100 rounded-md">
+                            <i class="fas fa-sign-in-alt mr-1"></i> लगइन
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Masthead (Hero Section) - Copied from index.html -->
+    <header class="masthead relative">
+        <div class="container mx-auto px-4 flex flex-col lg:flex-row items-center justify-center lg:justify-start relative z-20">
+            <div class="masthead-content text-center lg:text-left lg:w-1/2 p-4 lg:p-8">
+                <h2 class="text-xl mb-2">WELCOME TO MY WORLD</h2>
+                <h1 class="masthead-heading text-uppercase font-bold mb-2">Hi, I'm Lokendra Gaire</h1>
+                <h2 class="masthead-subheading font-bold text-black">MIS Operator</h2>
+                <h2 class="masthead-heading text-uppercase font-bold mb-2 text-blue-500">Head of Department</h2>
+                <p class="masthead-bio mt-4 text-white">
+                    Social Security and Vital Registration Department <br> Galkot Municipality Office <br> Galkot, Baglung, Nepal
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Social Media Links Section -->
+        <section class="page-section text-center py-8">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold mb-6 text-gray-800">Find me on social media</h2>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a class="btn-social btn-youtube" href="https://www.youtube.com/@hamrogalkot9" target="_blank" aria-label="YouTube">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    <a class="btn-social btn-facebook" href="https://www.facebook.com/lokendragaire7" target="_blank" aria-label="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a class="btn-social btn-tiktok" href="https://www.tiktok.com/@mr.gairelokendra" target="_blank" aria-label="TikTok">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                    <a class="btn-social btn-linkedin" href="https://www.linkedin.com/in/lokendra-gaire-70b1b1275/" target="_blank" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a class="btn-social btn-telegram" href="https://t.me/lokendragaire70" target="_blank" aria-label="Telegram">
+                        <i class="fab fa-telegram-plane"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Login Modal -->
+        <div id="loginModal" class="modal hidden">
+            <div class="modal-content">
+                <h3 class="text-2xl font-bold mb-4 text-center text-gray-800">लगइन गर्नुहोस्</h3>
+                <form id="loginForm">
+                    <div class="mb-4">
+                        <label for="usernameInput" class="block text-sm font-medium text-gray-700 mb-1">प्रयोगकर्ता नाम:</label>
+                        <input type="text" id="usernameInput" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500" required>
                     </div>
-
-                    <div class="grid grid-cols-3 w-full items-end mb-2">
-                        <div class="col-span-2 flex flex-col text-left">
-                            <p class="text-sm">प.सं.(Ref.No.) <span id="displayPatraSankhya"></span></p>
-                            <p class="text-sm">च.नं.(Des.No.) <span id="displayChalanNo"></span></p>
-                        </div>
-                        <div class="col-span-1 flex flex-col justify-end h-full">
-                            <p class="text-sm text-right">मिति(Date): <span id="displayMiti"></span></p>
-                        </div>
+                    <div class="mb-4">
+                        <label for="passwordInput" class="block text-sm font-medium text-gray-700 mb-1">पासवर्ड:</label>
+                        <input type="password" id="passwordInput" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500" required>
                     </div>
-
-                    <!-- New horizontal line -->
-                    <div class="border-b border-gray-400 my-2"></div>
-
-                    <h3 class="text-xl font-bold text-center mb-2">विषयः सामाजिक सुरक्षा भत्ता सम्बन्धमा।</h3>
-
-                    <p class="mb-1">
-                        <span style="margin-left: 2em;"></span>श्री <strong><span id="displayBankName"></span></strong> गलकोट शाखा,
+                    <div id="loginError" class="text-red-500 text-sm mb-4 hidden">गलत प्रयोगकर्ता नाम वा पासवर्ड।</div>
+                    <button type="submit" class="w-full bg-green-500 text-white py-2 px-4 rounded-md font-semibold hover:bg-green-600 transition-colors">
+                        लगइन
+                    </button>
+                    <button type="button" id="closeModalBtn" class="w-full bg-gray-300 text-gray-800 py-2 px-4 rounded-md font-semibold hover:bg-gray-400 transition-colors mt-2">
+                        रद्द गर्नुहोस्
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+<h2 class="text-3xl font-bold mb-6 text-gray-800">विभिन्न निवेदन तथा पत्र तयार गर्न यहाँ जानु होस</h2>
+                <div class="flex flex-wrap justify-center gap-4">
+                               <a href="renew.html" class="flex items-center"><i class="fas fa-envelope mr-2 text-blue-600"></i>सामाजिक सुरक्षा भत्ता नविकरणको लागी निवेदन। </a>
+                    <a href="letter.html" class="flex items-center"><i class="fas fa-envelope mr-2 text-blue-600"></i>सामाजिक सुरक्षा भत्ता सम्बन्धी बैँकलाई लेख्ने पत्र। </a>
+                    <a href="tamsuk.html" class="flex items-center"><i class="fas fa-envelope mr-2 text-blue-600"></i>कपाली तमसुक तयार गर्नुहोस। </a>
+<a href="birth.html" class="flex items-center"><i class="fas fa-envelope mr-2 text-blue-600"></i>जन्म प्रमाणित प्रमाणपत्र तयार गर्नुहोस।</a>
+                    <a href="application.html" class="flex items-center"><i class="fas fa-envelope mr-2 text-blue-600"></i>दरखास्त आवेदन दिनुहोस। </a>
+                     <a href="sif.html" class="flex items-center"><i class="fas fa-envelope mr-2 text-blue-600"></i>व्यवसाय दर्ता सिफारिस। </a>
+    <!-- Footer (Copied from index.html for consistency) -->
+    <footer class="footer py-2">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-wrap justify-center text-center">
+                <div class="w-full lg:w-1/2 mb-4 lg:mb-0">
+                    <h4 class="text-uppercase mb-2">Location</h4>
+                    <p class="lead text-sm text-gray-700">
+                        Galkot Municipality Office
+                        <br />
+                        Galkot, Baglung, Nepal
                     </p>
-                    <p class="mb-4">
-                        <span style="margin-left: 2em;"></span>गलकोट, बागलुङ।
-                    </p>
-
-                    <p class="mb-4 text-justify">
-                        <span style="margin-left: 2em;"></span>उपरोक्त विषयमा गलकोट नगरपालिका वडा नं.<span id="displayWardNo"></span>&nbsp;निवासी
-                        सामाजिक सुरक्षा भत्ता परिचयपत्र नं. <span id="displaySsbId"></span>&nbsp;भएका श्री <span id="displayPersonName"></span>&nbsp;को
-                        मिति <span id="displayDeathDate"></span>&nbsp;गते मृत्यु भएको र मिति <span id="displayDeathRegDate"></span>&nbsp;गते
-                        मृत्युदर्ता गरी लगत कट्टा गरिएको हुदाँ निज जिवित हुदाँ सम्मको प्राप्त
-                        गर्नुपर्ने आ.व. (<span id="displayFiscalYear"></span>)&nbsp;को <span id="displayQuarter"></span>&nbsp;त्रैमासिकको
-                        रकम रु. <span id="displayAmount"></span>/-&nbsp;निजको <span id="displayRelationship"></span>&nbsp;<span id="displayRelatedPersonName"></span>&nbsp;(ना.प्र.नं. <span id="displayCitizenshipNo"></span>,&nbsp;जारी मिति <span id="displayCitizenshipIssueDate"></span>) लाइ
-                        भुक्तानी दिनुहुन साथै मृत्यु मिति पछी खातामा बाँकी रहन आउने रकम रु. <span id="displayRemainingAmount"></span>/-
-                        (अक्षेरुपीःरु. <span id="displayRemainingAmountAksharu"></span>मात्र) &nbsp;<span id="displayDepositAccount"></span>मा दाखिला गरिदिनुहुन अनुरोध
-                        छ।
-                    </p>
-
-                    <div class="mt-12 flex justify-end items-end">
-                        <div class="text-right">
-                            <p class="font-bold">.......................</p>
-                            <p class="font-semibold" id="displaySignerName"></p>
-                            <p class="mt-4 font-bold"> </p>
-                            <p class="font-semibold" id="displaySignerPost"></p>
-                        </div>
+                    <div class="mt-4"> 
+                        <a href="https://www.google.com/maps/search/Galkot+Municipality-2,+Baglung,+Nepal" target="_blank" title="View Galkot Municipality on Google Maps">
+                            <img src="image_f958e4.png" alt="Map of Galkot Municipality-2, Baglung" class="mx-auto rounded-lg shadow-md" style="max-width: 300px;">
+                        </a>
+                        <p class="text-xs text-gray-600 mt-2">Click the map to view location on Google Maps.</p>
                     </div>
+                </div>
+                <div class="w-full lg:w-1/2">
+                    <h4 class="text-uppercase mb-2">Website Description</h4>
+                    <p class="lead text-sm text-gray-700">A personal website to showcase my professional and social journey.</p>
                 </div>
             </div>
         </div>
+    </footer>
+    
+    <!-- ग्यालेरी शीर्षक यहाँ थपिएको छ -->
+    <h2 class="text-3xl font-bold text-gray-800 text-center mt-8 mb-4">ग्यालेरी</h2>
+    <!-- This container holds the copyright and the newly positioned advertisement section -->
+    <div class="bg-gray-100 flex flex-col lg:flex-row justify-between items-center py-2 px-4">
+        <!-- The original copyright section -->
+        <div class="text-center text-gray-700 w-full lg:w-auto mb-4 lg:mb-0">
+            <small>Copyright © Lokendra Gaire 2024</small>
+        </div>
         
-        <div class="buttons-container flex justify-center space-x-4 mt-8">
-            <button id="printBtn" class="px-6 py-3 bg-green-600 text-white font-semibold rounded-lg shadow-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition duration-200">
-                प्रिन्ट गर्नुहोस्
-            </button>
-            <button id="backBtn" class="px-6 py-3 bg-gray-600 text-white font-semibold rounded-lg shadow-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition duration-200">
-                पछाडि जानुहोस्
-            </button>
+        <!-- Ad Slider Display Container - Now always visible to show the space -->
+        <div id="adDisplayContainer" class="w-full lg:w-1/4 max-w-sm mx-auto my-4 lg:my-0 lg:ml-4">
+             <!-- Advertisement Management Section - Only visible if logged in -->
+            <div id="adSection" class="mb-4 hidden">
+                <!-- 'विज्ञापन तथा समाचार' लाई 'विज्ञापन तथा सूचना' मा परिवर्तन गरिएको छ -->
+                <h3 class="text-sm font-bold mb-2 text-gray-800">विज्ञापन तथा सूचना</h3>
+                <p class="text-xs text-gray-600 mt-2">यो भागमा विज्ञापन तथा समाचारहरू देखाइनेछन्। नयाँ फोटोहरू थप्नको लागि, कृपया आफ्नो GitHub repository मा `photo1.jpg`, `photo2.jpg` जस्ता नाममा फोटोहरू अपलोड गर्नुहोस्।</p>
+            </div>
+            
+            <div class="slider-container">
+                <div id="adSlider" class="slider">
+                    <!-- Default placeholder images or uploaded images will be added here by JS -->
+                    <div class="slide"><img src="photo1.jpg" alt="Placeholder Advertisement"></div>
+                    <div class="slide"><img src="photo2.jpg" alt="Placeholder Advertisement"></div>
+                    <div class="slide"><img src="photo3.jpg" alt="Placeholder Advertisement"></div>
+                </div>
+                <div class="slider-nav">
+                    <button class="nav-btn" id="prevAdBtn"><i class="fas fa-chevron-left"></i></button>
+                    <button class="nav-btn" id="nextAdBtn"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="slider-dots" id="adDots"></div>
+            </div>
         </div>
     </div>
+    
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // JavaScript for toggling the dropdown menu
+        function toggleDropdown(dropdownId) {
+            const dropdown = document.getElementById(dropdownId);
+            const allDropdowns = document.getElementsByClassName("dropdown-menu");
 
-    <!-- Error Message Modal -->
-    <div id="errorModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
-        <div class="bg-white p-6 rounded-lg shadow-xl max-w-sm w-full text-center">
-            <h3 class="text-xl font-bold text-red-600 mb-4">त्रुटि !</h3>
-            <p id="errorModalMessage" class="text-gray-700 mb-6"></p>
-            <button id="closeErrorModal" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">बन्द गर्नुहोस्</button>
-        </div>
-    </div>
-
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-        // Function to convert English digits to Nepali digits
-        function convertEnglishToNepaliDigits(input) {
-            if (typeof input !== 'string') {
-                input = String(input);
+            // Close all other dropdowns
+            for (let i = 0; i < allDropdowns.length; i++) {
+                let openDropdown = allDropdowns[i];
+                if (openDropdown.id !== dropdownId && !openDropdown.classList.contains('hidden')) {
+                    openDropdown.classList.add('hidden');
+                }
             }
-            const englishDigits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-            const nepaliDigits = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९'];
-            return input.split('').map(char => {
-                const index = englishDigits.indexOf(char);
-                return index !== -1 ? nepaliDigits[index] : char;
-            }).join('');
+
+            // Toggle the clicked dropdown
+            dropdown.classList.toggle("hidden");
         }
 
-        // Function to convert Nepali digits to English digits
-        function convertNepaliToEnglishDigits(input) {
-            if (typeof input !== 'string') {
-                input = String(input);
-            }
-            const englishDigits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-            const nepaliDigits = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९'];
-            return input.split('').map(char => {
-                const index = nepaliDigits.indexOf(char);
-                return index !== -1 ? englishDigits[index] : char;
-            }).join('');
+        // JavaScript for toggling the main navbar on mobile
+        function toggleNavbar() {
+            const navbar = document.getElementById("navbarResponsive");
+            navbar.classList.toggle("hidden");
+            navbar.classList.toggle("flex"); // Toggle flex to show/hide
+            navbar.classList.toggle("flex-col"); // Ensure vertical stacking when open
         }
 
-        // Function to convert number to Nepali words (improved)
-        function convertToNepaliWords(num) {
-            num = String(num).replace(/,/g, '');
-            num = convertNepaliToEnglishDigits(num);
+        // Get references to search elements and spinner
+        const searchInput = document.getElementById('searchInput');
+        const searchActionButton = document.getElementById('searchActionButton');
+        const searchIcon = document.getElementById('searchIcon');
+        const clearSearchIcon = document.getElementById('clearSearchIcon');
+        const loadingSpinner = document.getElementById('loadingSpinner');
 
-            if (isNaN(num) || num === null || num === '') {
-                return '';
-            }
-            num = Math.floor(Number(num));
-            if (num === 0) {
-                return 'शून्य';
-            }
-
-            const units = ['', 'एक', 'दुई', 'तीन', 'चार', 'पाँच', 'छ', 'सात', 'आठ', 'नौ'];
-            const teens = ['दश', 'एघार', 'बाह्र', 'तेह्र', 'चौध', 'पन्ध्र', 'सोह्र', 'सत्र', 'अठार', 'उन्नाइस'];
-            const tens = ['', '', 'बिस', 'तीस', 'चालीस', 'पचास', 'साठी', 'सत्तरी', 'असी', 'नब्बे'];
-            const specialTens = {
-                21: 'एक्काइस', 22: 'बाइस', 23: 'तेइस', 24: 'चौबिस', 25: 'पच्चिस', 26: 'छब्बिस', 27: 'सत्ताइस', 28: 'अठ्ठाइस', 29: 'उनन्तिस',
-                31: 'एकतीस', 32: 'बत्तीस', 33: 'तेत्तीस', 34: 'चौंतीस', 35: 'पैंतीस', 36: 'छत्तिस', 37: 'सैंतीस', 38: 'अठतीस', 39: 'उनन्चालीस',
-                41: 'एकचालीस', 42: 'बयालीस', 43: 'त्रियालीस', 44: 'चौवालीस', 45: 'पैंतालीस', 46: 'छयालीस', 47: 'सन्तालीस', 48: 'अठ्चालीस', 49: 'उनन्चास',
-                51: 'एकाउन्न', 52: 'बाउन्न', 53: 'तिरपन्न', 54: 'चौवन्न', 55: 'पचपन्न', 56: 'छप्पन्न', 57: 'सन्ताउन्न', 58: 'अन्ठाउन्न', 59: 'उनन्साठी',
-                61: 'एकसट्ठी', 62: 'बासट्ठी', 63: 'त्रिसट्ठी', 64: 'चौंसट्ठी', 65: 'पैंसट्ठी', 66: 'छैसट्ठी', 67: 'सड्सट्ठी', 68: 'अठ्सट्ठी', 69: 'उनन्सत्तरी',
-                71: 'एकहत्तर', 72: 'बहत्तर', 73: 'तिहत्तर', 74: 'चौहत्तर', 75: 'पचहत्तर', 76: 'छयहत्तर', 77: 'सतहत्तर', 78: 'अठहत्तर', 79: 'उनन्असी',
-                81: 'एकासी', 82: 'बयासी', 83: 'त्रियासी', 84: 'चौरासी', 85: 'पचासी', 86: 'छयासी', 87: 'सतासी', 88: 'अठासी', 89: 'उनन्नब्बे',
-                91: 'एकानब्बे', 92: 'बयानब्बे', 93: 'त्रियानब्बे', 94: 'चौरानब्बे', 95: 'पन्चानब्बे', 96: 'छयानब्बे', 97: 'सन्तानब्बे', 98: 'अन्ठानब्बे', 99: 'उनान्सय'
-            };
-
-            function convertLessThanHundred(n) {
-                if (specialTens[n]) {
-                    return specialTens[n];
-                }
-                if (n < 10) {
-                    return units[n];
-                }
-                if (n < 20) {
-                    return teens[n - 10];
-                }
-                return tens[Math.floor(n / 10)] + (n % 10 !== 0 ? units[n % 10] : '');
-            }
-
-            function convertThreeDigits(n) {
-                let s = '';
-                if (n >= 100) {
-                    s += units[Math.floor(n / 100)] + ' सय ';
-                    n %= 100;
-                }
-                if (n > 0) {
-                    s += convertLessThanHundred(n);
-                }
-                return s.trim();
-            }
-
-            let result = '';
-            let crore = Math.floor(num / 10000000);
-            num %= 10000000;
-            let lakh = Math.floor(num / 100000);
-            num %= 100000;
-            let thousand = Math.floor(num / 1000);
-            num %= 1000;
-
-            if (crore > 0) {
-                result += convertThreeDigits(crore) + ' करोड ';
-            }
-            if (lakh > 0) {
-                result += convertThreeDigits(lakh) + ' लाख ';
-            }
-            if (thousand > 0) {
-                result += convertThreeDigits(thousand) + ' हजार ';
-            }
-            if (num > 0) {
-                result += convertThreeDigits(num);
-            }
-
-            return result.trim();
+        // Function to show/hide spinner
+        function showSpinner() {
+            searchIcon.classList.add('hidden');
+            clearSearchIcon.classList.add('hidden'); // Hide clear icon if showing
+            loadingSpinner.classList.remove('hidden');
         }
 
-        // Event listener for date inputs to auto-add slashes and validate
-        function setupDateInput(elementId) {
-            const inputElement = document.getElementById(elementId);
+        function hideSpinner() {
+            loadingSpinner.classList.add('hidden');
+            // Decide whether to show search icon or clear icon based on input value
+            if (searchInput.value.length > 0) {
+                clearSearchIcon.classList.remove('hidden');
+            } else {
+                searchIcon.classList.remove('hidden');
+            }
+        }
 
-            inputElement.addEventListener('input', function(event) {
-                let value = this.value;
-                let cursorPosition = this.selectionStart;
+        // Function to remove all existing highlights (general text)
+        function removeTextHighlights() {
+            const highlights = document.querySelectorAll('.highlight');
+            highlights.forEach(span => {
+                const parent = span.parentNode;
+                // Replace the span with its text content
+                parent.replaceChild(document.createTextNode(span.textContent), span);
+                parent.normalize(); // Merge adjacent text nodes
+            });
+        }
 
-                value = convertNepaliToEnglishDigits(value);
+        // Function to remove nav and dropdown item highlights
+        function removeNavHighlights() {
+            document.querySelectorAll('#navbarResponsive .nav-link.nav-item-highlight').forEach(el => el.classList.remove('nav-item-highlight'));
+            document.querySelectorAll('.dropdown-item-highlight').forEach(el => el.classList.remove('dropdown-item-highlight'));
+            // Also ensure all dropdowns are closed when clearing highlights, unless a search specifically opens them
+            const allDropdowns = document.getElementsByClassName("dropdown-menu");
+            for (let i = 0; i < allDropdowns.length; i++) {
+                allDropdowns[i].classList.add('hidden');
+            }
+        }
 
-                let cleanValue = value.replace(/[^0-9]/g, '');
+        // Combined search and highlight function
+        function performSearchAndHighlight(query) {
+            showSpinner();
+            removeTextHighlights(); // Clear general text highlights
+            removeNavHighlights(); // Clear nav/dropdown highlights
 
-                let formattedValue = '';
-                if (cleanValue.length > 0) {
-                    formattedValue += cleanValue.substring(0, 4);
-                    if (cleanValue.length > 4) {
-                        formattedValue += '/';
-                        formattedValue += cleanValue.substring(4, 6);
-                        if (cleanValue.length > 6) {
-                            formattedValue += '/';
-                            formattedValue += cleanValue.substring(6, 8);
+            if (!query) {
+                hideSpinner();
+                return;
+            }
+
+            const regex = new RegExp(query, 'gi'); // Case-insensitive global search
+
+            // 1. Highlight main content (excluding navbar)
+            function highlightNode(node) {
+                if (node.nodeType === Node.TEXT_NODE) {
+                    const parentTagName = node.parentNode.tagName;
+                    if (parentTagName !== 'SCRIPT' && parentTagName !== 'STYLE') {
+                        const match = node.nodeValue.match(regex);
+                        if (match) {
+                            const fragment = document.createDocumentFragment();
+                            let lastIndex = 0;
+                            node.nodeValue.replace(regex, (match, offset) => {
+                                fragment.appendChild(document.createTextNode(node.nodeValue.substring(lastIndex, offset)));
+                                const span = document.createElement('span');
+                                span.className = 'highlight';
+                                span.textContent = match;
+                                fragment.appendChild(span);
+                                lastIndex = offset + match.length;
+                                return match;
+                            });
+                            fragment.appendChild(document.createTextNode(node.nodeValue.substring(lastIndex)));
+                            node.parentNode.replaceChild(fragment, node);
+                        }
+                    }
+                } else if (node.nodeType === Node.ELEMENT_NODE) {
+                    if (node.tagName !== 'SCRIPT' && node.tagName !== 'STYLE' && node.tagName !== 'NOSCRIPT' && node.id !== 'mainNav') { // Exclude mainNav from general content search
+                        for (let i = 0; i < node.childNodes.length; i++) {
+                            highlightNode(node.childNodes[i]);
+                        }
+                    }
+                }
+            }
+            highlightNode(document.body); // Start from body
+
+            // 2. Highlight Nav Items and Dropdown Items specifically
+            const navItems = document.querySelectorAll('#navbarResponsive .nav-item');
+            navItems.forEach(navItem => {
+                const navLink = navItem.querySelector('.nav-link');
+                const dropdownMenu = navItem.querySelector('.dropdown-menu');
+                let navItemMatched = false;
+
+                // Get only the text content of the navLink, excluding child elements like the icon
+                let navLinkText = '';
+                if (navLink) {
+                    for (let child of navLink.childNodes) {
+                        if (child.nodeType === Node.TEXT_NODE) {
+                            navLinkText += child.nodeValue;
                         }
                     }
                 }
 
-                this.value = convertEnglishToNepaliDigits(formattedValue);
+                if (navLinkText.match(regex)) {
+                    navLink.classList.add('nav-item-highlight');
+                    navItemMatched = true;
+                }
 
-                let newCursorPosition = cursorPosition;
-                if (cursorPosition === 5 && formattedValue.charAt(4) === '/') {
-                    newCursorPosition++;
+                // Check dropdown items if it's a dropdown
+                if (dropdownMenu) {
+                    const dropdownLinks = dropdownMenu.querySelectorAll('a');
+                    dropdownLinks.forEach(dropdownLink => {
+                        if (dropdownLink.textContent.match(regex)) {
+                            dropdownLink.classList.add('dropdown-item-highlight');
+                            // Ensure parent dropdown is open
+                            dropdownMenu.classList.remove('hidden');
+                            // Highlight the parent nav item if not already
+                            if (!navItemMatched) {
+                                navLink.classList.add('nav-item-highlight');
+                            }
+                        }
+                    });
                 }
-                if (cursorPosition === 8 && formattedValue.charAt(7) === '/') {
-                    newCursorPosition++;
-                }
-                this.setSelectionRange(newCursorPosition, newCursorPosition);
             });
 
-            inputElement.addEventListener('keydown', function(event) {
-                if (event.key === 'Backspace' || event.key === 'Delete' || event.key === 'Tab' ||
-                    event.key.startsWith('Arrow') || event.key === 'Home' || event.key === 'End') {
-                    return;
-                }
+            // Highlight the social media section links (only the remaining ones)
+            const socialLinksSection = document.querySelector('main .page-section .flex.flex-wrap');
+            if (socialLinksSection) {
+                const socialLinks = socialLinksSection.querySelectorAll('a');
+                socialLinks.forEach(link => {
+                    if (link.textContent.match(regex) || (link.getAttribute('aria-label') && link.getAttribute('aria-label').match(regex))) {
+                        link.classList.add('highlight'); // Use general highlight for these buttons
+                    }
+                });
+            }
 
-                if (!/^\d$/.test(event.key)) {
-                    event.preventDefault();
-                }
-            });
+
+            setTimeout(() => {
+                hideSpinner();
+            }, 50); // Small delay to show spinner
         }
 
-        document.addEventListener('DOMContentLoaded', function() {
-            setupDateInput('miti');
-            setupDateInput('deathDate');
-            setupDateInput('deathRegDate');
-            setupDateInput('citizenshipIssueDate');
+        // Function to clear search and highlights
+        function clearSearch() {
+            searchInput.value = '';
+            removeTextHighlights();
+            removeNavHighlights(); // Clear nav and dropdown highlights
+            // Also remove highlights from social media section
+            document.querySelectorAll('main .page-section .flex.flex-wrap .highlight').forEach(el => el.classList.remove('highlight'));
+            clearSearchIcon.classList.add('hidden');
+            searchIcon.classList.remove('hidden');
+        }
 
-            const fiscalYearSelect = document.getElementById('fiscalYear');
-            fiscalYearSelect.addEventListener('change', function() {
-                const fiscalYear = this.value;
-                const patraSankhyaInput = document.getElementById('patraSankhya');
-                if (fiscalYear) {
-                    const years = fiscalYear.split('/');
-                    if (years.length === 2) {
-                        const formattedPatraSankhya = `${years[0].slice(-2)}/${years[1].slice(-2)}`;
-                        patraSankhyaInput.value = formattedPatraSankhya;
-                    } else {
-                        patraSankhyaInput.value = '';
-                    }
-                } else {
-                    patraSankhyaInput.value = '';
-                }
-            });
-
-            const relationshipSelect = document.getElementById('relationship');
-            const relatedPersonNameContainer = document.getElementById('relatedPersonNameContainer');
-            const relatedPersonNameInput = document.getElementById('relatedPersonName');
-
-            relationshipSelect.addEventListener('change', function() {
-                if (this.value !== '') {
-                    relatedPersonNameContainer.classList.remove('hidden');
-                    relatedPersonNameInput.setAttribute('required', 'required');
-                } else {
-                    relatedPersonNameContainer.classList.add('hidden');
-                    relatedPersonNameInput.removeAttribute('required');
-                    relatedPersonNameInput.value = '';
-                }
-            });
-
-            document.getElementById('remainingAmount').addEventListener('input', function() {
-                const amount = this.value;
-                const words = convertToNepaliWords(amount);
-                document.getElementById('remainingAmountAksharu').value = words;
-            });
-
-            document.getElementById('amount').addEventListener('input', function() {
-                let value = this.value;
-                let cleanValue = value.replace(/[^0-9०-९]/g, '');
-                this.value = convertEnglishToNepaliDigits(cleanValue);
-            });
-
-            document.getElementById('ssbId').addEventListener('input', function() {
-                let value = this.value;
-                let cleanValue = value.replace(/[^0-9०-९]/g, '');
-                this.value = convertEnglishToNepaliDigits(cleanValue);
-            });
+        // Event listener for search action button click
+        searchActionButton.addEventListener('click', () => {
+            if (clearSearchIcon.classList.contains('hidden')) { // If search icon is visible, perform search
+                performSearchAndHighlight(searchInput.value);
+            } else { // If clear icon is visible, clear search
+                clearSearch();
+            }
         });
 
+        // Event listener for Enter key in search input
+        searchInput.addEventListener('keypress', (event) => {
+            if (event.key === 'Enter') {
+                performSearchAndHighlight(searchInput.value);
+            }
+        });
 
-        document.getElementById('letterForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            console.log('Form submitted');
+        // Event listener for input changes to show/hide clear icon
+        searchInput.addEventListener('input', () => {
+            if (searchInput.value.length > 0) {
+                searchIcon.classList.add('hidden');
+                clearSearchIcon.classList.remove('hidden');
+            } else {
+                searchIcon.classList.remove('hidden');
+                clearSearchIcon.classList.add('hidden');
+                removeTextHighlights(); // Also remove highlights when input is cleared manually
+                removeNavHighlights(); // Clear nav and dropdown highlights when input is cleared
+                // Also remove highlights from social media section when input is cleared
+                document.querySelectorAll('main .page-section .flex.flex-wrap .highlight').forEach(el => el.classList.remove('highlight'));
+            }
+        });
 
-            const requiredFields = {
-                'officeName': 'कार्यालयको नाम',
-                'officeAddress': 'कार्यालयको ठेगाना',
-                'fiscalYear': 'आ.व. (आर्थिक वर्ष)',
-                'patraSankhya': 'पत्र संख्या',
-                'miti': 'मिति',
-                'bankName': 'बैंकको नाम',
-                'wardNo': 'वडा नं.',
-                'ssbId': 'सामाजिक सुरक्षा भत्ता परिचयपत्र नं.',
-                'personName': 'व्यक्तिगत नाम',
-                'deathDate': 'मृत्यु मिति',
-                'deathRegDate': 'मृत्युदर्ता मिति',
-                'quarter': 'त्रैमासिक',
-                'amount': 'रकम रु.',
-                'relationship': 'सम्बन्ध',
-                'citizenshipNo': 'ना.प्र.नं.',
-                'citizenshipIssueDate': 'जारी मिति',
-                'remainingAmount': 'बाँकी रकम रु.',
-                'depositAccount': 'दाखिला गर्ने खाता'
+        // Close dropdowns and navbar if the user clicks outside of them
+        window.onclick = function(event) {
+            // Close dropdowns
+            if (!event.target.matches('.nav-link') && !event.target.closest('.dropdown-menu') && !event.target.closest('.search-container')) {
+                const dropdowns = document.getElementsByClassName("dropdown-menu");
+                for (let i = 0; i < dropdowns.length; i++) {
+                    const openDropdown = dropdowns[i];
+                    if (!openDropdown.classList.contains('hidden')) {
+                        openDropdown.classList.add('hidden');
+                    }
+                }
+                // Also remove nav/dropdown highlights if clicking outside
+                removeNavHighlights();
+            }
+
+            // Close navbar if click is outside navbar and it's open
+            const navbar = document.getElementById("mainNav");
+            const navbarResponsive = document.getElementById("navbarResponsive");
+            const navbarToggler = document.querySelector('.navbar-toggler');
+            const searchContainer = document.querySelector('.search-container');
+
+            if (!navbar.contains(event.target) && !navbarToggler.contains(event.target) && !searchContainer.contains(event.target)) {
+                if (!navbarResponsive.classList.contains('hidden')) {
+                    navbarResponsive.classList.add('hidden');
+                    navbarResponsive.classList.remove('flex', 'flex-col');
+                }
+            }
+        }
+        
+        // ==========================================
+        //  Advertisement Slider & Login Logic
+        // ==========================================
+        document.addEventListener('DOMContentLoaded', () => {
+            const adSlider = document.getElementById('adSlider');
+            const prevAdBtn = document.getElementById('prevAdBtn');
+            const nextAdBtn = document.getElementById('nextAdBtn');
+            const adDots = document.getElementById('adDots');
+            const adSection = document.getElementById('adSection');
+            const adDisplayContainer = document.getElementById('adDisplayContainer');
+
+            const loginButton = document.getElementById('loginButton');
+            const loginModal = document.getElementById('loginModal');
+            const closeModalBtn = document.getElementById('closeModalBtn');
+            const loginForm = document.getElementById('loginForm');
+            const loginError = document.getElementById('loginError');
+            
+            // This is the interval ID for the automatic slide.
+            let slideInterval;
+
+            // GitHub repository details - **IMPORTANT: These must match your repo's details**
+            // **महत्त्वपूर्ण: यी मानहरू तपाईंको वास्तविक GitHub रिपोजिटरीको विवरणसँग मिल्नुपर्छ।**
+            // <<== यहाँ आफ्नो GitHub username राख्नुहोस्
+            const githubRepoOwner = 'lokendragaire'; 
+            // <<== यहाँ आफ्नो रिपोजिटरीको नाम राख्नुहोस् (यो 'Lokendragaire.com.np' मा परिवर्तन गरिएको छ)
+            const githubRepoName = 'Lokendragaire.com.np'; 
+            const githubBranch = 'main';
+            const githubBaseUrl = `https://raw.githubusercontent.com/${githubRepoOwner}/${githubRepoName}/${githubBranch}/`;
+            const githubLoginUrl = `https://github.com/${githubRepoOwner}/${githubRepoName}/`; // Changed to the repo's main page
+            
+            // Log the constructed URL for debugging purposes
+            console.log(`Debug: The base URL being used is: ${githubBaseUrl}`);
+
+            let images = []; // Array to store image URLs
+            let currentSlideIndex = 0;
+
+            // Login Modal Functions
+            const openLoginModal = () => {
+                loginModal.classList.remove('hidden');
             };
 
-            let missingFields = [];
-            let allFieldsValid = true;
+            const closeLoginModal = () => {
+                loginModal.classList.add('hidden');
+                loginError.classList.add('hidden');
+                loginForm.reset();
+            };
 
-            for (const fieldId in requiredFields) {
-                const inputElement = document.getElementById(fieldId);
-                if (inputElement.value.trim() === '') {
-                    missingFields.push(requiredFields[fieldId]);
-                    inputElement.style.borderColor = 'red';
-                    allFieldsValid = false;
+            // Login form submission handler
+            loginForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const username = document.getElementById('usernameInput').value;
+                const password = document.getElementById('passwordInput').value;
+
+                // Hardcoded credentials for demonstration
+                // Replace with a real authentication system if needed
+                if (username === 'lokendra' && password === 'password123') {
+                    // Simulate successful login
+                    localStorage.setItem('isLoggedIn', 'true');
+                    closeLoginModal();
+                    // Open a new tab to the GitHub repository page where they can manage files
+                    window.open(githubLoginUrl, '_blank');
+                    checkLoginStatus();
                 } else {
-                    inputElement.style.borderColor = '';
-                }
-            }
-
-            const relationshipSelect = document.getElementById('relationship');
-            const relatedPersonNameInput = document.getElementById('relatedPersonName');
-            if (relationshipSelect.value !== '' && relatedPersonNameInput.value.trim() === '') {
-                missingFields.push('सम्बन्धित व्यक्तिको नाम');
-                relatedPersonNameInput.style.borderColor = 'red';
-                allFieldsValid = false;
-            } else {
-                relatedPersonNameInput.style.borderColor = '';
-            }
-
-            const ssbIdInput = document.getElementById('ssbId');
-            const ssbIdValue = convertNepaliToEnglishDigits(ssbIdInput.value.trim());
-            if (ssbIdValue.length !== 13 || isNaN(ssbIdValue)) {
-                if (!missingFields.includes(requiredFields['ssbId'])) {
-                    missingFields.push(`सामाजिक सुरक्षा भत्ता परिचयपत्र नं. (१३ अंकको हुनुपर्छ र अंक मात्र हुनुपर्छ)`);
-                }
-                ssbIdInput.style.borderColor = 'red';
-                allFieldsValid = false;
-            } else {
-                ssbIdInput.style.borderColor = '';
-            }
-
-            const dateFields = ['miti', 'deathDate', 'deathRegDate', 'citizenshipIssueDate'];
-            dateFields.forEach(fieldId => {
-                const dateInput = document.getElementById(fieldId);
-                const dateValue = convertNepaliToEnglishDigits(dateInput.value.trim());
-                const parts = dateValue.split('/');
-
-                if (parts.length !== 3 || parts[0].length !== 4 || parts[1].length !== 2 || parts[2].length !== 2) {
-                    if (!missingFields.includes(requiredFields[fieldId])) {
-                        missingFields.push(`${requiredFields[fieldId]} (ढाँचा YYYY/MM/DD हुनुपर्छ)`); /* Corrected format string */
-                    }
-                    dateInput.style.borderColor = 'red';
-                    allFieldsValid = false;
-                } else {
-                    const year = parseInt(parts[0], 10);
-                    const month = parseInt(parts[1], 10);
-                    const day = parseInt(parts[2], 10);
-
-                    if (isNaN(year) || isNaN(month) || isNaN(day) || month < 1 || month > 12 || day < 1 || day > 32) {
-                        if (!missingFields.includes(requiredFields[fieldId])) {
-                            missingFields.push(`${requiredFields[fieldId]} (अवैध मिति: महिना १-१२, गते १-३२ हुनुपर्छ)`);
-                        }
-                        dateInput.style.borderColor = 'red';
-                        allFieldsValid = false;
-                    } else {
-                        dateInput.style.borderColor = '';
-                    }
+                    loginError.classList.remove('hidden');
                 }
             });
 
-            const errorMessageDiv = document.getElementById('errorMessage');
-            const formSection = document.getElementById('formSection');
-            const previewSection = document.getElementById('previewSection');
-            const buttonsContainer = document.querySelector('.buttons-container');
-            const errorModal = document.getElementById('errorModal');
-            const errorModalMessage = document.getElementById('errorModalMessage');
-            const closeErrorModal = document.getElementById('closeErrorModal');
+            closeModalBtn.addEventListener('click', closeLoginModal);
 
-            if (allFieldsValid) {
-                errorModal.classList.add('hidden'); // Ensure modal is hidden on success
+            // Function to handle the logout
+            const handleLogout = () => {
+                localStorage.removeItem('isLoggedIn');
+                checkLoginStatus();
+            };
 
-                document.getElementById('displayOfficeName').textContent = document.getElementById('officeName').value;
-                document.getElementById('displayOfficeAddress').textContent = document.getElementById('officeAddress').value;
-                document.getElementById('displayPatraSankhya').textContent = document.getElementById('patraSankhya').value;
-                document.getElementById('displayMiti').textContent = document.getElementById('miti').value;
-                document.getElementById('displayChalanNo').textContent = convertEnglishToNepaliDigits(document.getElementById('chalanNo').value);
-                document.getElementById('displayBankName').textContent = document.getElementById('bankName').value;
-                document.getElementById('displayWardNo').textContent = convertEnglishToNepaliDigits(document.getElementById('wardNo').value);
-                document.getElementById('displaySsbId').textContent = convertEnglishToNepaliDigits(document.getElementById('ssbId').value);
-                document.getElementById('displayPersonName').textContent = document.getElementById('personName').value;
-                document.getElementById('displayDeathDate').textContent = document.getElementById('deathDate').value;
-                document.getElementById('displayDeathRegDate').textContent = document.getElementById('deathRegDate').value;
-                document.getElementById('displayFiscalYear').textContent = document.getElementById('fiscalYear').value;
-                document.getElementById('displayQuarter').textContent = document.getElementById('quarter').value;
-                document.getElementById('displayAmount').textContent = convertEnglishToNepaliDigits(document.getElementById('amount').value);
-                document.getElementById('displayRelationship').textContent = document.getElementById('relationship').value;
-                document.getElementById('displayRelatedPersonName').textContent = document.getElementById('relatedPersonName').value;
-                document.getElementById('displayCitizenshipNo').textContent = convertEnglishToNepaliDigits(document.getElementById('citizenshipNo').value);
-                document.getElementById('displayCitizenshipIssueDate').textContent = convertEnglishToNepaliDigits(document.getElementById('citizenshipIssueDate').value); /* Converted to Nepali digits */
-                document.getElementById('displayRemainingAmount').textContent = convertEnglishToNepaliDigits(document.getElementById('remainingAmount').value);
-                document.getElementById('displayRemainingAmountAksharu').textContent = document.getElementById('remainingAmountAksharu').value;
-                document.getElementById('displayDepositAccount').textContent = document.getElementById('depositAccount').value;
-                document.getElementById('displaySignerName').textContent = document.getElementById('signerName').value;
-                document.getElementById('displaySignerPost').textContent = document.getElementById('signerPost').value;
+            // Function to check login status from localStorage and update UI
+            const checkLoginStatus = () => {
+                const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+                
+                if (isLoggedIn) {
+                    loginButton.innerHTML = '<i class="fas fa-sign-out-alt mr-1"></i> लगआउट';
+                    loginButton.classList.remove('text-blue-700', 'hover:bg-blue-100');
+                    loginButton.classList.add('text-red-700', 'hover:bg-red-100');
+                    adSection.classList.remove('hidden'); // Show ad management for logged-in user
+                    loginButton.onclick = handleLogout; // Set logout function
+                } else {
+                    loginButton.innerHTML = '<i class="fas fa-in-alt mr-1"></i> लगइन';
+                    loginButton.classList.remove('text-red-700', 'hover:bg-red-100');
+                    loginButton.classList.add('text-blue-700', 'hover:bg-blue-100');
+                    adSection.classList.add('hidden'); // Hide ad management for logged-out user
+                    loginButton.onclick = openLoginModal; // Open modal for login
+                }
+                
+                // Always fetch images to display the slider, regardless of login status
+                fetchImagesFromGitHub();
+            };
 
-                formSection.classList.remove('active');
-                previewSection.classList.add('active');
-                buttonsContainer.classList.add('active'); // Show buttons
-            } else {
-                errorModalMessage.innerHTML = `कृपया निम्न फिल्डहरू भर्नुहोस् वा सुधार्नुहोस्: <br> ${missingFields.join(', ')}।`;
-                errorModal.classList.remove('hidden'); // Show the error modal
-                previewSection.classList.remove('active');
-                formSection.classList.add('active');
-                buttonsContainer.classList.remove('active');
-            }
+            // Function to fetch images from GitHub based on filenames
+            const fetchImagesFromGitHub = async () => {
+                images = []; // Clear existing images
+                const imageFilenames = [];
+                for (let i = 1; i <= 10; i++) { // Check for photo1.jpg to photo10.jpg
+                    imageFilenames.push(`photo${i}.jpg`);
+                }
 
-            closeErrorModal.addEventListener('click', function() {
-                errorModal.classList.add('hidden');
-            });
-        });
+                const promises = imageFilenames.map(filename => {
+                    const imageUrl = `${githubBaseUrl}${filename}`;
+                    
+                    // Log the URL being fetched for debugging
+                    console.log(`Fetching image from: ${imageUrl}`);
 
-        document.getElementById('printBtn').addEventListener('click', function() {
-            window.print();
-        });
+                    return fetch(imageUrl)
+                        .then(response => {
+                            if (response.ok) {
+                                console.log(`Successfully loaded image from: ${imageUrl}`);
+                                return imageUrl;
+                            } else {
+                                console.error(`Failed to load image from: ${imageUrl} (Status: ${response.status})`);
+                                return null;
+                            }
+                        })
+                        .catch(error => {
+                            console.error(`Error fetching image from ${imageUrl}:`, error);
+                            return null;
+                        });
+                });
 
-        document.getElementById('backBtn').addEventListener('click', function() {
-            previewSection.classList.remove('active');
-            formSection.classList.add('active');
-            document.querySelector('.buttons-container').classList.remove('active'); // Hide buttons when going back
+                const loadedImages = await Promise.all(promises);
+                images = loadedImages.filter(url => url !== null); // Keep only valid URLs
+                
+                if (images.length === 0) {
+                    console.warn("No valid images found on GitHub. Displaying placeholder.");
+                }
+                
+                renderSlider();
+                
+                // Start auto-slide only if there are images
+                // यदि १ भन्दा बढी फोटो छ भने मात्र स्लाइडर चलाउने
+                if (images.length > 1) {
+                    startAutoSlide();
+                } else {
+                    // यदि १ वा सो भन्दा कम फोटो छ भने, स्लाइडर रोक्ने
+                    clearInterval(slideInterval);
+                }
+            };
+            
+            // Function to render the slider based on the images array
+            const renderSlider = () => {
+                adSlider.innerHTML = '';
+                adDots.innerHTML = '';
+                
+                if (images.length > 0) {
+                    images.forEach((src, index) => {
+                        const slide = document.createElement('div');
+                        slide.className = 'slide relative'; 
+                        
+                        const img = document.createElement('img');
+                        img.src = src;
+                        img.alt = `Advertisement Image ${index + 1}`;
+                        img.onclick = () => {
+                            window.open(src, '_blank');
+                        };
+                        // यदि छवि लोड हुन सकेन भने, त्रुटि सन्देशसहितको खाली (placeholder) छवि देखाउनुहोस्।
+                        img.onerror = () => {
+                            // व्यक्तिगत बिग्रिएका छविहरूको लागि एक प्लेसहोल्डर छवि प्रयोग गर्नुहोस्
+                            img.src = `https://placehold.co/250x150/E0E0E0/888888?text=Image+Not+Found`;
+                            img.alt = `Image Not Found`;
+                        };
+                        slide.appendChild(img);
+                        adSlider.appendChild(slide);
+
+                        const dot = document.createElement('span');
+                        dot.className = 'dot';
+                        dot.addEventListener('click', () => {
+                            currentSlideIndex = index;
+                            showSlide();
+                        });
+                        adDots.appendChild(dot);
+                    });
+                    
+                    showSlide(); // Show the first slide
+                    prevAdBtn.style.display = 'block';
+                    nextAdBtn.style.display = 'block';
+                } else {
+                    // Display placeholder if no images and hide controls
+                    adSlider.innerHTML = '<div class="slide"><img src="https://placehold.co/800x400/CCCCCC/333333?text=No+Photos+Found" alt="Placeholder Advertisement"></div>';
+                    prevAdBtn.style.display = 'none';
+                    nextAdBtn.style.display = 'none';
+                }
+            };
+
+            // Function to show a specific slide
+            const showSlide = () => {
+                const slides = document.querySelectorAll('#adSlider .slide');
+                const dots = document.querySelectorAll('#adDots .dot');
+
+                if (slides.length === 0) return;
+
+                // Loop the index if it goes out of bounds
+                if (currentSlideIndex >= slides.length) {
+                    currentSlideIndex = 0;
+                }
+                if (currentSlideIndex < 0) {
+                    currentSlideIndex = slides.length - 1;
+                }
+
+                adSlider.style.transform = `translateX(-${currentSlideIndex * 100}%)`;
+
+                // Update active dot
+                dots.forEach(dot => dot.classList.remove('active'));
+                if(dots[currentSlideIndex]) {
+                    dots[currentSlideIndex].classList.add('active');
+                }
+            };
+
+            // Function to go to the next slide
+            const nextSlide = () => {
+                console.log(`Debug: Advancing to next slide. Current index: ${currentSlideIndex}`);
+                currentSlideIndex++;
+                showSlide();
+            };
+
+            // Function to go to the previous slide
+            const prevSlide = () => {
+                currentSlideIndex--;
+                showSlide();
+            };
+
+            // Start the auto-slide interval
+            const startAutoSlide = () => {
+                console.log("Debug: Attempting to start auto-slide interval.");
+                clearInterval(slideInterval); // Clear any existing interval
+                if (images.length > 1) {
+                    slideInterval = setInterval(nextSlide, 5000); // Change slide every 5 seconds
+                    console.log("Debug: Auto-slide started successfully.");
+                } else {
+                    console.log("Debug: Not enough images to start auto-slide.");
+                }
+            };
+
+            // Event listeners for navigation buttons
+            nextAdBtn.addEventListener('click', nextSlide);
+            prevAdBtn.addEventListener('click', prevSlide);
+
+            // Initial check and render on page load
+            checkLoginStatus();
         });
     </script>
 </body>
