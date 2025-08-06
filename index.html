@@ -627,6 +627,8 @@
         </div>
     </footer>
     
+    <!-- ग्यालेरी शीर्षक यहाँ थपिएको छ -->
+    <h2 class="text-3xl font-bold text-gray-800 text-center mt-8 mb-4">ग्यालेरी</h2>
     <!-- This container holds the copyright and the newly positioned advertisement section -->
     <div class="bg-gray-100 flex flex-col lg:flex-row justify-between items-center py-2 px-4">
         <!-- The original copyright section -->
@@ -638,7 +640,8 @@
         <div id="adDisplayContainer" class="w-full lg:w-1/4 max-w-sm mx-auto my-4 lg:my-0 lg:ml-4">
              <!-- Advertisement Management Section - Only visible if logged in -->
             <div id="adSection" class="mb-4 hidden">
-                <h3 class="text-sm font-bold mb-2 text-gray-800">विज्ञापन तथा समाचार</h3>
+                <!-- 'विज्ञापन तथा समाचार' लाई 'विज्ञापन तथा सूचना' मा परिवर्तन गरिएको छ -->
+                <h3 class="text-sm font-bold mb-2 text-gray-800">विज्ञापन तथा सूचना</h3>
                 <p class="text-xs text-gray-600 mt-2">यो भागमा विज्ञापन तथा समाचारहरू देखाइनेछन्। नयाँ फोटोहरू थप्नको लागि, कृपया आफ्नो GitHub repository मा `photo1.jpg`, `photo2.jpg` जस्ता नाममा फोटोहरू अपलोड गर्नुहोस्।</p>
             </div>
             
@@ -927,8 +930,8 @@
             // **महत्त्वपूर्ण: यी मानहरू तपाईंको वास्तविक GitHub रिपोजिटरीको विवरणसँग मिल्नुपर्छ।**
             // <<== यहाँ आफ्नो GitHub username राख्नुहोस्
             const githubRepoOwner = 'lokendragaire'; 
-            // <<== यहाँ आफ्नो रिपोजिटरीको नाम राख्नुहोस्
-            const githubRepoName = 'lokendragaire'; 
+            // <<== यहाँ आफ्नो रिपोजिटरीको नाम राख्नुहोस् (यो 'Lokendragaire.com.np' मा परिवर्तन गरिएको छ)
+            const githubRepoName = 'Lokendragaire.com.np'; 
             const githubBranch = 'main';
             const githubBaseUrl = `https://raw.githubusercontent.com/${githubRepoOwner}/${githubRepoName}/${githubBranch}/`;
             const githubLoginUrl = `https://github.com/${githubRepoOwner}/${githubRepoName}/`; // Changed to the repo's main page
@@ -989,7 +992,7 @@
                     adSection.classList.remove('hidden'); // Show ad management for logged-in user
                     loginButton.onclick = handleLogout; // Set logout function
                 } else {
-                    loginButton.innerHTML = '<i class="fas fa-sign-in-alt mr-1"></i> लगइन';
+                    loginButton.innerHTML = '<i class="fas fa-in-alt mr-1"></i> लगइन';
                     loginButton.classList.remove('text-red-700', 'hover:bg-red-100');
                     loginButton.classList.add('text-blue-700', 'hover:bg-blue-100');
                     adSection.classList.add('hidden'); // Hide ad management for logged-out user
@@ -1067,7 +1070,9 @@
                         };
                         // यदि छवि लोड हुन सकेन भने, त्रुटि सन्देशसहितको खाली (placeholder) छवि देखाउनुहोस्।
                         img.onerror = () => {
-                            img.src = `NO Advertisement Avaliable`;
+                            // व्यक्तिगत बिग्रिएका छविहरूको लागि एक प्लेसहोल्डर छवि प्रयोग गर्नुहोस्
+                            img.src = `https://placehold.co/250x150/E0E0E0/888888?text=Image+Not+Found`;
+                            img.alt = `Image Not Found`;
                         };
                         slide.appendChild(img);
                         adSlider.appendChild(slide);
