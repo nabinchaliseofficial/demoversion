@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/x-icon" href="lok.ico" />
+    <title>परिचयपत्र नवीकरण फारम</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans Devanagari', sans-serif;
+            background-color: #f0f2f5;
+        }
+        /* प्रिन्ट गर्दा नचाहिने तत्वहरू लुकाउने */
+        @media print {
+            .no-print {
+                display: none;
+            }
+            #preview-area {
+                box-shadow: none;
+                border: none;
+                width: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            .print-container {
+                display: block !important;
+                width: 100% !important;
+                padding: 0 !important;
+            }
+        }
+        .input-field {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            margin-top: 4px;
+        }
+        .placeholder {
+            color: #9ca3af;
+            font-style: italic;
+            min-width: 50px;
+            display: inline-block;
+            border-bottom: 1px dotted #9ca3af;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <div class="max-w-7xl mx-auto">
+        <header class="text-center mb-8 no-print">
+            <h1 class="text-3xl font-bold text-gray-800">सामाजिक सुरक्षा परिचयपत्र नवीकरण फारम</h1>
+            <p class="text-gray-600 mt-2">बायाँतिरको फारममा विवरण भर्नुहोस् र दायाँतिर पूर्वावलोकन हेर्नुहोस्।</p>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 print-container">
+            <!-- Input Form Section -->
+            <div id="input-form" class="bg-white p-6 rounded-xl shadow-lg no-print">
+                <h2 class="text-2xl font-bold mb-6 border-b pb-3">विवरण भर्नुहोस्</h2>
+                <form id="detailsForm" class="space-y-6">
+                    <!-- General Info -->
+                    <div>
+                        <label for="form-date" class="font-semibold text-gray-700">मिति (बि.सं.)</label>
+                        <div class="grid grid-cols-3 gap-2">
+                            <input type="text" id="year" placeholder="वर्ष" class="input-field">
+                            <input type="text" id="month" placeholder="महिना" class="input-field">
+                            <input type="text" id="day" placeholder="गते" class="input-field">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="ward-no" class="font-semibold text-gray-700">वडा नं.</label>
+                        <input type="text" id="ward-no" class="input-field">
+                    </div>
+
+                    <!-- Beneficiary Details -->
+                    <div class="border-t pt-4">
+                        <h3 class="text-xl font-bold mb-4 text-gray-800">लाभग्राहीको विवरण</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="name" class="font-semibold text-gray-700">नाम थर</label>
+                                <input type="text" id="name" class="input-field">
+                            </div>
+                            <div>
+                                <label for="gender" class="font-semibold text-gray-700">लिङ्ग</label>
+                                <select id="gender" class="input-field">
+                                    <option value="">छान्नुहोस्</option>
+                                    <option value="पुरुष">पुरुष</option>
+                                    <option value="महिला">महिला</option>
+                                    <option value="अन्य">अन्य</option>
+                                </select>
+                            </div>
+                            <div class="col-span-1 md:col-span-2">
+                                <label for="group" class="font-semibold text-gray-700">लक्षित समुह</label>
+                                <select id="group" class="input-field">
+                                    <option value="">छान्नुहोस्</option>
+                                    <option value="अन्य जेष्ठ नागरिक">अन्य जेष्ठ नागरिक</option>
+                                    <option value="जेष्ठ नागरिक दलित">जेष्ठ नागरिक दलित</option>
+                                    <option value="जेष्ठ नागरिक एकल महिला">जेष्ठ नागरिक एकल महिला</option>
+                                    <option value="विधवा">विधवा</option>
+                                    <option value="पुर्ण अपाङ्गता">पुर्ण अपाङ्गता</option>
+                                    <option value="अति अशक्त अपाङ्गता">अति अशक्त अपाङ्गता</option>
+                                    <option value="दलित बालबालिका">दलित बालबालिका</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="social-id" class="font-semibold text-gray-700">सामाजिक सुरक्षा परिचयपत्र नं.</label>
+                                <input type="text" id="social-id" class="input-field" maxlength="13">
+                                <p id="social-id-error" class="text-red-500 text-sm mt-1"></p>
+                            </div>
+                            <div>
+                                <label for="national-id" class="font-semibold text-gray-700">राष्ट्रिय परिचयपत्र नं.</label>
+                                <input type="text" id="national-id" class="input-field" maxlength="10">
+                                <p id="national-id-error" class="text-red-500 text-sm mt-1"></p>
+                            </div>
+                            <div>
+                                <label for="mobile" class="font-semibold text-gray-700">सम्पर्क मोबाइल नं.</label>
+                                <input type="text" id="mobile" class="input-field">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Guardian Checkbox -->
+                    <div class="border-t pt-4">
+                         <div class="flex items-center">
+                            <input type="checkbox" id="needsGuardian" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                            <label for="needsGuardian" class="ml-2 block text-sm text-gray-900">बालबालिका वा आफैँ उपस्थित हुन नसक्ने व्यक्तिको हकमा हो?</label>
+                        </div>
+                    </div>
+
+
+                    <!-- Guardian Details (Initially Hidden) -->
+                    <div id="guardian-form-section" class="border-t pt-4" style="display: none;">
+                        <h3 class="text-xl font-bold mb-4 text-gray-800">संरक्षक/मायवरको विवरण</h3>
+                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="guardian-name" class="font-semibold text-gray-700">नाम थर</label>
+                                <input type="text" id="guardian-name" class="input-field">
+                            </div>
+                             <div>
+                                <label for="relation" class="font-semibold text-gray-700">भत्ता प्राप्त गर्ने व्यक्तिसँगको नाता</label>
+                                <input type="text" id="relation" class="input-field">
+                            </div>
+                             <div>
+                                <label for="guardian-mobile" class="font-semibold text-gray-700">सम्पर्क मोबाईल नं.</label>
+                                <input type="text" id="guardian-mobile" class="input-field">
+                            </div>
+                            <div>
+                                <label for="guardian-national-id" class="font-semibold text-gray-700">राष्ट्रिय परिचयपत्र नं.</label>
+                                <input type="text" id="guardian-national-id" class="input-field" maxlength="10">
+                                <p id="guardian-national-id-error" class="text-red-500 text-sm mt-1"></p>
+                            </div>
+                             <div>
+                                <label for="citizenship-no" class="font-semibold text-gray-700">नागरिकता प्रमाणपत्र नं.</label>
+                                <input type="text" id="citizenship-no" class="input-field">
+                            </div>
+                            <div>
+                                <label for="issue-details" class="font-semibold text-gray-700">जारि भएको जिल्ला र मिति</label>
+                                <input type="text" id="issue-details" class="input-field">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center pt-4">
+                         <button type="button" onclick="window.print()" class="w-full bg-blue-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors duration-300">
+                            प्रिन्ट गर्नुहोस्
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Preview Area -->
+            <div id="preview-area" class="bg-white p-8 md:p-12 rounded-xl shadow-lg leading-relaxed">
+                <div class="text-center mb-6">
+                    <h2 class="font-bold">अनुसूची- २</h2>
+                    <p>(दफा ४ को उपदफा (१) सँग सम्बन्धित )</p>
+                </div>
+                <div class="text-right mb-6">
+                    <p>मिति: <span id="preview-year" class="placeholder">२०&nbsp;&nbsp;</span>/<span id="preview-month" class="placeholder">&nbsp;&nbsp;</span>/<span id="preview-day" class="placeholder">&nbsp;&nbsp;</span> गते</p>
+                </div>
+
+                <div class="space-y-2 mb-4">
+                    <p>श्री वडा अध्यक्षज्यू,</p>
+                    <p>गलकोट नगरपालिका</p>
+                    <p>वडा नं. <span id="preview-ward-no" class="placeholder">...</span>, बागलुङ</p>
+                    <p>गण्डकी प्रदेश</p>
+                </div>
+
+                <h3 class="text-center font-bold underline mb-4">विषयः परिचयपत्र नवीकरण सम्बन्धमा ।</h3>
+
+                <p class="mb-4">
+                    प्रस्तुत विषयमा चालु आर्थिक वर्षमा सामाजिक सुरक्षा भत्ता प्राप्त गर्नका लागि परिचयपत्र नवीकरण गरिदिनु हुन देहायको विवरण सहित निवेदन पेश गरेको छु ।
+                </p>
+                <p class="mb-4">
+                    म सरकारी वा सार्वजनिक पदमा नियुक्ति, निर्वाचित, मनोनित भएको व्यक्ति होइन र मैले नेपाल सरकार, प्रदेश सरकार र स्थानीय तहको पूर्ण वा आंशिक स्वामित्वमा भएको संगठित संस्थाबाट नियमित रुपले पारिश्रमिक, निवृत्तभरण, अवकाश सुविधा वा अन्य सुविधा पाएको छैन । व्यहोरा ठीक साँचो हो, झुठ्ठा ठहरे प्रचलित कानून बमोजिम सहुँला बुझाउँला ।
+                </p>
+                <p class="mb-4">
+                    ६० वर्ष भन्दा मूनिका विधवा महिला लाभग्राहीको हकमा अर्को विवाह नभएको र सामाजिक सुरक्षा भत्ता पाउन कुनै कानूनले अयोग्य नभएको व्यहोरा प्रमाणित भएको हुनुपर्नेछ ।
+                </p>
+
+                <div class="mb-6 border-t border-b py-4">
+                    <h4 class="font-bold underline mb-2">लाभग्राहीको विवरणः</h4>
+                    <div class="grid grid-cols-2 gap-x-8 gap-y-2">
+                        <p>नाम थर :- <span id="preview-name" class="placeholder">नाम</span></p>
+                        <p>लिङ्ग:- <span id="preview-gender" class="placeholder">लिङ्ग</span></p>
+                        <p class="col-span-2">लक्षित समुह:- <span id="preview-group" class="placeholder">समुह</span></p>
+                        <p>सामाजिक सुरक्षा परिचयपत्र नं.: <span id="preview-social-id" class="placeholder">नं.</span></p>
+                        <p>राष्ट्रिय परिचयपत्र नं.:- <span id="preview-national-id" class="placeholder">नं.</span></p>
+                        <p>सम्पर्क मोबाइल नं.:- <span id="preview-mobile" class="placeholder">नं.</span></p>
+                        <p>दस्तखतः- ....................................</p>
+                        <p>मिति:- ..................................</p>
+                    </div>
+                </div>
+
+                <div id="guardian-preview-section" class="mb-6">
+                    <h4 class="font-bold text-center mb-2">संरक्षक/ मायवर/ स्याहारसुसार गर्ने व्यक्तिको विवरण (बालबालिका वा आफैँ उपस्थित हुन नसक्ने व्यक्तिको हकमा)</h4>
+                    <p class="mb-4">
+                        यस निवेदनमा भएको लाभग्राहीको दस्तखत / सहिछाप मेरो रोहवरमा भएको ठिक साँचो हो । यसमा भएको दस्तखत वा मितिमा फरक परेमा कानून बमोजिम सहुँदा बुझाउँला भनी सहिछाप गर्ने इच्छाएको व्यक्तिको:-
+                    </p>
+                     <div class="grid grid-cols-2 gap-x-8 gap-y-2">
+                        <p>नाम थर:- <span id="preview-guardian-name" class="placeholder">नाम</span></p>
+                        <p>दस्तखतः- ....................................</p>
+                        <p>भत्ता प्राप्त गर्ने व्यक्तिसँगको नाताः <span id="preview-relation" class="placeholder">नाता</span></p>
+                        <p>सम्पर्क मोबाईल नं.:- <span id="preview-guardian-mobile" class="placeholder">नं.</span></p>
+                        <p>राष्ट्रिय परिचयपत्र नं.:- <span id="preview-guardian-national-id" class="placeholder">नं.</span></p>
+                        <p>नागरिकता प्रमाणपत्र नं.:- <span id="preview-citizenship-no" class="placeholder">नं.</span></p>
+                        <p class="col-span-2">जारि भएको जिल्ला र मितिः- <span id="preview-issue-details" class="placeholder">विवरण</span></p>
+                    </div>
+                </div>
+
+                <div class="border-t pt-4">
+                    <h4 class="font-bold underline mb-2">कार्यालयको प्रयोजनको लागि</h4>
+                     <div class="grid grid-cols-2 gap-x-8 gap-y-2">
+                        <p>दर्ता नं.:- ....................................</p>
+                        <p>रुजु गर्ने कर्मचारीको नाम थर: ....................................</p>
+                        <p>पदः ....................................</p>
+                        <p>दस्तखतः- ....................................</p>
+                        <p>मितिः ....................................</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- Helper Functions ---
+
+        // Function to convert English digits to Nepali digits
+        const toNepaliNumber = (numStr) => {
+            if (numStr === null || numStr === undefined) return '';
+            const englishNumerals = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+            const nepaliNumerals = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९'];
+            let nepaliStr = String(numStr);
+            for (let i = 0; i < 10; i++) {
+                nepaliStr = nepaliStr.replace(new RegExp(englishNumerals[i], "g"), nepaliNumerals[i]);
+            }
+            return nepaliStr;
+        };
+        
+        // Function to set up event listeners for text fields with optional validation
+        function listenAndUpdate(inputId, previewId, defaultValue, options = {}) {
+            const { isNumeric = false, validation = null } = options;
+
+            const inputElement = document.getElementById(inputId);
+            const previewElement = document.getElementById(previewId);
+            const errorElement = validation ? document.getElementById(validation.errorId) : null;
+            
+            previewElement.textContent = defaultValue;
+
+            inputElement.addEventListener('input', () => {
+                let value = inputElement.value;
+                if (isNumeric) {
+                    value = value.replace(/[^0-9]/g, '');
+                    inputElement.value = value;
+                } else {
+                    value = value.trim();
+                }
+
+                // Update Preview
+                if (value !== '') {
+                    previewElement.textContent = isNumeric ? toNepaliNumber(value) : value;
+                    previewElement.classList.remove('placeholder');
+                } else {
+                    previewElement.textContent = defaultValue;
+                    previewElement.classList.add('placeholder');
+                }
+
+                // Handle Validation
+                if (validation && errorElement) {
+                    if (value.length > 0 && value.length !== validation.length) {
+                        errorElement.textContent = validation.message;
+                    } else {
+                        errorElement.textContent = '';
+                    }
+                }
+            });
+        }
+
+        // --- Event Listeners Setup ---
+
+        // Date fields
+        listenAndUpdate('year', 'preview-year', '२०\u00a0\u00a0', { isNumeric: true });
+        listenAndUpdate('month', 'preview-month', '\u00a0\u00a0', { isNumeric: true });
+        listenAndUpdate('day', 'preview-day', '\u00a0\u00a0', { isNumeric: true });
+
+        // Other fields
+        listenAndUpdate('ward-no', 'preview-ward-no', '...', { isNumeric: true });
+        listenAndUpdate('name', 'preview-name', 'नाम');
+        listenAndUpdate('gender', 'preview-gender', 'लिङ्ग');
+        listenAndUpdate('group', 'preview-group', 'समुह');
+        listenAndUpdate('mobile', 'preview-mobile', 'नं.', { isNumeric: true });
+        
+        // Fields with validation
+        listenAndUpdate('social-id', 'preview-social-id', 'नं.', {
+            isNumeric: true,
+            validation: {
+                length: 13,
+                errorId: 'social-id-error',
+                message: 'परिचयपत्र नं. १३ अंकको हुनुपर्छ।'
+            }
+        });
+        listenAndUpdate('national-id', 'preview-national-id', 'नं.', {
+            isNumeric: true,
+            validation: {
+                length: 10,
+                errorId: 'national-id-error',
+                message: 'राष्ट्रिय परिचयपत्र नं. १० अंकको हुनुपर्छ।'
+            }
+        });
+
+        // Guardian fields
+        listenAndUpdate('guardian-name', 'preview-guardian-name', 'नाम');
+        listenAndUpdate('relation', 'preview-relation', 'नाता');
+        listenAndUpdate('guardian-mobile', 'preview-guardian-mobile', 'नं.', { isNumeric: true });
+        listenAndUpdate('citizenship-no', 'preview-citizenship-no', 'नं.', { isNumeric: true });
+        listenAndUpdate('issue-details', 'preview-issue-details', 'विवरण');
+        listenAndUpdate('guardian-national-id', 'preview-guardian-national-id', 'नं.', {
+            isNumeric: true,
+            validation: {
+                length: 10,
+                errorId: 'guardian-national-id-error',
+                message: 'राष्ट्रिय परिचयपत्र नं. १० अंकको हुनुपर्छ।'
+            }
+        });
+
+        // Guardian section visibility toggle
+        const needsGuardianCheckbox = document.getElementById('needsGuardian');
+        const guardianFormSection = document.getElementById('guardian-form-section');
+        
+        needsGuardianCheckbox.addEventListener('change', () => {
+            const isChecked = needsGuardianCheckbox.checked;
+            guardianFormSection.style.display = isChecked ? 'block' : 'none';
+        });
+
+    </script>
+
+</body>
+</html>

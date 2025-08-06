@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Important portal for education related work</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .link-card {
+            margin-bottom: 1rem;
+            border-radius: 0.5rem;
+            transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .link-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .icon-bg {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .icon-bg i {
+            font-size: 1.25rem;
+            color: #374151; /* gray-700 */
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
+
+    <div class="main-container text-center">
+        <a href="#financial-services-section" class="inline-block px-8 py-4 bg-blue-600 text-white font-bold text-xl rounded-lg shadow-lg hover:bg-blue-700 transition duration-300 ease-in-out">
+            Click here to take financial services
+        </a>
+
+        <div id="financial-services-section" class="max-w-6xl mx-auto bg-white p-6 sm:p-8 rounded-xl shadow-lg mt-8 hidden">
+            <h2 class="text-3xl sm:text-4xl font-bold text-center text-gray-800 mb-8">important link</h2>
+
+            <a href="https://www.nrb.org.np/" target="_blank" rel="noopener noreferrer" class="link-card flex items-center p-4 bg-green-100 hover:bg-green-200 shadow-md">
+                <div class="icon-bg mr-4">
+                    <i class="fas fa-bank"></i>
+                </div>
+                <span class="text-lg font-medium text-gray-800">नेपाल राष्ट्र बैंक</span>
+            </a>
+
+            <a href="https://nia.gov.np/" target="_blank" rel="noopener noreferrer" class="link-card flex items-center p-4 bg-gray-100 hover:bg-gray-200 shadow-md">
+                <div class="icon-bg mr-4">
+                    <i class="fas fa-user-secret"></i>
+                </div>
+                <span class="text-lg font-medium text-gray-800">राष्ट्रिय विमा प्राधिकरण</span>
+            </a>
+
+            <a href="https://mof.gov.np/" target="_blank" rel="noopener noreferrer" class="link-card flex items-center p-4 bg-teal-100 hover:bg-teal-200 shadow-md">
+                <div class="icon-bg mr-4">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <span class="text-lg font-medium text-gray-800">अर्थ मन्त्रालय</span>
+            </a>
+
+            <a href="https://epf.org.np/np/" target="_blank" rel="noopener noreferrer" class="link-card flex items-center p-4 bg-yellow-100 hover:bg-yellow-200 shadow-md">
+                <div class="icon-bg mr-4">
+                    <i class="fas fa-hand-holding-usd"></i>
+                </div>
+                <span class="text-lg font-medium text-gray-800">कर्मचारी सञ्चय कोष</span>
+            </a>
+
+            <a href="https://www.nlk.org.np/" target="_blank" rel="noopener noreferrer" class="link-card flex items-center p-4 bg-lime-100 hover:bg-lime-200 shadow-md">
+                <div class="icon-bg mr-4">
+                    <i class="fas fa-map-marked-alt"></i>
+                </div>
+                <span class="text-lg font-medium text-gray-800">नागरिक लगानी कोष</span>
+            </a>
+
+            <a href="https://www.nimbacecapital.com/sip-calculator/" target="_blank" rel="noopener noreferrer" class="link-card flex items-center p-4 bg-orange-100 hover:bg-orange-200 shadow-md">
+                <div class="icon-bg mr-4">
+                    <i class="fas fa-calculator"></i>
+                </div>
+                <span class="text-lg font-medium text-gray-800">निम्बेस क्यापिटल SIP क्याल्कुलेटर</span>
+            </a>
+
+            <a href="https://www.bolpatra.gov.np/egp/openDateConverter" target="_blank" rel="noopener noreferrer" class="link-card flex items-center p-4 bg-indigo-100 hover:bg-indigo-200 shadow-md">
+                <div class="icon-bg mr-4">
+                    <i class="fas fa-calendar-alt"></i>
+                </div>
+                <span class="text-lg font-medium text-gray-800">मिति परिवर्तक</span>
+            </a>
+
+            <a href="https://cleartax.in/s/simple-compound-interest-calculator" target="_blank" rel="noopener noreferrer" class="link-card flex items-center p-4 bg-pink-100 hover:bg-pink-200 shadow-md">
+                <div class="icon-bg mr-4">
+                    <i class="fas fa-calculator"></i>
+                </div>
+                <span class="text-lg font-medium text-gray-800">ClearTax ब्याज क्याल्कुलेटर</span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        document.querySelector('a[href="#financial-services-section"]').addEventListener('click', function(e) {
+            e.preventDefault(); // Prevent default anchor behavior
+            const section = document.getElementById('financial-services-section');
+            section.classList.toggle('hidden'); // Toggle visibility
+            if (!section.classList.contains('hidden')) {
+                section.scrollIntoView({ behavior: 'smooth' }); // Scroll to the section if it becomes visible
+            }
+        });
+    </script>
+</body>
+</html>
