@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>जन्म प्रमाणिकरण पत्र</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 5px; /* Reduced padding */
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 15px; /* Reduced padding */
+            width: 100%;
+            max-width: 800px;
+            margin-top: 10px; /* Reduced margin */
+            margin-bottom: 10px; /* Reduced margin */
+        }
+        .form-section, .preview-section {
+            display: none; /* Hidden by default */
+        }
+        .form-section.active {
+            display: block;
+        }
+        .preview-section.active {
+            display: block;
+        }
+
+        /* A4 size for printing */
+        @media print {
+            body {
+                background: none;
+                margin: 0;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+                border-radius: 0;
+                width: 210mm; /* A4 width */
+                min-height: 297mm; /* A4 height */
+                margin: 0 auto;
+                padding: 10mm; /* Reduced print padding */
+                page-break-after: always; /* Ensure each letter starts on a new page if multiple */
+                position: relative; /* For watermark positioning */
+            }
+            .form-section, .buttons-container {
+                display: none !important; /* Hide form and buttons when printing */
+            }
+            .preview-section {
+                display: block !important;
+                position: relative; /* Ensure watermark is positioned correctly */
+            }
+            .letter-content {
+                position: relative;
+                z-index: 10; /* Ensure content is above watermark */
+            }
+            .watermark {
+                display: block !important;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 80%; /* Adjust size as needed */
+                height: auto;
+                opacity: 0.08 !important; /* Adjust opacity for print */
+                pointer-events: none; /* Allow text selection through watermark */
+                z-index: 1; /* Place watermark behind content */
+            }
+            /* Ensure dotted lines are visible on print */
+            .dotted-line-bottom {
+                border-bottom: 1px dotted #999 !important;
+                text-align: initial !important; /* Allow natural flow */
+            }
+            .field-value {
+                white-space: normal !important; /* Allow text to wrap on print */
+                overflow: visible !important;
+                text-overflow: clip !important;
+            }
+            .header-left-align {
+                text-align: left !important;
+            }
+            .header-right-align {
+                text-align: right !important;
+            }
+        }
+
+        /* Watermark styling */
+        .watermark-container {
+            position: relative;
+            min-height: 500px; /* Adjust as needed for content */
+        }
+        .watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%; /* Adjust size as needed */
+            height: auto;
+            opacity: 0.08; /* Adjust opacity as needed */
+            pointer-events: none; /* Allow text selection through watermark */
+            z-index: 1; /* Place watermark behind content */
+        }
+        .letter-content {
+            position: relative;
+            z-index: 10; /* Ensure content is above watermark */
+        }
+        /* Custom styles for dotted lines and layout */
+        .dotted-line-bottom {
+            border-bottom: 1px dotted #999; /* Changed to dotted */
+            padding-bottom: 2px;
+            display: inline-block;
+            /* Removed min-width to allow dynamic sizing */
+            text-align: left; /* Align text to left within the dotted line */
+            box-sizing: border-box; /* Include padding and border in the element's total width and height */
+            margin-left: 1px; /* Small space after label */
+            margin-right: 1px; /* Small space before next element */
+            flex-grow: 1; /* Allow to grow and fill space */
+            flex-shrink: 1; /* Allow to shrink if needed */
+        }
+        .field-row {
+            display: flex;
+            align-items: baseline;
+            margin-bottom: 8px;
+            flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+        }
+        .field-label {
+            flex-shrink: 0;
+            margin-right: 5px;
+            white-space: nowrap; /* Prevent label from wrapping */
+        }
+        .field-value {
+            flex-grow: 1;
+            white-space: normal; /* Allow text to wrap */
+        }
+        .header-top-right p {
+            margin-bottom: 2px;
+        }
+        .header-center p {
+            margin-bottom: 2px;
+        }
+        .header-left-align {
+            text-align: left;
+        }
+        .header-right-align {
+            text-align: right;
+        }
+        .header-flex-item {
+            flex-basis: 33.33%; /* Approx one-third width for each section */
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center align items in the middle column */
+        }
+        .header-flex-item.left {
+            align-items: flex-start;
+        }
+        .header-flex-item.right {
+            align-items: flex-end;
+        }
+        .header-main-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            width: 100%;
+        }
+        .header-bottom-left {
+            text-align: left;
+            width: 50%; /* Adjust width for left alignment */
+        }
+        .header-bottom-right {
+            text-align: right;
+            width: 50%; /* Adjust width for right alignment */
+        }
+        /* Specific adjustments for the new header layout */
+        .header-top-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        .header-top-section .left-col {
+            flex-basis: 20%; /* Adjust as needed */
+            text-align: left;
+        }
+        .header-top-section .center-col {
+            flex-basis: 60%; /* Adjust as needed */
+            text-align: center;
+        }
+        .header-top-section .right-col {
+            flex-basis: 20%; /* Adjust as needed */
+            text-align: right;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: flex-end;
+        }
+        .header-top-section .right-col p {
+            margin-bottom: 2px;
+        }
+        /* Ensure header text adjusts to single line if possible, or wraps gracefully */
+        .header-center p {
+            white-space: normal; /* Allow wrapping */
+            word-break: break-word; /* Break long words */
+            font-size: 0.875rem; /* text-sm */
+            line-height: 1.25rem; /* leading-5 */
+        }
+        .header-center p.text-lg {
+            font-size: 1.125rem; /* text-lg */
+            line-height: 1.75rem; /* leading-7 */
+        }
+
+        /* Adjust header flex item to give more space to center */
+        .header-flex-item.left, .header-flex-item.right {
+            flex-basis: 15%; /* Reduced side column width */
+            max-width: 15%;
+        }
+        .header-flex-item.center {
+            flex-basis: 70%; /* Increased center column width */
+            max-width: 70%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Form Section -->
+        <div id="formSection" class="form-section active">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">जन्म प्रमाणिकरण विवरण प्रविष्ट गर्नुहोस्</h2>
+            <form id="letterForm" class="space-y-6">
+                <div>
+                    <label for="municipalityNepali" class="block text-sm font-medium text-gray-700">नगरपालिका/महानगरपालिका (नेपाली):</label>
+                    <input type="text" id="municipalityNepali" name="municipalityNepali" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="नगरपालिका/महानगरपालिका नेपालीमा प्रविष्ट गर्नुहोस्">
+                </div>
+                <div>
+                    <label for="municipalityEnglish" class="block text-sm font-medium text-gray-700">Municipality (English):</label>
+                    <input type="text" id="municipalityEnglish" name="municipalityEnglish" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="Municipality name in English">
+                </div>
+                <div>
+                    <label for="wardOfficeNepali" class="block text-sm font-medium text-gray-700">वडा कार्यालय (नेपाली):</label>
+                    <input type="text" id="wardOfficeNepali" name="wardOfficeNepali" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="वडा कार्यालय नेपालीमा प्रविष्ट गर्नुहोस्">
+                </div>
+                <div>
+                    <label for="wardOfficeEnglish" class="block text-sm font-medium text-gray-700">Ward Office (English):</label>
+                    <input type="text" id="wardOfficeEnglish" name="wardOfficeEnglish" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="Ward Office name in English">
+                </div>
+                <div>
+                    <label for="districtNepali" class="block text-sm font-medium text-gray-700">जिल्ला (नेपाली):</label>
+                    <input type="text" id="districtNepali" name="districtNepali" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="जिल्ला नेपालीमा प्रविष्ट गर्नुहोस्">
+                </div>
+                <div>
+                    <label for="districtEnglish" class="block text-sm font-medium text-gray-700">District (English):</label>
+                    <input type="text" id="districtEnglish" name="districtEnglish" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="District name in English">
+                </div>
+                <div>
+                    <label for="provinceNepali" class="block text-sm font-medium text-gray-700">प्रदेश (नेपाली):</label>
+                    <input type="text" id="provinceNepali" name="provinceNepali" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="प्रदेश नेपालीमा प्रविष्ट गर्नुहोस्">
+                </div>
+                <div>
+                    <label for="provinceEnglish" class="block text-sm font-medium text-gray-700">Province (English):</label>
+                    <input type="text" id="provinceEnglish" name="provinceEnglish" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="Province name in English">
+                </div>
+                <div>
+                    <label for="refNo" class="block text-sm font-medium text-gray-700">प.सं. (Ref.No.):</label>
+                    <input type="text" id="refNo" name="refNo" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="प.सं. प्रविष्ट गर्नुहोस्">
+                </div>
+                <div>
+                    <label for="desNo" class="block text-sm font-medium text-gray-700">चलानी नं (Des.No.):</label>
+                    <input type="text" id="desNo" name="desNo" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="चलानी नं प्रविष्ट गर्नुहोस्">
+                </div>
+                <div>
+                    <label for="date" class="block text-sm font-medium text-gray-700">मिति (Date):</label>
+                    <input type="text" id="date" name="date" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="dd/mm/yyyy (वि.सं.)">
+                </div>
+                <div>
+                    <label for="applicantNameNepali" class="block text-sm font-medium text-gray-700">श्री (नेपाली):</label>
+                    <input type="text" id="applicantNameNepali" name="applicantNameNepali" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="निवेदन दिने व्यक्तिको नाम नेपालीमा प्रविष्ट गर्नुहोस्">
+                </div>
+                <div>
+                    <label for="applicantNameEnglish" class="block text-sm font-medium text-gray-700">Mr./Mrs./Ms./Miss (English):</label>
+                    <input type="text" id="applicantNameEnglish" name="applicantNameEnglish" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="Applicant's name in English">
+                </div>
+                <div>
+                    <label for="verifiedPersonNameNepali" class="block text-sm font-medium text-gray-700">प्रमाणित गरिने व्यक्तिको नाम (नेपाली):</label>
+                    <input type="text" id="verifiedPersonNameNepali" name="verifiedPersonNameNepali" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="प्रमाणित गरिने व्यक्तिको नाम नेपालीमा प्रविष्ट गर्नुहोस्">
+                </div>
+                <div>
+                    <label for="verifiedPersonNameEnglish" class="block text-sm font-medium text-gray-700">Verified Person's Name (English):</label>
+                    <input type="text" id="verifiedPersonNameEnglish" name="verifiedPersonNameEnglish" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="Verified person's name in English">
+                </div>
+                <div>
+                    <label for="fullNameNepali" class="block text-sm font-medium text-gray-700">पुरा नाम (नेपाली):</label>
+                    <input type="text" id="fullNameNepali" name="fullNameNepali" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="पुरा नाम नेपालीमा प्रविष्ट गर्नुहोस्">
+                </div>
+                <div>
+                    <label for="fullNameEnglish" class="block text-sm font-medium text-gray-700">Full Name (English):</label>
+                    <input type="text" id="fullNameEnglish" name="fullNameEnglish" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="Full Name in English">
+                </div>
+                <div>
+                    <label for="dobBS" class="block text-sm font-medium text-gray-700">जन्म मिति (वि.सं.):</label>
+                    <input type="text" id="dobBS" name="dobBS" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="yyyy/mm/dd (वि.सं.)">
+                </div>
+                <div>
+                    <label for="dobAD" class="block text-sm font-medium text-gray-700">जन्म मिति (A.D.):</label>
+                    <input type="text" id="dobAD" name="dobAD" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="yyyy/mm/dd (A.D.)">
+                </div>
+                <div>
+                    <label for="sex" class="block text-sm font-medium text-gray-700">लिङ्ग/Sex:</label>
+                    <select id="sex" name="sex" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                        <option value="">लिङ्ग छान्नुहोस्</option>
+                        <option value="पुरुष">पुरुष</option>
+                        <option value="महिला">महिला</option>
+                        <option value="अन्य">अन्य</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="permanentAddressMunicipalityNepali" class="block text-sm font-medium text-gray-700">स्थायी ठेगाना पालिकाको नाम (नेपाली):</label>
+                    <input type="text" id="permanentAddressMunicipalityNepali" name="permanentAddressMunicipalityNepali" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="पालिकाको नाम लेख्नुहोस्">
+                </div>
+                <div>
+                    <label for="permanentAddressWardNo" class="block text-sm font-medium text-gray-700">स्थायी ठेगाना वडा नं:</label>
+                    <input type="text" id="permanentAddressWardNo" name="permanentAddressWardNo" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="वडा नं प्रविष्ट गर्नुहोस्">
+                </div>
+                <div>
+                    <label for="permanentAddressDistrictNepali" class="block text-sm font-medium text-gray-700">स्थायी ठेगाना जिल्ला (नेपाली):</label>
+                    <input type="text" id="permanentAddressDistrictNepali" name="permanentAddressDistrictNepali" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="जिल्लाको नाम नेपालीमा लेख्नुहोस्">
+                </div>
+                <div>
+                    <label for="permanentAddressMunicipalityEnglish" class="block text-sm font-medium text-gray-700">Permanent Address Municipality (English):</label>
+                    <input type="text" id="permanentAddressMunicipalityEnglish" name="permanentAddressMunicipalityEnglish" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="Municipality name in English">
+                </div>
+                <div>
+                    <label for="permanentAddressDistrictEnglish" class="block text-sm font-medium text-gray-700">Permanent Address District (English):</label>
+                    <input type="text" id="permanentAddressDistrictEnglish" name="permanentAddressDistrictEnglish" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="District name in English">
+                </div>
+                <div>
+                    <label for="birthPlaceMunicipalityNepali" class="block text-sm font-medium text-gray-700">जन्म स्थान पालिकाको नाम (नेपाली):</label>
+                    <input type="text" id="birthPlaceMunicipalityNepali" name="birthPlaceMunicipalityNepali" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="पालिकाको नाम लेख्नुहोस्">
+                </div>
+                <div>
+                    <label for="birthPlaceWardNo" class="block text-sm font-medium text-gray-700">जन्म स्थान वडा नं:</label>
+                    <input type="text" id="birthPlaceWardNo" name="birthPlaceWardNo" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="वडा नं प्रविष्ट गर्नुहोस्">
+                </div>
+                <div>
+                    <label for="birthPlaceDistrictNepali" class="block text-sm font-medium text-gray-700">जन्म स्थान जिल्ला (नेपाली):</label>
+                    <input type="text" id="birthPlaceDistrictNepali" name="birthPlaceDistrictNepali" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="जिल्लाको नाम नेपालीमा लेख्नुहोस्">
+                </div>
+                <div>
+                    <label for="birthPlaceMunicipalityEnglish" class="block text-sm font-medium text-gray-700">Birth Place Municipality (English):</label>
+                    <input type="text" id="birthPlaceMunicipalityEnglish" name="birthPlaceMunicipalityEnglish" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="Municipality name in English">
+                </div>
+                <div>
+                    <label for="birthPlaceDistrictEnglish" class="block text-sm font-medium text-gray-700">Birth Place District (English):</label>
+                    <input type="text" id="birthPlaceDistrictEnglish" name="birthPlaceDistrictEnglish" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="जिल्लाको नाम English मा लेख्नुहोस्">
+                </div>
+                <div>
+                    <label for="fatherFullNameNepali" class="block text-sm font-medium text-gray-700">बाबुको पुरा नाम (नेपाली):</label>
+                    <input type="text" id="fatherFullNameNepali" name="fatherFullNameNepali" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="बाबुको पुरा नाम नेपालीमा प्रविष्ट गर्नुहोस्">
+                </div>
+                <div>
+                    <label for="fatherFullNameEnglish" class="block text-sm font-medium text-gray-700">बाबुको पुरा नाम (English):</label>
+                    <input type="text" id="fatherFullNameEnglish" name="fatherFullNameEnglish" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="Father's Full Name in English">
+                </div>
+                <div>
+                    <label for="fatherIdType" class="block text-sm font-medium text-gray-700">बाबुको परिचयपत्र प्रकार:</label>
+                    <select id="fatherIdType" name="fatherIdType" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                        <option value="">छान्नुहोस्</option>
+                        <option value="नागरिकता">नागरिकता</option>
+                        <option value="राहदानी">राहदानी</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="fatherIdNumber" class="block text-sm font-medium text-gray-700">बाबुको परिचयपत्र नं (नेपाली/English):</label>
+                    <input type="text" id="fatherIdNumber" name="fatherIdNumber" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="नेपाली नम्बर/English नम्बर">
+                </div>
+                <div>
+                    <label for="motherFullNameNepali" class="block text-sm font-medium text-gray-700">आमाको पुरा नाम (नेपाली):</label>
+                    <input type="text" id="motherFullNameNepali" name="motherFullNameNepali" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="आमाको पुरा नाम नेपालीमा प्रविष्ट गर्नुहोस्">
+                </div>
+                <div>
+                    <label for="motherFullNameEnglish" class="block text-sm font-medium text-gray-700">आमाको पुरा नाम (English):</label>
+                    <input type="text" id="motherFullNameEnglish" name="motherFullNameEnglish" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="Mother's Full Name in English">
+                </div>
+                <div>
+                    <label for="motherIdType" class="block text-sm font-medium text-gray-700">आमाको परिचयपत्र प्रकार:</label>
+                    <select id="motherIdType" name="motherIdType" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                        <option value="">छान्नुहोस्</option>
+                        <option value="नागरिकता">नागरिकता</option>
+                        <option value="राहदानी">राहदानी</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="motherIdNumber" class="block text-sm font-medium text-gray-700">आमाको परिचयपत्र नं (नेपाली/English):</label>
+                    <input type="text" id="motherIdNumber" name="motherIdNumber" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="नेपाली नम्बर/English नम्बर">
+                </div>
+                <div>
+                    <label for="wardChairpersonNameNepali" class="block text-sm font-medium text-gray-700">वडा अध्यक्षको नाम (नेपाली):</label>
+                    <input type="text" id="wardChairpersonNameNepali" name="wardChairpersonNameNepali" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="वडा अध्यक्षको नाम नेपालीमा प्रविष्ट गर्नुहोस्">
+                </div>
+                <div>
+                    <label for="wardChairpersonNameEnglish" class="block text-sm font-medium text-gray-700">वडा अध्यक्षको नाम (English):</label>
+                    <input type="text" id="wardChairpersonNameEnglish" name="wardChairpersonNameEnglish" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="Ward Chairperson's Name in English">
+                </div>
+
+                <div class="flex justify-center">
+                    <button type="submit" class="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-200">
+                        पूर्वावलोकन हेर्नुहोस्
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Preview Section -->
+        <div id="previewSection" class="preview-section">
+            <div class="watermark-container relative">
+                <!-- Watermark Image - Using emblem.png for watermark -->
+                <img src="emblem.png" alt="Watermark" class="watermark">
+                
+                <div class="letter-content text-gray-800 leading-relaxed text-sm">
+                    <div class="header-main-row mb-4">
+                        <!-- Emblem -->
+                        <div class="header-flex-item left">
+                            <img src="emblem.png" alt="Emblem" class="w-28 h-28 object-contain">
+                        </div>
+                        
+                        <div class="header-flex-item text-center mt-4 header-center text-red-600">
+                            <p class="text-lg font-bold"><span id="displayHeaderMunicipalityNepali" class="dotted-line-bottom"></span> नगरपालिका, <span id="displayHeaderMunicipalityEnglish" class="dotted-line-bottom"></span> Municipality</p> 
+                            <p class="text-base font-bold"><span id="displayHeaderWardOfficeNepali" class="dotted-line-bottom"></span> नं. वडा कार्यालय, <span id="displayHeaderWardOfficeEnglish" class="dotted-line-bottom"></span> No. Ward Office</p>
+                            <p class="text-base"><span class="dotted-line-bottom" id="displayDistrictNepali"></span> जिल्ला, <span id="displayDistrictEnglish" class="dotted-line-bottom"></span> District</p>
+                            <p class="text-base"><span class="dotted-line-bottom" id="displayProvinceNepali"></span> प्रदेश, <span class="dotted-line-bottom" id="displayProvinceEnglish"></span> Province</p>
+                            <p class="text-base">नेपाल, Nepal</p>
+                        </div>
+
+                        <div class="header-flex-item right">
+                            <!-- Empty div to push content to center/left -->
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-3 w-full items-end mb-6">
+                        <div class="col-span-2 flex flex-col text-left">
+                            <p class="text-sm">प.सं.(Ref.No.) <span id="displayRefNo" class="dotted-line-bottom"></span></p>
+                            <p class="text-sm">च.नं.(Des.No.) <span id="displayDesNo" class="dotted-line-bottom"></span></p>
+                        </div>
+                        <div class="col-span-1 flex flex-col justify-end h-full">
+                            <p class="text-sm text-right">मिति(Date): <span id="displayDate" class="dotted-line-bottom"></span></p>
+                        </div>
+                    </div>
+
+                    <!-- New horizontal line -->
+                    <div class="border-b border-gray-400 my-4"></div>
+
+                    <h3 class="text-xl font-bold text-center mb-6">जन्म प्रमाणिकरण (Birth Verification)</h3>
+
+                    <p class="mb-4">
+                        श्री <span id="displayApplicantNameNepali" class="dotted-line-bottom"></span> ले दिएको निवेदन अनुसार श्री <span id="displayVerifiedPersonNameNepali" class="dotted-line-bottom"></span> को देहाय बमोजिम जन्मको विवरण रहेछ प्रमाणित गरिन्छ । (According to the application given by MR./Mrs./Ms./Miss. <span id="displayApplicantNameEnglish" class="dotted-line-bottom"></span>, it is verified that the details of birth of Mr./Mrs./Ms./Miss <span id="displayVerifiedPersonNameEnglish" class="dotted-line-bottom"></span> are as follows.)
+                    </p>
+
+                    <div class="border border-gray-400 p-4 rounded-md">
+                        <div class="field-row">
+                            <span class="field-label font-bold">पुरा नाम:</span>
+                            <span id="displayFullNameNepali" class="dotted-line-bottom field-value"></span>
+                        </div>
+                        <div class="field-row">
+                            <span class="field-label font-bold">Full Name:</span>
+                            <span id="displayFullNameEnglish" class="dotted-line-bottom field-value"></span>
+                        </div>
+                        <div class="field-row">
+                            <span class="field-label font-bold">जन्म मिति/Date of Birth: वि.सं.</span>
+                            <span id="displayDobBS" class="dotted-line-bottom field-value"></span>
+                            <span class="ml-1 mr-1">/</span>
+                            <span id="displayDobAD" class="dotted-line-bottom field-value"></span>
+                            <span class="ml-1">(A.D.)</span>
+                        </div>
+                        <div class="field-row">
+                            <span class="field-label font-bold">लिङ्ग/Sex:</span>
+                            <span id="displaySex" class="dotted-line-bottom field-value"></span>
+                        </div>
+
+                        <!-- Permanent Address -->
+                        <div class="field-row">
+                            <span class="field-label font-bold">स्थायी ठेगानाः :</span>
+                            <span id="displayPermanentAddressMunicipalityNepali" class="dotted-line-bottom field-value"></span>
+                            <span class="ml-1">नगरपालिका वडा नं.</span>
+                            <span id="displayPermanentAddressWardNo" class="dotted-line-bottom field-value"></span>
+                            <span class="ml-1">, <span id="displayPermanentAddressDistrictNepali" class="dotted-line-bottom field-value"></span></span>
+                        </div>
+                        <div class="field-row">
+                            <span class="field-label font-bold">Permanent Address:</span>
+                            <span id="displayPermanentAddressMunicipalityEnglish" class="dotted-line-bottom field-value"></span>
+                            <span class="ml-1">municipality ward No.</span>
+                            <span id="displayPermanentAddressWardNo" class="dotted-line-bottom field-value"></span>
+                            <span class="ml-1">, <span id="displayPermanentAddressDistrictEnglish" class="dotted-line-bottom field-value"></span></span>
+                        </div>
+
+                        <!-- Birth Place -->
+                        <div class="field-row">
+                            <span class="field-label font-bold">जन्म स्थानः</span>
+                            <span id="displayBirthPlaceMunicipalityNepali" class="dotted-line-bottom field-value"></span>
+                            <span class="ml-1">नगरपालिका वडा नं.</span>
+                            <span id="displayBirthPlaceWardNo" class="dotted-line-bottom field-value"></span>
+                            <span class="ml-1">, <span id="displayBirthPlaceDistrictNepali" class="dotted-line-bottom field-value"></span></span>
+                        </div>
+                        <div class="field-row">
+                            <span class="field-label font-bold">Birth Place:</span>
+                            <span id="displayBirthPlaceMunicipalityEnglish" class="dotted-line-bottom field-value"></span>
+                            <span class="ml-1">Municipality ward No.</span>
+                            <span id="displayBirthPlaceWardNo" class="dotted-line-bottom field-value"></span>
+                            <span class="ml-1">, <span id="displayBirthPlaceDistrictEnglish" class="dotted-line-bottom field-value"></span></span>
+                        </div>
+
+                        <div class="mt-6 mb-2 font-bold">बाबुको विवरण (Father's Details)</div>
+                        <div class="field-row">
+                            <span class="field-label font-bold">पुरा नाम:</span>
+                            <span id="displayFatherFullNameNepali" class="dotted-line-bottom field-value"></span>
+                        </div>
+                        <div class="field-row">
+                            <span class="field-label font-bold">Full Name:</span>
+                            <span id="displayFatherFullNameEnglish" class="dotted-line-bottom field-value"></span>
+                        </div>
+                        <div class="field-row">
+                            <span class="field-label font-bold">परिचयपत्र नं (<span id="displayFatherIdTypeNepali"></span>/<span id="displayFatherIdTypeEnglish"></span>)/ID (Citizenship or Passport):</span>
+                            <span id="displayFatherIdNumber" class="dotted-line-bottom field-value"></span>
+                            <span class="ml-1">(नेपाली नम्बर/English नम्बर)</span>
+                        </div>
+
+                        <div class="mt-6 mb-2 font-bold">आमाको विवरण (Mother's Details)</div>
+                        <div class="field-row">
+                            <span class="field-label font-bold">पुरा नाम:</span>
+                            <span id="displayMotherFullNameNepali" class="dotted-line-bottom field-value"></span>
+                        </div>
+                        <div class="field-row">
+                            <span class="field-label font-bold">Full Name:</span>
+                            <span id="displayMotherFullNameEnglish" class="dotted-line-bottom field-value"></span>
+                        </div>
+                        <div class="field-row">
+                            <span class="field-label font-bold">परिचयपत्र नं (<span id="displayMotherIdTypeNepali"></span>/<span id="displayMotherIdTypeEnglish"></span>)/ID (Citizenship or Passport):</span>
+                            <span id="displayMotherIdNumber" class="dotted-line-bottom field-value"></span>
+                            <span class="ml-1">(नेपाली नम्बर/English नम्बर)</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-12 flex justify-between items-end">
+                        <div class="text-left">
+                            <p class="font-bold">सही (Signature):-</p>
+                            <p class="font-semibold dotted-line-bottom" id="displayWardChairpersonNameNepali"></p>
+                            <p class="mt-4 font-bold">वडा अध्यक्षको नाम:-</p>
+                            <p class="font-semibold dotted-line-bottom" id="displayWardChairpersonNameEnglish"></p>
+                            
+                            <p class="mt-4 font-bold">Ward Chairperson:-</p>
+                            
+                        </div>
+                        <div class="text-right">
+                            <p class="font-bold">कार्यालयको छाप (Official Stamp)</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 border border-gray-400 p-3 rounded-md text-xs">
+                        <p class="font-bold">नोट:</p>
+                        <p>यो प्रमाणिकरण जन्म मृत्यु तथा अन्य व्यक्तिगत घटना (दर्ता गर्ने) ऐन, २०३३ प्रारम्भ हुनु भन्दा पहिले घटेका घटनाको लागि मात्र मान्य हुनेछ ।(Note: This verification shall be valid only for events occurred before the commencement of the Births, Deaths and Other Events (Registration) Act, 2033(1976)</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="buttons-container flex justify-center space-x-4 mt-8">
+                <button id="printBtn" class="px-6 py-3 bg-green-600 text-white font-semibold rounded-lg shadow-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition duration-200">
+                    प्रिन्ट गर्नुहोस्
+                </button>
+                <button id="backBtn" class="px-6 py-3 bg-gray-600 text-white font-semibold rounded-lg shadow-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition duration-200">
+                    पछाडि जानुहोस्
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM Content Loaded');
+            const formSection = document.getElementById('formSection');
+            const previewSection = document.getElementById('previewSection');
+            const letterForm = document.getElementById('letterForm');
+            const printBtn = document.getElementById('printBtn');
+            const backBtn = document.getElementById('backBtn');
+
+            // Function to get English equivalent of ID type
+            function getIdTypeEnglish(nepaliType) {
+                switch (nepaliType) {
+                    case 'नागरिकता': return 'Citizenship';
+                    case 'राहदानी': return 'Passport';
+                    default: return '';
+                }
+            }
+
+            // Function to get English equivalent of Sex
+            function getSexEnglish(nepaliSex) {
+                switch (nepaliSex) {
+                    case 'पुरुष': return 'Male';
+                    case 'महिला': return 'Female';
+                    case 'अन्य': return 'Other';
+                    default: return '';
+                }
+            }
+
+            // Handle form submission to show preview
+            letterForm.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent default form submission
+                console.log('Form submitted');
+
+                // Get form data
+                const formData = {
+                    municipalityNepali: document.getElementById('municipalityNepali').value,
+                    municipalityEnglish: document.getElementById('municipalityEnglish').value,
+                    wardOfficeNepali: document.getElementById('wardOfficeNepali').value,
+                    wardOfficeEnglish: document.getElementById('wardOfficeEnglish').value,
+                    districtNepali: document.getElementById('districtNepali').value,
+                    districtEnglish: document.getElementById('districtEnglish').value,
+                    provinceNepali: document.getElementById('provinceNepali').value,
+                    provinceEnglish: document.getElementById('provinceEnglish').value,
+                    refNo: document.getElementById('refNo').value,
+                    desNo: document.getElementById('desNo').value,
+                    date: document.getElementById('date').value,
+                    applicantNameNepali: document.getElementById('applicantNameNepali').value,
+                    applicantNameEnglish: document.getElementById('applicantNameEnglish').value,
+                    verifiedPersonNameNepali: document.getElementById('verifiedPersonNameNepali').value,
+                    verifiedPersonNameEnglish: document.getElementById('verifiedPersonNameEnglish').value,
+                    fullNameNepali: document.getElementById('fullNameNepali').value,
+                    fullNameEnglish: document.getElementById('fullNameEnglish').value,
+                    dobBS: document.getElementById('dobBS').value,
+                    dobAD: document.getElementById('dobAD').value,
+                    sex: document.getElementById('sex').value,
+                    permanentAddressMunicipalityNepali: document.getElementById('permanentAddressMunicipalityNepali').value,
+                    permanentAddressWardNo: document.getElementById('permanentAddressWardNo').value,
+                    permanentAddressDistrictNepali: document.getElementById('permanentAddressDistrictNepali').value,
+                    permanentAddressMunicipalityEnglish: document.getElementById('permanentAddressMunicipalityEnglish').value,
+                    permanentAddressDistrictEnglish: document.getElementById('permanentAddressDistrictEnglish').value,
+                    birthPlaceMunicipalityNepali: document.getElementById('birthPlaceMunicipalityNepali').value,
+                    birthPlaceWardNo: document.getElementById('birthPlaceWardNo').value,
+                    birthPlaceDistrictNepali: document.getElementById('birthPlaceDistrictNepali').value,
+                    birthPlaceMunicipalityEnglish: document.getElementById('birthPlaceMunicipalityEnglish').value,
+                    birthPlaceDistrictEnglish: document.getElementById('birthPlaceDistrictEnglish').value,
+                    fatherFullNameNepali: document.getElementById('fatherFullNameNepali').value,
+                    fatherFullNameEnglish: document.getElementById('fatherFullNameEnglish').value,
+                    fatherIdType: document.getElementById('fatherIdType').value,
+                    fatherIdNumber: document.getElementById('fatherIdNumber').value,
+                    motherFullNameNepali: document.getElementById('motherFullNameNepali').value,
+                    motherFullNameEnglish: document.getElementById('motherFullNameEnglish').value,
+                    motherIdType: document.getElementById('motherIdType').value,
+                    motherIdNumber: document.getElementById('motherIdNumber').value,
+                    wardChairpersonNameNepali: document.getElementById('wardChairpersonNameNepali').value,
+                    wardChairpersonNameEnglish: document.getElementById('wardChairpersonNameEnglish').value,
+                };
+
+                console.log('Form Data:', formData);
+
+                // Populate preview section with form data
+                document.getElementById('displayHeaderMunicipalityNepali').textContent = formData.municipalityNepali;
+                document.getElementById('displayHeaderMunicipalityEnglish').textContent = formData.municipalityEnglish;
+                document.getElementById('displayHeaderWardOfficeNepali').textContent = formData.wardOfficeNepali;
+                document.getElementById('displayHeaderWardOfficeEnglish').textContent = formData.wardOfficeEnglish;
+                document.getElementById('displayDistrictNepali').textContent = formData.districtNepali;
+                document.getElementById('displayDistrictEnglish').textContent = formData.districtEnglish;
+                document.getElementById('displayProvinceNepali').textContent = formData.provinceNepali;
+                document.getElementById('displayProvinceEnglish').textContent = formData.provinceEnglish;
+                document.getElementById('displayRefNo').textContent = formData.refNo;
+                document.getElementById('displayDesNo').textContent = formData.desNo;
+                document.getElementById('displayDate').textContent = formData.date;
+                document.getElementById('displayApplicantNameNepali').textContent = formData.applicantNameNepali;
+                document.getElementById('displayApplicantNameEnglish').textContent = formData.applicantNameEnglish;
+                document.getElementById('displayVerifiedPersonNameNepali').textContent = formData.verifiedPersonNameNepali;
+                document.getElementById('displayVerifiedPersonNameEnglish').textContent = formData.verifiedPersonNameEnglish;
+                document.getElementById('displayFullNameNepali').textContent = formData.fullNameNepali;
+                document.getElementById('displayFullNameEnglish').textContent = formData.fullNameEnglish;
+                document.getElementById('displayDobBS').textContent = formData.dobBS;
+                document.getElementById('displayDobAD').textContent = formData.dobAD;
+                document.getElementById('displaySex').textContent = `${formData.sex}/${getSexEnglish(formData.sex)}`;
+                
+                document.getElementById('displayPermanentAddressMunicipalityNepali').textContent = formData.permanentAddressMunicipalityNepali;
+                document.getElementById('displayPermanentAddressWardNo').textContent = formData.permanentAddressWardNo;
+                document.getElementById('displayPermanentAddressDistrictNepali').textContent = formData.permanentAddressDistrictNepali;
+                document.getElementById('displayPermanentAddressMunicipalityEnglish').textContent = formData.permanentAddressMunicipalityEnglish;
+                document.getElementById('displayPermanentAddressDistrictEnglish').textContent = formData.permanentAddressDistrictEnglish;
+
+                document.getElementById('displayBirthPlaceMunicipalityNepali').textContent = formData.birthPlaceMunicipalityNepali;
+                document.getElementById('displayBirthPlaceWardNo').textContent = formData.birthPlaceWardNo;
+                document.getElementById('displayBirthPlaceDistrictNepali').textContent = formData.birthPlaceDistrictNepali;
+                document.getElementById('displayBirthPlaceMunicipalityEnglish').textContent = formData.birthPlaceMunicipalityEnglish;
+                document.getElementById('displayBirthPlaceDistrictEnglish').textContent = formData.birthPlaceDistrictEnglish;
+
+                document.getElementById('displayFatherFullNameNepali').textContent = formData.fatherFullNameNepali;
+                document.getElementById('displayFatherFullNameEnglish').textContent = formData.fatherFullNameEnglish;
+                document.getElementById('displayFatherIdTypeNepali').textContent = formData.fatherIdType;
+                document.getElementById('displayFatherIdTypeEnglish').textContent = getIdTypeEnglish(formData.fatherIdType);
+                document.getElementById('displayFatherIdNumber').textContent = formData.fatherIdNumber;
+                document.getElementById('displayMotherFullNameNepali').textContent = formData.motherFullNameNepali;
+                document.getElementById('displayMotherFullNameEnglish').textContent = formData.motherFullNameEnglish;
+                document.getElementById('displayMotherIdTypeNepali').textContent = formData.motherIdType;
+                document.getElementById('displayMotherIdTypeEnglish').textContent = getIdTypeEnglish(formData.motherIdType);
+                document.getElementById('displayMotherIdNumber').textContent = formData.motherIdNumber;
+                document.getElementById('displayWardChairpersonNameNepali').textContent = formData.wardChairpersonNameNepali;
+                document.getElementById('displayWardChairpersonNameEnglish').textContent = formData.wardChairpersonNameEnglish;
+
+
+                // Show preview and hide form
+                formSection.classList.remove('active');
+                previewSection.classList.add('active');
+                console.log('Form section active:', formSection.classList.contains('active'));
+                console.log('Preview section active:', previewSection.classList.contains('active'));
+            });
+
+            // Handle print button click
+            printBtn.addEventListener('click', function() {
+                window.print();
+            });
+
+            // Handle back button click
+            backBtn.addEventListener('click', function() {
+                previewSection.classList.remove('active');
+                formSection.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

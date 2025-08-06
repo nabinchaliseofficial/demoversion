@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Staff Portfolio - Teacher</title>
+    <style>
+        .container {
+            width: 80%;
+            margin: auto;
+        }
+        .horizontal-section {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .horizontal-section > div {
+            flex: 1;
+            margin: 10px;
+        }
+        .horizontal-section h3 {
+            margin-top: 0;
+        }
+        .details p, .details ul {
+            margin: 0;
+        }
+        /* Style for the login button */
+        .btn-login {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: green;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        /* Modal styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 300px; /* Could be more or less, depending on screen size */
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Sambuddha Educational Academy</h1>
+            <h2>Galkot Municipality-6, Majuwa</h2>
+            <h2>Galkot, Baglung, Nepal</h2>
+        </header>
+        <p>Started: 2075-08-27 BS</p>
+        <p>Current: 2076-09-13 BS</p>
+        <section class="details">
+            <div class="horizontal-section">
+                <div>
+                    <ul><img class="img-fluid" src="brp.jpg.me.jpg" height="300"></ul>
+                    <h3>Work Experience</h3>
+                    <p>Detail the work experience, roles, and responsibilities here.</p>
+                    <ul>
+                        <li>Curriculum Delivery: Developed and implemented engaging lesson plans for [specific subjects], adapting materials to meet diverse learning styles and abilities.</li>
+                        <li>Student Support: Provided academic and emotional support to students, fostering a positive learning environment that encouraged personal growth and resilience.</li>
+                        <li>Extracurricular Activities: Organized and led extracurricular programs, including [clubs, sports, arts], promoting teamwork and personal development outside of the classroom.</li>
+                        <li>Collaboration: Worked closely with fellow educators and boarding staff to coordinate educational and residential programs, ensuring a holistic approach to student well-being.</li>
+                        <li>Assessment and Feedback: Conducted regular assessments and provided constructive feedback to students and parents, tracking progress and adjusting teaching strategies as needed.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Projects</h3>
+                    <p>Detail the projects worked on, achievements, and contributions here.</p>
+                    <ul>
+                        <li>Innovative Teaching Methods: Introduced technology-integrated learning strategies that enhanced student engagement and facilitated a deeper understanding of complex concepts.</li>
+                        <li>Mentorship Programs: Established mentorship initiatives pairing older students with younger peers, fostering a sense of community and leadership within the boarding environment.</li>
+                        <li>Cultural Activities: Initiated cultural exchange programs, enriching students' understanding of global perspectives and promoting inclusivity within the school community.</li>
+                        <li>Wellness Initiatives: Championed mental health awareness programs, collaborating with counselors to provide resources and support for students facing challenges.</li>
+                        <li>Parental Involvement: Strengthened parent-teacher communication through workshops and newsletters, encouraging greater involvement in the educational process.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+
+   

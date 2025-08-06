@@ -1,0 +1,337 @@
+<!-- यो HTML कोडले व्यवसाय दर्ताका लागि निवेदन पत्रको ढाँचा तयार गर्छ -->
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>व्यवसाय दर्ता निवेदन पत्र</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* नेपाली अक्षरहरूको लागि Google Fonts प्रयोग गर्नुहोस् */
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;700&display=swap');
+        
+        body {
+            font-family: 'Noto Sans Devangari', sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 24px;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        /* फारम र प्रिभ्यु सेक्सन */
+        .form-section, .preview-section {
+            display: none;
+        }
+        .form-section.active, .preview-section.active {
+            display: block;
+        }
+
+        /* प्रिन्टको लागि स्टाइल */
+        @media print {
+            body {
+                background: none;
+                margin: 0;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+                border-radius: 0;
+                width: 210mm;
+                min-height: 297mm;
+                margin: 0 auto;
+                padding: 10mm;
+            }
+            .form-section, .buttons-container {
+                display: none !important;
+            }
+            .preview-section {
+                display: block !important;
+            }
+            input, textarea {
+                border: none !important;
+                padding: 0 !important;
+                background: none !important;
+                box-shadow: none !important;
+            }
+            .dotted-line-bottom {
+                border-bottom: 1px dotted #999 !important;
+            }
+            hr {
+                border-top: 1px solid black !important;
+                margin: 10px 0 !important;
+            }
+        }
+        
+        .dotted-line-bottom {
+            border-bottom: 1px dotted #999;
+            padding-bottom: 2px;
+            display: inline-block;
+            min-width: 50px;
+        }
+
+        .justify-text {
+            text-align: justify;
+            text-justify: inter-word;
+        }
+    </style>
+</head>
+<body>
+    <div class="container p-6">
+        <!-- फारम भर्ने भाग -->
+        <div id="formSection" class="form-section active">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">व्यवसाय दर्ताका लागि विवरण भर्नुहोस्</h2>
+            <form id="letterForm" class="space-y-6">
+                <div>
+                    <label for="officeName" class="block text-sm font-medium text-gray-700">कार्यालयको नाम:</label>
+                    <input type="text" id="officeName" name="officeName" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="कार्यालयको नाम">
+                </div>
+                <div>
+                    <label for="placeDistrictName" class="block text-sm font-medium text-gray-700">ठाउँको नाम (जिल्ला सहित):</label>
+                    <input type="text" id="placeDistrictName" name="placeDistrictName" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="उदा. गलकोट, बागलुङ">
+                </div>
+                <div>
+                    <label for="refNo" class="block text-sm font-medium text-gray-700">नगरपालिका कार्यालय च.नं.ः</label>
+                    <input type="text" id="refNo" name="refNo" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="च.नं. प्रविष्ट गर्नुहोस्">
+                </div>
+                <div>
+                    <label for="letterNo" class="block text-sm font-medium text-gray-700">पत्र संख्याः</label>
+                    <input type="text" id="letterNo" name="letterNo" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="पत्र संख्या प्रविष्ट गर्नुहोस्">
+                </div>
+                <div>
+                    <label for="date" class="block text-sm font-medium text-gray-700">मितिः</label>
+                    <input type="text" id="date" name="date" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="२०८०/०१/०१">
+                </div> 
+                <div>
+                    <label for="district" class="block text-sm font-medium text-gray-700">जिल्ला:</label>
+                    <input type="text" id="district" name="district" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="जिल्लाको नाम">
+                </div>
+                <div>
+                    <label for="municipality" class="block text-sm font-medium text-gray-700">गाउँपालिका/नगरपालिका:</label>
+                    <div class="flex space-x-2 mt-1">
+                        <select id="municipalityType" name="municipalityType" class="block w-1/3 px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                            <option value="गाउँपालिका">गाउँपालिका</option>
+                            <option value="नगरपालिका">नगरपालिका</option>
+                            <option value="उप-महानगरपालिका">उप-महानगरपालिका</option>
+                            <option value="महानगरपालिका">महानगरपालिका</option>
+                        </select>
+                        <input type="text" id="municipalityName" name="municipalityName" class="block w-2/3 px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="नाम">
+                    </div>
+                </div>
+                <div>
+                    <label for="wardNo" class="block text-sm font-medium text-gray-700">गलकोट नगरपालिका वडा नं:</label>
+                    <input type="text" id="wardNo" name="wardNo" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="वडा नं भर्नुहोस्">
+                </div>
+                <div>
+                    <label for="placeName" class="block text-sm font-medium text-gray-700">ठाउँको नाम:</label>
+                    <input type="text" id="placeName" name="placeName" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="ठाउँको नाम लेख्नुहोस्">
+                </div>
+                <div>
+                    <label for="citizenshipNo" class="block text-sm font-medium text-gray-700">ना.प्र.नं:</label>
+                    <input type="text" id="citizenshipNo" name="citizenshipNo" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="ना.प्र.नं.">
+                </div>
+                <div>
+                    <label for="issueDate" class="block text-sm font-medium text-gray-700">जारी मिति:</label>
+                    <input type="text" id="issueDate" name="issueDate" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="मिति">
+                </div>
+                <div>
+                    <label for="applicantName" class="block text-sm font-medium text-gray-700">निवेदकको नाम:</label>
+                    <input type="text" id="applicantName" name="applicantName" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="नाम लेख्नुहोस्">
+                </div>
+                <div>
+                    <label for="currentMunicipality" class="block text-sm font-medium text-gray-700">व्यवसाय संचालन हुने नगरपालिका:</label>
+                    <input type="text" id="currentMunicipality" name="currentMunicipality" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="व्यवसाय संचालन हुने नगरपालिका">
+                </div>
+                <div>
+                    <label for="currentWardNo" class="block text-sm font-medium text-gray-700">व्यवसाय संचालन हुने वडा नं:</label>
+                    <input type="text" id="currentWardNo" name="currentWardNo" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="व्यवसाय संचालन हुने वडा नं">
+                </div>
+                <div>
+                    <label for="currentPlaceName" class="block text-sm font-medium text-gray-700">व्यवसाय संचालन हुने ठाउँको नाम:</label>
+                    <input type="text" id="currentPlaceName" name="currentPlaceName" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="व्यवसाय संचालन हुने ठाउँको नाम">
+                </div>
+                <div>
+                    <label for="duration" class="block text-sm font-medium text-gray-700">कति वर्ष/महिनादेखि:</label>
+                    <input type="text" id="duration" name="duration" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="वर्ष/महिना">
+                </div>
+                <div>
+                    <label for="shopName" class="block text-sm font-medium text-gray-700">पसलको नाम:</label>
+                    <input type="text" id="shopName" name="shopName" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="पसलको नाम">
+                </div>
+                <div>
+                    <label for="wardChairpersonName" class="block text-sm font-medium text-gray-700">वडा अध्यक्षको नाम:</label>
+                    <input type="text" id="wardChairpersonName" name="wardChairpersonName" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="अध्यक्षको नाम लेख्नुहोस्">
+                </div>
+
+                <div class="flex justify-center">
+                    <button type="submit" class="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-200">
+                        पूर्वावलोकन हेर्नुहोस्
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- प्रिभ्यु देखाउने भाग -->
+        <div id="previewSection" class="preview-section p-6">
+            <div class="letter-header relative flex justify-center items-center mb-4">
+                <!-- तपाईंले अपलोड गर्नुभएको लोगो -->
+                <img src="emblem.png" alt="" class="h-24 w-auto absolute left-0">
+                
+                <div class="text-center">
+                    <h1 class="text-2xl font-bold text-red-600">गलकोट नगरपालिका</h1>
+                    <p class="text-lg font-medium text-red-600"><span id="displayOfficeName" class="text-red-600"></span> कार्यालय</p>
+                    <p class="text-md text-gray-800"><span id="displayPlaceDistrictName"></span></p>
+                    <p class="text-md text-red-600">गण्डकी प्रदेश, नेपाल</p>
+                </div>
+            </div>
+            
+            <div class="top-info-right flex justify-between items-start mb-1 leading-snug">
+                <div class="space-y-1">
+                    <p class="text-red-600">प.सं.ः<span id="displayLetterNo" class="w-16 text-gray-800"></span></p>
+                    <p class="text-red-600">च.नं.ः<span id="displayRefNo" class="w-16 text-gray-800"></span></p>
+                </div>
+                <p class="text-red-600">मितिः <span id="displayDate" class="w-32 text-gray-800"></span></p>
+            </div>
+            
+            <hr class="my-1 border-black">
+
+            <p class="mt-2 mb-2">श्री प्रमुख प्रशासकीय अधिकृत ज्यू,<br>गलकोट नगरपालिकाको कार्यालय,<br>गलकोट, बागलुङ ।</p>
+            <p class="text-center text-xl font-bold mb-2 mt-4">विषयः व्यवसाय दर्ता गरिदिने सम्बन्धमा।</p>
+            <div class="content-area mt-4 leading-normal justify-text">
+                <p>
+                    प्रस्तुत बिषयका सम्बन्धमा
+                    <span id="displayDistrict"></span>,
+                    <span id="displayMunicipalityName"></span>
+                    <span id="displayMunicipalityType"></span>
+                    निवासी
+                    ना.प्र.नं <span id="displayCitizenshipNo"></span>
+                    जारी मिति <span id="displayIssueDate"></span>
+                    को <span id="displayApplicantName"></span> ले
+                    <span id="displayCurrentMunicipality"></span>
+                    वडा नं <span id="displayCurrentWardNo"></span>,
+                    <span id="displayCurrentPlaceName"></span>
+                    मा <span id="displayDuration"></span> देखी
+                    <span id="displayShopName"></span>
+                    नामक पसल संचालन गरेको हुँदा तहाँ कार्यालयको नियमानुसार उक्त पसल दर्ता गरिदिनुहुन सिफारिसका साथ अनुरोध गरिन्छ ।
+                </p>
+            </div>
+            
+            <div class="footer mt-6 text-right">
+                <div class="signature inline-block text-center pt-2 border-t border-black">
+                    <span id="displayWardChairpersonName"></span>
+                    <br>
+                    वडा अध्यक्ष
+                </div>
+            </div>
+
+            <div class="buttons-container flex justify-center space-x-4 mt-8">
+                <button id="printBtn" class="px-6 py-3 bg-green-600 text-white font-semibold rounded-lg shadow-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition duration-200">
+                    प्रिन्ट गर्नुहोस्
+                </button>
+                <button id="backBtn" class="px-6 py-3 bg-gray-600 text-white font-semibold rounded-lg shadow-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition duration-200">
+                    पछाडि जानुहोस्
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const formSection = document.getElementById('formSection');
+            const previewSection = document.getElementById('previewSection');
+            const letterForm = document.getElementById('letterForm');
+            const printBtn = document.getElementById('printBtn');
+            const backBtn = document.getElementById('backBtn');
+        
+            // Helper function to update text content with fallback
+            function updateTextContent(elementId, value) {
+                const element = document.getElementById(elementId);
+                if (element) {
+                    if (value.trim() !== '') {
+                        element.textContent = value;
+                        element.classList.remove('dotted-line-bottom');
+                    } else {
+                        element.textContent = '\u00A0';
+                        element.classList.add('dotted-line-bottom');
+                    }
+                }
+            }
+
+            // फारम सबमिट गर्दा प्रिभ्यु देखाउने
+            letterForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                // फारमबाट डाटा लिने
+                const formData = {
+                    officeName: document.getElementById('officeName').value,
+                    placeDistrictName: document.getElementById('placeDistrictName').value,
+                    refNo: document.getElementById('refNo').value,
+                    letterNo: document.getElementById('letterNo').value,
+                    date: document.getElementById('date').value,
+                    district: document.getElementById('district').value,
+                    municipalityType: document.getElementById('municipalityType').value,
+                    municipalityName: document.getElementById('municipalityName').value,
+                    wardNo: document.getElementById('wardNo').value,
+                    placeName: document.getElementById('placeName').value,
+                    citizenshipNo: document.getElementById('citizenshipNo').value,
+                    issueDate: document.getElementById('issueDate').value,
+                    applicantName: document.getElementById('applicantName').value,
+                    currentMunicipality: document.getElementById('currentMunicipality').value,
+                    currentWardNo: document.getElementById('currentWardNo').value,
+                    currentPlaceName: document.getElementById('currentPlaceName').value,
+                    duration: document.getElementById('duration').value,
+                    shopName: document.getElementById('shopName').value,
+                    wardChairpersonName: document.getElementById('wardChairpersonName').value,
+                };
+                
+                // प्रिभ्यु सेक्सनमा डाटा राख्ने
+                updateTextContent('displayOfficeName', formData.officeName);
+                updateTextContent('displayPlaceDistrictName', formData.placeDistrictName);
+                updateTextContent('displayRefNo', formData.refNo);
+                updateTextContent('displayLetterNo', formData.letterNo);
+                updateTextContent('displayDate', formData.date);
+                updateTextContent('displayDistrict', formData.district);
+                updateTextContent('displayMunicipalityName', formData.municipalityName);
+                updateTextContent('displayMunicipalityType', formData.municipalityType);
+                updateTextContent('displayWardNo', formData.wardNo);
+                updateTextContent('displayPlaceName', formData.placeName);
+                updateTextContent('displayCitizenshipNo', formData.citizenshipNo);
+                updateTextContent('displayIssueDate', formData.issueDate);
+                updateTextContent('displayApplicantName', formData.applicantName);
+                updateTextContent('displayCurrentMunicipality', formData.currentMunicipality);
+                updateTextContent('displayCurrentWardNo', formData.currentWardNo);
+                updateTextContent('displayCurrentPlaceName', formData.currentPlaceName);
+                updateTextContent('displayDuration', formData.duration);
+                updateTextContent('displayShopName', formData.shopName);
+                updateTextContent('displayWardChairpersonName', formData.wardChairpersonName);
+
+                // प्रिभ्यु देखाउने र फारम लुकाउने
+                formSection.classList.remove('active');
+                previewSection.classList.add('active');
+            });
+
+            // प्रिन्ट बटन क्लिक गर्दा
+            printBtn.addEventListener('click', function() {
+                window.print();
+            });
+
+            // पछाडि जानुहोस् बटन क्लिक गर्दा
+            backBtn.addEventListener('click', function() {
+                previewSection.classList.remove('active');
+                formSection.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/x-icon" href="lok.ico" />
+    <title>तमसुक फारम</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Custom styles for better visual appeal and layout */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            gap: 20px; /* Space between form and preview */
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        }
+        .form-container, .preview-container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            width: 100%;
+            max-width: 700px; /* Max width for readability */
+            box-sizing: border-box;
+            margin-bottom: 20px; /* Space for mobile view */
+        }
+        @media (min-width: 1024px) {
+            .form-container, .preview-container {
+                width: calc(50% - 20px); /* Two columns layout */
+                margin-bottom: 0;
+            }
+        }
+        h2 {
+            text-align: center;
+            font-size: 2.2em;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+        }
+        .form-row {
+            display: flex;
+            align-items: baseline;
+            flex-wrap: wrap; /* Allow items to wrap */
+            gap: 5px; /* Spacing between inline elements */
+        }
+        .form-row label {
+            min-width: 80px; /* Adjust label width */
+            font-weight: 600;
+            color: #34495e;
+            text-align: right;
+            padding-right: 10px;
+        }
+        .form-row .input-field,
+        .form-row select {
+            flex-grow: 1;
+            border: none;
+            border-bottom: 1px dashed #95a5a6;
+            padding: 8px 0;
+            margin-right: 5px;
+            background-color: transparent;
+            font-size: 1em;
+            color: #2c3e50;
+            border-radius: 0; /* Remove default border-radius */
+        }
+        .form-row .input-field:focus,
+        .form-row select:focus {
+            outline: none;
+            border-bottom-color: #3498db;
+        }
+        .form-row span {
+            white-space: nowrap;
+            color: #555;
+            margin-right: 5px;
+        }
+        .text-area-group {
+            margin-top: 20px;
+        }
+        textarea {
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 10px;
+            min-height: 100px;
+            font-size: 1em;
+            color: #2c3e50;
+        }
+        .signature-section {
+            margin-top: 40px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .signature-block {
+            flex: 1;
+            min-width: 200px; /* Ensure blocks don't get too small */
+            text-align: center;
+            padding-top: 20px;
+            position: relative;
+        }
+        .signature-line {
+            border-bottom: 1px solid #000;
+            margin-bottom: 5px;
+        }
+        .signature-label {
+            font-size: 0.9em;
+            color: #555;
+        }
+        .witness-section {
+            margin-top: 30px;
+            border-top: 1px dashed #ccc;
+            padding-top: 20px;
+        }
+        .witness-entry {
+            display: flex;
+            flex-direction: column; /* Stack name, phone, writer, signature vertically */
+            margin-bottom: 15px; /* Space between witness entries */
+            border: 1px dashed #eee; /* Visual separation in form */
+            padding: 10px;
+            border-radius: 8px;
+        }
+        .witness-entry .witness-row {
+            display: flex;
+            align-items: baseline;
+            gap: 5px;
+            margin-bottom: 5px;
+        }
+        .witness-entry .witness-row input {
+            border: none;
+            border-bottom: 1px dashed #95a5a6;
+            padding: 5px 0;
+            flex-grow: 1;
+            min-width: 100px;
+        }
+        .witness-entry .witness-row span {
+            white-space: nowrap;
+            margin-right: 5px;
+        }
+        .add-witness-btn {
+            background-color: #28a745;
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-size: 0.9em;
+            transition: background-color 0.3s ease;
+        }
+        .add-witness-btn:hover {
+            background-color: #218838;
+        }
+
+        /* Preview specific styles */
+        .preview-container {
+            font-size: 1em;
+            line-height: 1.8;
+            color: #333;
+            position: relative; /* For absolute positioning of signature boxes */
+        }
+        .preview-container h3 {
+            text-align: center;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        /* On-screen preview uses pre for simple text display */
+        #formPreviewScreen {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            min-height: 500px;
+            border: 1px dashed #ccc; /* Visual border for screen preview */
+            padding: 15px;
+            text-align: left; /* Default for screen preview */
+        }
+
+        /* Print specific styles */
+        @media print {
+            body {
+                display: block;
+                padding: 0;
+                margin: 0;
+                background-color: #fff;
+            }
+            .form-container {
+                display: none; /* Hide the form when printing */
+            }
+            .preview-container {
+                width: 210mm; /* A4 width */
+                height: 297mm; /* A4 height */
+                max-width: none;
+                box-shadow: none;
+                border: none;
+                /* Adjusted padding to match the image more closely */
+                padding: 25mm 20mm 20mm 25mm; /* Top Right Bottom Left */
+                margin: 0;
+                font-size: 11pt; /* Adjust font size for print */
+                line-height: 1.5; /* Slightly tighter line height */
+                position: relative; /* For absolute positioning of signature boxes */
+            }
+            .preview-container h3 {
+                display: none; /* Hide preview title on print */
+            }
+            .add-witness-btn {
+                display: none; /* Hide print button on print */
+            }
+
+            /* Hide screen preview and show print-specific layout */
+            #formPreviewScreen {
+                display: none;
+            }
+            #printOutputArea {
+                display: block;
+                height: 100%; /* Fill available height */
+                width: 100%;
+                position: relative; /* To contain absolutely positioned children */
+            }
+
+            .print-left-margin-area {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 65mm; /* This width includes the space for the rotated heading and witness details */
+                height: 100%;
+                /* No padding here, as preview-container handles the main padding */
+            }
+
+            .rotated-witness-heading {
+                position: absolute;
+                /* Position relative to print-left-margin-area */
+                top: 25mm; /* Vertical position within the margin */
+                left: 10mm; /* Horizontal position within the 65mm area */
+                transform-origin: top left;
+                transform: rotate(90deg);
+                white-space: nowrap;
+                font-weight: bold;
+                font-size: 11pt;
+                color: #000;
+                z-index: 10;
+            }
+
+            .print-witness-column {
+                position: absolute;
+                /* Position relative to print-left-margin-area */
+                top: 70mm; /* Start below the rotated heading */
+                left: 25mm; /* Position within the 65mm margin area */
+                width: 35mm; /* Actual width of witness text content */
+                bottom: 50mm; /* Adjusted to be above thumbprints and leave space for them */
+                font-size: 9pt;
+                line-height: 1.3;
+                text-align: left;
+                overflow-y: auto; /* Enable scrolling if too many witnesses */
+            }
+            .print-witness-column .witness-title {
+                display: none; /* Hide the old title, use the new rotated one */
+            }
+            .print-witness-column .witness-entry-print {
+                margin-bottom: 5mm; /* Smaller space between witness entries in print */
+            }
+            .print-witness-column .witness-label {
+                font-weight: bold;
+            }
+            .print-witness-column .witness-line {
+                border-bottom: 1px dashed #000;
+                margin-bottom: 2mm; /* Space after line */
+            }
+
+
+            .print-main-content {
+                /* This will naturally flow after the left padding of preview-container */
+                /* Needs margin-left to push it away from the absolute print-left-margin-area */
+                margin-left: 65mm; /* Pushes content past the 65mm wide left margin area */
+                text-align: justify; /* Justify main content */
+                font-size: 11pt; /* Main content font size */
+                line-height: 1.5;
+            }
+            .print-main-content .tamasuk-title {
+                text-align: center;
+                font-size: 14pt; /* Larger title for print */
+                font-weight: bold;
+                margin-bottom: 10mm; /* Space below title */
+            }
+            .print-main-content .tamasuk-passage {
+                text-indent: 10mm; /* Indent first line of paragraph */
+                margin-bottom: 10mm;
+            }
+            .print-main-content .signature-placeholder {
+                display: inline-block;
+                min-width: 50mm; /* Adjust width of placeholder lines */
+                border-bottom: 1px dashed #000;
+            }
+            .print-main-content .date-line {
+                text-align: right; /* Align the date line to the right */
+                margin-top: 10mm;
+            }
+
+            .print-signature-boxes {
+                position: absolute;
+                bottom: 20mm; /* Adjust as needed from bottom margin */
+                right: 20mm; /* Align to the right margin */
+                display: flex;
+                width: auto; /* Auto width to fit content */
+                gap: 20mm; /* Space between signatures */
+                justify-content: flex-end; /* Align signatures to the right */
+                padding-right: 10mm; /* Add some padding from the right edge */
+            }
+            .print-signature-box {
+                width: 40mm; /* Size of signature box */
+                height: 20mm;
+                border: 1px solid #000;
+                display: flex;
+                flex-direction: column; /* Stack label and line vertically */
+                justify-content: flex-end;
+                align-items: center;
+                padding-bottom: 5px;
+                font-size: 0.9em;
+            }
+            .print-signature-box .signature-label-print {
+                margin-bottom: 2mm; /* Space between label and line */
+            }
+            .print-signature-box .signature-line-print {
+                width: 80%; /* Line width */
+                border-bottom: 1px dashed #000;
+            }
+
+
+            .borrower-thumbprint-boxes {
+                position: absolute;
+                bottom: 20mm; /* Same bottom as signature boxes */
+                left: 25mm; /* Align with the start of the left margin area */
+                display: flex;
+                gap: 10mm; /* Space between left and right thumbprint */
+            }
+            .thumbprint-box {
+                width: 30mm; /* Size of thumbprint box */
+                height: 30mm;
+                border: 1px solid #000;
+                display: flex;
+                flex-direction: column; /* Stack बाँ/दाँ and box vertically */
+                justify-content: center;
+                align-items: center;
+                font-size: 0.8em;
+                font-weight: bold;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>तमसुक फारम</h2>
+
+        <div class="form-group">
+            <div class="form-row">
+                <label for="date_nepali_year">मिति:</label>
+                <input type="text" id="date_nepali_year" class="input-field w-20" placeholder="वर्ष">
+                <span>साल</span>
+                <input type="text" id="date_nepali_month" class="input-field w-20" placeholder="महिना">
+                <span>महिना</span>
+                <input type="text" id="date_nepali_day" class="input-field w-16" placeholder="दिन">
+                <span>गते</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="form-row">
+                <label for="borrower_name">ऋणीको नाम:</label>
+                <input type="text" id="borrower_name" class="input-field" placeholder="ऋणीको पूरा नाम">
+            </div>
+            <div class="form-row mt-2">
+                <label for="borrower_grandparent_name">हजुरबुवाको नाम:</label>
+                <input type="text" id="borrower_grandparent_name" class="input-field" placeholder="हजुरबुवाको नाम">
+            </div>
+            <div class="form-row mt-2">
+                <label for="borrower_parent_name">बुवाको नाम:</label>
+                <input type="text" id="borrower_parent_name" class="input-field" placeholder="बुवाको नाम">
+            </div>
+            
+            <div class="form-row mt-2">
+                <label for="borrower_address_type">ठेगानाको प्रकार:</label>
+                <div class="flex items-center space-x-4">
+                    <label class="inline-flex items-center">
+                        <input type="radio" name="borrower_address_type" value="permanent" class="form-radio" checked>
+                        <span class="ml-2">स्थायी</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                        <input type="radio" name="borrower_address_type" value="temporary" class="form-radio">
+                        <span class="ml-2">अस्थायी</span>
+                    </label>
+                </div>
+            </div>
+
+            <div id="borrower_permanent_address_fields">
+                <div class="form-row mt-2">
+                    <label for="borrower_district">ठेगाना:</label>
+                    <span>जिल्ला</span>
+                    <select id="borrower_district" class="input-field">
+                        <option value="">जिल्ला छान्नुहोस्</option>
+                        <option value="अछाम">अछाम</option><option value="अर्घाखाँची">अर्घाखाँची</option><option value="इलाम">इलाम</option><option value="उदयपुर">उदयपुर</option><option value="ओखलढुङ्गा">ओखलढुङ्गा</option><option value="कञ्चनपुर">कञ्चनपुर</option><option value="कपिलवस्तु">कपिलवस्तु</option><option value="काभ्रेपलाञ्चोक">काभ्रेपलाञ्चोक</option><option value="कास्की">कास्की</option><option value="काठमाडौं">काठमाडौं</option><option value="कालिकोट">कालिकोट</option><option value="कान्छी">कान्छी</option><option value="खुम्बु">खुम्बु</option><option value="खोटाङ">खोटाङ</option><option value="गुल्मी">गुल्मी</option><option value="गोरखा">गोरखा</option><option value="चितवन">चितवन</option><option value="जाजरकोट">जाजरकोट</option><option value="जाजरकोट">जाजरकोट</option><option value="जुम्ला">जुम्ला</option><option value="झापा">झापा</option><option value="डोल्पा">डोल्पा</option><option value="डोटी">डोटी</option><option value="तनहुँ">तनहुँ</option><option value="ताप्लेजुङ">ताप्लेजुङ</option><option value="तेह्रथुम">तेह्रथुम</option><option value="दोलखा">दोलखा</option><option value="दैलेख">दैलेख</option><option value="धनकुटा">धनकुटा</option><option value="धादिङ">धादिङ</option><option value="नवलपरासी (बर्दघाट सुस्ता पूर्व)">नवलपरासी (बर्दघाट सुस्ता पूर्व)</option><option value="नवलपरासी (बर्दघाट सुस्ता पश्चिम)">नवलपरासी (बर्दघाट सुस्ता पश्चिम)</option><option value="नुवाकोट">नुवाकोट</option><option value="पर्वत">पर्वत</option><option value="पाल्पा">पाल्पा</option><option value="पाँचथर">पाँचथर</option><option value="प्यूठान">प्यूठान</option><option value="बझाङ">बझाङ</option><option value="बर्दिया">बर्दिया</option><option value="बागलुङ">बागलुङ</option><option value="बाजुरा">बाजुरा</option><option value="बाँके">बाँके</option><option value="भक्तपुर">भक्तपुर</option><option value="भोजपुर">भोजपुर</option><option value="मकवानपुर">मकवानपुर</option><option value="मनाङ">मनाङ</option><option value="महोत्तरी">महोत्तरी</option><option value="मुगु">मुगु</option><option value="मुस्ताङ">मुस्ताङ</option><option value="मोरङ">मोरङ</option><option value="म्याग्दी">म्याग्दी</option><option value="रसुवा">रसुवा</option><option value="रामेछाप">रामेछाप</option><option value="रोल्पा">रोल्पा</option><option value="रुकुम (पूर्वी)">रुकुम (पूर्वी)</option><option value="रुकुम (पश्चिमी)">रुकुम (पश्चिमी)</option><option value="रुपन्देही">रुपन्देही</option><option value="ललितपुर">ललितपुर</option><option value="लम्जुङ">लम्जुङ</option><option value="बारा">बारा</option><option value="बर्दिया">बर्दिया</option><option value="बागलुङ">बागलुङ</option><option value="बाजुरा">बाजुरा</option><option value="बाँके">बाँके</option><option value="बुटवल">बुटवल</option><option value="भक्तपुर">भक्तपुर</option><option value="भोजपुर">भोजपुर</option><option value="मकवानपुर">मकवानपुर</option><option value="मनाङ">मनाङ</option><option value="महोत्तरी">महोत्तरी</option><option value="मुगु">मुगु</option><option value="मुस्ताङ">मुस्ताङ</option><option value="मोरङ">मोरङ</option><option value="म्याग्दी">म्याग्दी</option><option value="रसुवा">रसुवा</option><option value="रामेछाप">रामेछाप</option><option value="रोल्पा">रोल्पा</option><option value="रुकुम (पूर्वी)">रुकुम (पूर्वी)</option><option value="रुकुम (पश्चिमी)">रुकुम (पश्चिमी)</option><option value="रुपन्देही">रुपन्देही</option><option value="ललितपुर">ललितपुर</option><option value="लम्जुङ">लम्जुङ</option><option value="बारा">बारा</option>
+                    </select>
+                    <select id="borrower_local_body_type" class="input-field w-32">
+                        <option value="">प्रकार</option>
+                        <option value="महानगरपालिका">महानगरपालिका</option>
+                        <option value="उप-महानगरपालिका">उप-महानगरपालिका</option>
+                        <option value="नगरपालिका">नगरपालिका</option>
+                        <option value="गाउँपालिका">गाउँपालिका</option>
+                    </select>
+                    <input type="text" id="borrower_local_body_name" class="input-field" placeholder="पालिकाको नाम">
+                    <span>वडा नं.</span>
+                    <input type="text" id="borrower_ward_no" class="input-field w-16" placeholder="वडा">
+                </div>
+            </div>
+            <div id="borrower_temporary_address_fields" style="display: none;">
+                <div class="form-row mt-2">
+                    <label for="borrower_temp_district">ठेगाना (अस्थायी ठेगाना):</label>
+                    <span>जिल्ला</span>
+                    <input type="text" id="borrower_temp_district" class="input-field" placeholder="जिल्ला">
+                    <select id="borrower_temp_local_body_type" class="input-field w-32">
+                        <option value="">प्रकार</option>
+                        <option value="महानगरपालिका">महानगरपालिका</option>
+                        <option value="उप-महानगरपालिका">उप-महानगरपालिका</option>
+                        <option value="नगरपालिका">नगरपालिका</option>
+                        <option value="गाउँपालिका">गाउँपालिका</option>
+                    </select>
+                    <input type="text" id="borrower_temp_local_body_name" class="input-field" placeholder="पालिकाको नाम">
+                    <span>वडा नं.</span>
+                    <input type="text" id="borrower_temp_ward_no" class="input-field w-16" placeholder="वडा">
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="form-row">
+                <label for="lender_name">साहुको नाम:</label>
+                <input type="text" id="lender_name" class="input-field" placeholder="साहुको पूरा नाम">
+            </div>
+            <div class="form-row mt-2">
+                <label for="lender_grandparent_name">हजुरबुवाको नाम:</label>
+                <input type="text" id="lender_grandparent_name" class="input-field" placeholder="हजुरबुवाको नाम">
+            </div>
+            <div class="form-row mt-2">
+                <label for="lender_parent_name">बुवाको नाम:</label>
+                <input type="text" id="lender_parent_name" class="input-field" placeholder="बुवाको नाम">
+            </div>
+
+            <div class="form-row mt-2">
+                <label for="lender_address_type">ठेगानाको प्रकार:</label>
+                <div class="flex items-center space-x-4">
+                    <label class="inline-flex items-center">
+                        <input type="radio" name="lender_address_type" value="permanent" class="form-radio" checked>
+                        <span class="ml-2">स्थायी</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                        <input type="radio" name="lender_address_type" value="temporary" class="form-radio">
+                        <span class="ml-2">अस्थायी</span>
+                    </label>
+                </div>
+            </div>
+
+            <div id="lender_permanent_address_fields">
+                <div class="form-row mt-2">
+                    <label for="lender_district">ठेगाना:</label>
+                    <span>जिल्ला</span>
+                    <select id="lender_district" class="input-field">
+                        <option value="">जिल्ला छान्नुहोस्</option>
+                        <option value="अछाम">अछाम</option><option value="अर्घाखाँची">अर्घाखाँची</option><option value="इलाम">इलाम</option><option value="उदयपुर">उदयपुर</option><option value="ओखलढुङ्गा">ओखलढुङ्गा</option><option value="कञ्चनपुर">कञ्चनपुर</option><option value="कपिलवस्तु">कपिलवस्तु</option><option value="काभ्रेपलाञ्चोक">काभ्रेपलाञ्चोक</option><option value="कास्की">कास्की</option><option value="काठमाडौं">काठमाडौं</option><option value="कालिकोट">कालिकोट</option><option value="कान्छी">कान्छी</option><option value="खुम्बु">खुम्बु</option><option value="खोटाङ">खोटाङ</option><option value="गुल्मी">गुल्मी</option><option value="गोरखा">गोरखा</option><option value="चितवन">चितवन</option><option value="जाजरकोट">जाजरकोट</option><option value="जाजरकोट">जाजरकोट</option><option value="जुम्ला">जुम्ला</option><option value="झापा">झापा</option><option value="डोल्पा">डोल्पा</option><option value="डोटी">डोटी</option><option value="तनहुँ">तनहुँ</option><option value="ताप्लेजुङ">ताप्लेजुङ</option><option value="तेह्रथुम">तेह्रथुम</option><option value="दोलखा">दोलखा</option><option value="दैलेख">दैलेख</option><option value="धनकुटा">धनकुटा</option><option value="धादिङ">धादिङ</option><option value="नवलपरासी (बर्दघाट सुस्ता पूर्व)">नवलपरासी (बर्दघाट सुस्ता पूर्व)</option><option value="नवलपरासी (बर्दघाट सुस्ता पश्चिम)">नवलपरासी (बर्दघाट सुस्ता पश्चिम)</option><option value="नुवाकोट">नुवाकोट</option><option value="पर्वत">पर्वत</option><option value="पाल्पा">पाल्पा</option><option value="पाँचथर">पाँचथर</option><option value="प्यूठान">प्यूठान</option><option value="बझाङ">बझाङ</option><option value="बर्दिया">बर्दिया</option><option value="बागलुङ">बागलुङ</option><option value="बाजुरा">बाजुरा</option><option value="बाँके">बाँके</option><option value="भक्तपुर">भक्तपुर</option><option value="भोजपुर">भोजपुर</option><option value="मकवानपुर">मकवानपुर</option><option value="मनाङ">मनाङ</option><option value="महोत्तरी">महोत्तरी</option><option value="मुगु">मुगु</option><option value="मुस्ताङ">मुस्ताङ</option><option value="मोरङ">मोरङ</option><option value="म्याग्दी">म्याग्दी</option><option value="रसुवा">रसुवा</option><option value="रामेछाप">रामेछाप</option><option value="रोल्पा">रोल्पा</option><option value="रुकुम (पूर्वी)">रुकुम (पूर्वी)</option><option value="रुकुम (पश्चिमी)">रुकुम (पश्चिमी)</option><option value="रुपन्देही">रुपन्देही</option><option value="ललितपुर">ललितपुर</option><option value="लम्जुङ">लम्जुङ</option><option value="बारा">बारा</option>
+                    </select>
+                    <select id="lender_local_body_type" class="input-field w-32">
+                        <option value="">प्रकार</option>
+                        <option value="महानगरपालिका">महानगरपालिका</option>
+                        <option value="उप-महानगरपालिका">उप-महानगरपालिका</option>
+                        <option value="नगरपालिका">नगरपालिका</option>
+                        <option value="गाउँपालिका">गाउँपालिका</option>
+                    </select>
+                    <input type="text" id="lender_local_body_name" class="input-field" placeholder="पालिकाको नाम">
+                    <span>वडा नं.</span>
+                    <input type="text" id="lender_ward_no" class="input-field w-16" placeholder="वडा">
+                </div>
+            </div>
+            <div id="lender_temporary_address_fields" style="display: none;">
+                <div class="form-row mt-2">
+                    <label for="lender_temp_district">ठेगाना (अस्थायी ठेगाना):</label>
+                    <span>जिल्ला</span>
+                    <input type="text" id="lender_temp_district" class="input-field" placeholder="जिल्ला">
+                    <select id="lender_temp_local_body_type" class="input-field w-32">
+                        <option value="">प्रकार</option>
+                        <option value="महानगरपालिका">महानगरपालिका</option>
+                        <option value="उप-महानगरपालिका">उप-महानगरपालिका</option>
+                        <option value="नगरपालिका">नगरपालिका</option>
+                        <option value="गाउँपालिका">गाउँपालिका</option>
+                    </select>
+                    <input type="text" id="lender_temp_local_body_name" class="input-field" placeholder="पालिकाको नाम">
+                    <span>वडा नं.</span>
+                    <input type="text" id="lender_temp_ward_no" class="input-field w-16" placeholder="वडा">
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="form-row">
+                <label for="loan_amount_num">ऋण रकम:</label>
+                <span>रु.</span>
+                <input type="number" id="loan_amount_num" class="input-field" placeholder="अंकमा रकम" min="0">
+                <span>(अक्षेरुपीः <span id="loan_amount_words" class="amount-in-words">.........................</span> मात्र)</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="form-row">
+                <label for="interest_rate">ब्याज दर:</label>
+                <input type="number" id="interest_rate" class="input-field w-20" placeholder="%" min="0" max="100" step="0.01">
+                <span>% वार्षिक</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="form-row">
+                <label for="loan_period">ऋण अवधि:</label>
+                <input type="number" id="loan_period_year" class="input-field w-20" placeholder="वर्ष">
+                <span>वर्ष</span>
+                <input type="number" id="loan_period_month" class="input-field w-20" placeholder="महिना">
+                <span>महिना</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="form-row">
+                <label for="place_agreed">स्थान:</label>
+                <input type="text" id="place_agreed" class="input-field" placeholder="तमसुक लेखिएको स्थान">
+            </div>
+        </div>
+
+        <div class="form-group text-area-group">
+            <label for="additional_terms" class="block text-gray-700 text-sm font-bold mb-2">अन्य शर्तहरू (यदि छन् भने):</label>
+            <textarea id="additional_terms" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="यहाँ थप शर्तहरू लेख्नुहोस्..."></textarea>
+        </div>
+
+        <div class="signature-section">
+            <div class="signature-block">
+                <div class="signature-line"></div>
+                <div class="signature-label">ऋणीको दस्तखत</div>
+            </div>
+            <div class="signature-block">
+                <div class="signature-line"></div>
+                <div class="signature-label">साहुको दस्तखत</div>
+            </div>
+        </div>
+
+        <div class="witness-section">
+            <h3 class="text-lg font-semibold mb-4 text-gray-800">साक्षीहरू:</h3>
+            <div id="witnesses-container">
+                </div>
+            <button type="button" id="add-witness-btn" class="add-witness-btn">साक्षी थप्नुहोस्</button>
+        </div>
+    </div>
+
+    <div class="preview-container">
+        <h3>तमसुकको प्रिभ्यू (स्क्रिनमा हेर्नका लागि)</h3>
+        <pre id="formPreviewScreen" class="preview-content"></pre>
+
+        <div id="printOutputArea" style="display: none;">
+            <div class="print-left-margin-area">
+                <div class="rotated-witness-heading">साक्षीको नाम र विवरण</div>
+                <div class="print-witness-column" id="printWitnessColumn">
+                    <div class="witness-entry-print">
+    <div class="rotated-witness-heading">नाम:</div>
+    <div class="rotated-witness-heading"id="printWitnessColumn"></div>
+    <div class="rotated-witness-heading"id="printWitnessColumn">थर:</div>
+    <div class="rotated-witness-heading"id="printWitnessColumn"></div>
+    <div class="rotated-witness-heading"id="printWitnessColumn">सम्पर्क नं.:</div>
+    <div class="rotated-witness-heading"id="printWitnessColumn"></div>
+    <div class="witness-label-vertical">लेखक:</div>
+    <div class="witness-line-vertical"></div>
+    <div class="witness-label-vertical">दस्तखत:</div>
+    <div class="witness-line-vertical"></div>
+</div>
+                    </div> <div class="rotated-witness-heading">नाम</div>
+                <div class="print-witness-column" id="printWitnessColumn">
+                    </div>
+            </div>
+            <div class="print-main-content" id="printMainContent">
+                </div>
+            <div class="borrower-thumbprint-boxes" style="display: none;">
+                <div class="thumbprint-box">बाँ</div>
+                <div class="thumbprint-box">दाँ</div>
+            </div>
+        </div>
+
+        <div class="print-signature-boxes" style="display: none;">
+            <div class="print-signature-box">दा.</div>
+            <div class="print-signature-box">बा.</div>
+        </div>
+        <button onclick="window.print()" class="add-witness-btn mt-4 w-full bg-blue-600 hover:bg-blue-700">प्रिन्ट गर्नुहोस्</button>
+    </div>
+
+    <script>
+        // Function to convert Nepali numbers to Nepali words
+        const nepaliNumbersToWords = (num) => {
+            if (num === 0) return "शून्य";
+            if (num < 0) return "माइनस " + nepaliNumbersToWords(Math.abs(num));
+
+            const units = ["", "एक", "दुई", "तीन", "चार", "पाँच", "छ", "सात", "आठ", "नौ"];
+            const teens = ["", "एघार", "बाह्र", "तेह्र", "चौध", "पन्ध्र", "सोह्र", "सत्र", "अठार", "उनाइस"];
+            const tens = ["", "दश", "बिस", "तीस", "चालीस", "पचास", "साठी", "सत्तर", "अस्सी", "नब्बे"];
+            
+            let result = "";
+
+            if (num >= 10000000) { // Crores
+                result += nepaliNumbersToWords(Math.floor(num / 10000000)) + " करोड ";
+                num %= 10000000;
+            }
+            if (num >= 100000) { // Lakhs
+                result += nepaliNumbersToWords(Math.floor(num / 100000)) + " लाख ";
+                num %= 100000;
+            }
+            if (num >= 1000) { // Thousands
+                result += nepaliNumbersToWords(Math.floor(num / 1000)) + " हजार ";
+                num %= 1000;
+            }
+            if (num >= 100) { // Hundreds
+                result += units[Math.floor(num / 100)] + " सय ";
+                num %= 100;
+            }
+
+            if (num > 0) { // Remainder less than 100
+                if (num < 10) {
+                    result += units[num];
+                } else if (num < 20) {
+                    result += teens[num - 10];
+                } else {
+                    result += tens[Math.floor(num / 10)] + (num % 10 !== 0 ? " " + units[num % 10] : "");
+                }
+            }
+            return result.trim();
+        };
+
+        // Get references to all input fields and preview areas
+        const formInputs = document.querySelectorAll('.form-container input, .form-container select, .form-container textarea');
+        const formPreviewScreen = document.getElementById('formPreviewScreen');
+        const printWitnessColumn = document.getElementById('printWitnessColumn');
+        const printMainContent = document.getElementById('printMainContent');
+        const loanAmountNumInput = document.getElementById('loan_amount_num');
+        const loanAmountWordsSpan = document.getElementById('loan_amount_words');
+        const witnessesContainer = document.getElementById('witnesses-container');
+        const addWitnessBtn = document.getElementById('add-witness-btn');
+
+        // Address type radio buttons and field containers
+        const borrowerAddressTypeRadios = document.querySelectorAll('input[name="borrower_address_type"]');
+        const borrowerPermanentFields = document.getElementById('borrower_permanent_address_fields');
+        const borrowerTemporaryFields = document.getElementById('borrower_temporary_address_fields');
+        const borrowerTempLocalBodyTypeSelect = document.getElementById('borrower_temp_local_body_type');
+
+
+        const lenderAddressTypeRadios = document.querySelectorAll('input[name="lender_address_type"]');
+        const lenderPermanentFields = document.getElementById('lender_permanent_address_fields');
+        const lenderTemporaryFields = document.getElementById('lender_temporary_address_fields');
+        const lenderTempLocalBodyTypeSelect = document.getElementById('lender_temp_local_body_type');
+
+
+        let witnessCount = 0;
+
+        // Function to add a new witness input block
+        const addWitnessField = () => {
+            witnessCount++;
+            const witnessDiv = document.createElement('div');
+            witnessDiv.className = 'witness-entry';
+            witnessDiv.innerHTML = `
+                <div class="witness-row">
+                    <span>साक्षी ${witnessCount} नाम:</span>
+                    <input type="text" id="witness_name_${witnessCount}" class="input-field" placeholder="नाम">
+                </div>
+                <div class="witness-row">
+                    <span>थर:</span>
+                    <input type="text" id="witness_surname_${witnessCount}" class="input-field" placeholder="थर">
+                </div>
+                <div class="witness-row">
+                    <span>सम्पर्क नं.:</span>
+                    <input type="text" id="witness_phone_${witnessCount}" class="input-field" placeholder="सम्पर्क नं.">
+                </div>
+                <div class="witness-row">
+                    <span>लेखक:</span>
+                    <input type="text" id="witness_writer_${witnessCount}" class="input-field" placeholder="लेखकको नाम">
+                </div>
+                <div class="witness-row">
+                    <span>दस्तखत:</span>
+                    <div class="signature-line flex-grow"></div>
+                </div>
+            `;
+            witnessesContainer.appendChild(witnessDiv);
+
+            // Add event listeners to the newly added inputs
+            const newInputs = witnessDiv.querySelectorAll('input');
+            newInputs.forEach(input => {
+                input.addEventListener('input', generatePreview);
+            });
+            generatePreview(); // Update preview after adding a new field
+        };
+
+        // Initial witness field
+        addWitnessField();
+
+        // Add event listener for "Add Witness" button
+        addWitnessBtn.addEventListener('click', addWitnessField);
+
+        // Function to generate the preview text for both screen and print
+        function generatePreview() {
+            const dateYear = document.getElementById('date_nepali_year').value || '.......';
+            const dateMonth = document.getElementById('date_nepali_month').value || '.......';
+            const dateDay = document.getElementById('date_nepali_day').value || '.......';
+
+            const borrowerName = document.getElementById('borrower_name').value || '.........................';
+            const borrowerGrandparentName = document.getElementById('borrower_grandparent_name').value || '.........................';
+            const borrowerParentName = document.getElementById('borrower_parent_name').value || '.........................';
+            const borrowerDistrict = document.getElementById('borrower_district').value || '';
+            const borrowerLocalBodyType = document.getElementById('borrower_local_body_type').value || '';
+            const borrowerLocalBodyName = document.getElementById('borrower_local_body_name').value || '';
+            const borrowerWardNo = document.getElementById('borrower_ward_no').value || '';
+            const borrowerTempDistrict = document.getElementById('borrower_temp_district').value || '';
+            const borrowerTempLocalBodyType = document.getElementById('borrower_temp_local_body_type').value || ''; // New temporary local body type
+            const borrowerTempLocalBodyName = document.getElementById('borrower_temp_local_body_name').value || '';
+            const borrowerTempWardNo = document.getElementById('borrower_temp_ward_no').value || '';
+
+
+            const lenderName = document.getElementById('lender_name').value || '.........................';
+            const lenderGrandparentName = document.getElementById('lender_grandparent_name').value || '.........................';
+            const lenderParentName = document.getElementById('lender_parent_name').value || '.........................';
+            const lenderDistrict = document.getElementById('lender_district').value || '';
+            const lenderLocalBodyType = document.getElementById('lender_local_body_type').value || '';
+            const lenderLocalBodyName = document.getElementById('lender_local_body_name').value || '';
+            const lenderWardNo = document.getElementById('lender_ward_no').value || '';
+            const lenderTempDistrict = document.getElementById('lender_temp_district').value || '';
+            const lenderTempLocalBodyType = document.getElementById('lender_temp_local_body_type').value || ''; // New temporary local body type
+            const lenderTempLocalBodyName = document.getElementById('lender_temp_local_body_name').value || '';
+            const lenderTempWardNo = document.getElementById('lender_temp_ward_no').value || '';
+
+            const loanAmountNum = parseFloat(document.getElementById('loan_amount_num').value) || 0;
+            const loanAmountWords = nepaliNumbersToWords(loanAmountNum);
+            loanAmountWordsSpan.textContent = loanAmountWords; // Update the span in the form itself
+
+            const interestRate = document.getElementById('interest_rate').value || '....';
+            const loanPeriodYear = document.getElementById('loan_period_year').value || '....';
+            const loanPeriodMonth = document.getElementById('loan_period_month').value || '....';
+            const placeAgreed = document.getElementById('place_agreed').value || '....................';
+            const additionalTerms = document.getElementById('additional_terms').value || '';
+
+            // Helper to check if an address is sufficiently complete for display
+            const isAddressFieldsFilled = (district, lbType, lbName, wardNo) => {
+                return (district !== '' && lbType !== '' && lbName !== '' && wardNo !== '');
+            };
+
+            // Helper to get formatted core address part with placeholders
+            const getFormattedAddressString = (district, lbType, lbName, wardNo) => {
+                const districtPart = district ? `जिल्ला ${district}` : '............... जिल्ला';
+                let localBodyPart = '';
+                if (lbType && lbName) {
+                    localBodyPart = `${lbType}/${lbName}`;
+                } else if (lbName) {
+                    localBodyPart = lbName;
+                } else {
+                    localBodyPart = '............... गाउँपालिका/नगरपालिका/उप-महानगरपालिका/महानगरपालिका';
+                }
+                const wardPart = wardNo ? `वडा नं. ${wardNo}` : 'वडा नं. ....';
+
+                return `${districtPart} ${localBodyPart} ${wardPart}`;
+            };
+
+
+            // Lender's address for the main passage
+            let lenderFinalAddressString = '';
+            const lenderSelectedAddressType = document.querySelector('input[name="lender_address_type"]:checked').value;
+
+            const lenderPermanentFilled = isAddressFieldsFilled(lenderDistrict, lenderLocalBodyType, lenderLocalBodyName, lenderWardNo);
+            const lenderTemporaryFilled = isAddressFieldsFilled(lenderTempDistrict, lenderTempLocalBodyType, lenderTempLocalBodyName, lenderTempWardNo);
+
+            if (lenderSelectedAddressType === 'permanent' && lenderPermanentFilled) {
+                lenderFinalAddressString = `${getFormattedAddressString(lenderDistrict, lenderLocalBodyType, lenderLocalBodyName, lenderWardNo)} स्थायी ठेगाना`;
+            } else if (lenderSelectedAddressType === 'temporary' && lenderTemporaryFilled) {
+                lenderFinalAddressString = `${getFormattedAddressString(lenderTempDistrict, lenderTempLocalBodyType, lenderTempLocalBodyName, lenderTempWardNo)} अस्थायी ठेगाना`;
+            } else {
+                // Fallback to placeholders if selected type is not filled or no type selected (default to permanent placeholder)
+                lenderFinalAddressString = `............... जिल्ला...............गाउँपालिका/नगरपालिका/उप-महानगरपालिका/महानगरपालिका वडा नं. ...., ...... स्थायी ठेगाना`;
+                if (lenderSelectedAddressType === 'temporary') {
+                    lenderFinalAddressString = `............... जिल्ला...............गाउँपालिका/नगरपालिका/उप-महानगरपालिका/महानगरपालिका वडा नं. ...., ...... अस्थायी ठेगाना`;
+                }
+            }
+
+            // Borrower's address for the main passage
+            let borrowerFinalAddressString = '';
+            const borrowerSelectedAddressType = document.querySelector('input[name="borrower_address_type"]:checked').value;
+
+            const borrowerPermanentFilled = isAddressFieldsFilled(borrowerDistrict, borrowerLocalBodyType, borrowerLocalBodyName, borrowerWardNo);
+            const borrowerTemporaryFilled = isAddressFieldsFilled(borrowerTempDistrict, borrowerTempLocalBodyType, borrowerTempLocalBodyName, borrowerTempWardNo);
+
+            if (borrowerSelectedAddressType === 'permanent' && borrowerPermanentFilled) {
+                borrowerFinalAddressString = `${getFormattedAddressString(borrowerDistrict, borrowerLocalBodyType, borrowerLocalBodyName, borrowerWardNo)} स्थायी ठेगाना`;
+            } else if (borrowerSelectedAddressType === 'temporary' && borrowerTemporaryFilled) {
+                borrowerFinalAddressString = `${getFormattedAddressString(borrowerTempDistrict, borrowerTempLocalBodyType, borrowerTempLocalBodyName, borrowerTempWardNo)} अस्थायी ठेगाना`;
+            } else {
+                // Fallback to placeholders if selected type is not filled or no type selected (default to permanent placeholder)
+                borrowerFinalAddressString = `............... जिल्ला...............गाउँपालिका/नगरपालिका/उप-महानगरपालिका/महानगरपालिका वडा नं. ...., ...... स्थायी ठेगाना`;
+                if (borrowerSelectedAddressType === 'temporary') {
+                    borrowerFinalAddressString = `............... जिल्ला...............गाउँपालिका/नगरपालिका/उप-महानगरपालिका/महानगरपालिका वडा नं. ...., ...... अस्थायी ठेगाना`;
+                }
+            }
+
+            // --- Generate Witness Block Content for Print ---
+            let printWitnessContent = '';
+            if (witnessCount > 0) {
+                for (let i = 1; i <= witnessCount; i++) {
+                    const witnessName = document.getElementById(`witness_name_${i}`).value || '....................';
+                    const witnessSurname = document.getElementById(`witness_surname_${i}`).value || '....................'; // New surname field
+                    const witnessPhone = document.getElementById(`witness_phone_${i}`).value || '....................';
+                    const witnessWriter = document.getElementById(`witness_writer_${i}`).value || '....................';
+                    
+                    printWitnessContent += `
+<div class="witness-entry-print">
+    <div class="witness-label-vertical">नाम:</div>
+    <div class="witness-line-vertical"></div>
+    <div class="witness-label-vertical">थर:</div>
+    <div class="witness-line-vertical"></div>
+    <div class="witness-label-vertical">सम्पर्क नं.:</div>
+    <div class="witness-line-vertical"></div>
+    <div class="witness-label-vertical">लेखक:</div>
+    <div class="witness-line-vertical"></div>
+    <div class="witness-label-vertical">दस्तखत:</div>
+    <div class="witness-line-vertical"></div>
+</div>
+`;
+                }
+            }
+            printWitnessColumn.innerHTML = printWitnessContent;
+
+
+            // --- Generate Main Content for Print ---
+            const printMainContentText = `
+<div class="tamasuk-title">तमसुक</div>
+
+<div class="tamasuk-passage">
+    आगे ${lenderFinalAddressString} भएका श्री ${lenderName} (हजुरबुवाको नाम ${lenderGrandparentName}), श्री ${lenderParentName} (बुवाको नाम), श्री ${lenderName} ले
+    ${borrowerFinalAddressString} निवासी श्री ${borrowerName} (हजुरबुवाको नाम ${borrowerGrandparentName}), श्री ${borrowerParentName} (बुवाको नाम), बाट मिति ${dateYear}/${dateMonth}/${dateDay} गते रु. ${loanAmountNum.toLocaleString('en-IN')} (अक्षेरुपीः ${loanAmountWords} मात्र) गर्नका बार्षिक ${interestRate}% का दरले ब्याज लगाई आगामी ${loanPeriodYear} वर्ष ${loanPeriodMonth} महिना गते सम्ममा रु. ${loanAmountNum.toLocaleString('en-IN')} (अक्षेरुपीः ${loanAmountWords} मात्र) को साँवा र ब्याज एकमुष्ट बुझाउने भाका राख्दै सो म्यादमा बुझाउन नसकी म्याद नाघ्यो भने प्रचलित नेपाल कानून बमोजिम मेरो घर घरानाबाट असूल उपर गरी लिनु भनी मेरो मनोमन राजी खुसी ${placeAgreed} (स्थान) बसी कपालि तमसुक लेखी तपाई साहुलाई दिए साक्षी बाँया किनाराको सदर इति संवत ${dateYear} साल ${dateMonth} महिना ${dateDay} रोज शुभम् ।
+</div>
+
+${additionalTerms ? `<div class="tamasuk-passage">\nअन्य शर्तहरू:\n${additionalTerms}\n</div>` : ''}
+`;
+            printMainContent.innerHTML = printMainContentText;
+
+
+            // --- Generate Screen Preview Content (simpler, pre-based) ---
+            let screenWitnessContent = '';
+            if (witnessCount > 0) {
+                screenWitnessContent += `साक्षीहरू:\n`;
+                for (let i = 1; i <= witnessCount; i++) {
+                    const witnessName = document.getElementById(`witness_name_${i}`).value || '....................';
+                    const witnessSurname = document.getElementById(`witness_surname_${i}`).value || '....................';
+                    const witnessPhone = document.getElementById(`witness_phone_${i}`).value || '....................';
+                    const witnessWriter = document.getElementById(`witness_writer_${i}`).value || '....................';
+                    screenWitnessContent += `साक्षी ${i} नाम: ${witnessName}\nथर: ${witnessSurname}\nसम्पर्क नं.: ${witnessPhone}\nलेखक: ${witnessWriter}\nदस्तखत: ....................\n\n`;
+                }
+            }
+
+            const screenPreviewText = `
+                                    तमसुक
+
+आगे ${lenderFinalAddressString} भएका श्री ${lenderName} (हजुरबुवाको नाम ${lenderGrandparentName}), श्री ${lenderParentName} (बुवाको नाम), श्री ${lenderName} ले
+${borrowerFinalAddressString} निवासी श्री ${borrowerName} (हजुरबुवाको नाम ${borrowerGrandparentName}), श्री ${borrowerParentName} (बुवाको नाम), बाट मिति ${dateYear}/${dateMonth}/${dateDay} गते रु. ${loanAmountNum.toLocaleString('en-IN')} (अक्षेरुपीः ${loanAmountWords} मात्र) गर्नका बार्षिक ${interestRate}% का दरले ब्याज लगाई आगामी ${loanPeriodYear} वर्ष ${loanPeriodMonth} महिना गते सम्ममा रु. ${loanAmountNum.toLocaleString('en-IN')} (अक्षेरुपीः ${loanAmountWords} मात्र) को साँवा र ब्याज एकमुष्ट बुझाउने भाका राख्दै सो म्यादमा बुझाउन नसकी म्याद नाघ्यो भने प्रचलित नेपाल कानून बमोजिम मेरो घर घरानाबाट असूल उपर गरी लिनु भनी मेरो मनोमन राजी खुसी ${placeAgreed} (स्थान) बसी कपालि तमसुक लेखी तपाई साहुलाई दिए साक्षी बाँया किनाराको सदर इति संवत ${dateYear} साल ${dateMonth} महिना ${dateDay} रोज शुभम् ।
+
+${additionalTerms ? `\nअन्य शर्तहरू:\n${additionalTerms}\n` : ''}
+
+ऋणीको दस्तखत: ..........................................
+साहुको दस्तखत: ..........................................
+
+${screenWitnessContent}
+`;
+            formPreviewScreen.textContent = screenPreviewText;
+        }
+
+        // Add event listeners to all input fields to update the preview on change
+        formInputs.forEach(input => {
+            input.addEventListener('input', generatePreview);
+            input.addEventListener('change', generatePreview); // For select elements
+        });
+
+        // Address type radio button listeners
+        borrowerAddressTypeRadios.forEach(radio => {
+            radio.addEventListener('change', () => {
+                if (radio.value === 'permanent') {
+                    borrowerPermanentFields.style.display = 'block';
+                    borrowerTemporaryFields.style.display = 'none';
+                    // Clear temporary fields when switching to permanent
+                    document.getElementById('borrower_temp_district').value = '';
+                    document.getElementById('borrower_temp_local_body_type').value = '';
+                    document.getElementById('borrower_temp_local_body_name').value = '';
+                    document.getElementById('borrower_temp_ward_no').value = '';
+                } else {
+                    borrowerPermanentFields.style.display = 'none';
+                    borrowerTemporaryFields.style.display = 'block';
+                    // Clear permanent fields when switching to temporary
+                    document.getElementById('borrower_district').value = '';
+                    document.getElementById('borrower_local_body_type').value = '';
+                    document.getElementById('borrower_local_body_name').value = '';
+                    document.getElementById('borrower_ward_no').value = '';
+                }
+                generatePreview();
+            });
+        });
+
+        lenderAddressTypeRadios.forEach(radio => {
+            radio.addEventListener('change', () => {
+                if (radio.value === 'permanent') {
+                    lenderPermanentFields.style.display = 'block';
+                    lenderTemporaryFields.style.display = 'none';
+                    // Clear temporary fields when switching to permanent
+                    document.getElementById('lender_temp_district').value = '';
+                    document.getElementById('lender_temp_local_body_type').value = '';
+                    document.getElementById('lender_temp_local_body_name').value = '';
+                    document.getElementById('lender_temp_ward_no').value = '';
+                } else {
+                    lenderPermanentFields.style.display = 'none';
+                    lenderTemporaryFields.style.display = 'block';
+                    // Clear permanent fields when switching to temporary
+                    document.getElementById('lender_district').value = '';
+                    document.getElementById('lender_local_body_type').value = '';
+                    document.getElementById('lender_local_body_name').value = '';
+                    document.getElementById('lender_ward_no').value = '';
+                }
+                generatePreview();
+            });
+        });
+
+
+        // Initial preview generation when the page loads
+        generatePreview();
+
+        // Show/hide print-specific elements based on print media
+        window.onbeforeprint = () => {
+            document.getElementById('formPreviewScreen').style.display = 'none';
+            document.getElementById('printOutputArea').style.display = 'block';
+            document.querySelector('.print-signature-boxes').style.display = 'flex';
+            document.querySelector('.borrower-thumbprint-boxes').style.display = 'flex'; // Show thumbprint boxes
+            document.querySelector('.preview-container h3').style.display = 'none';
+        };
+        window.onafterprint = () => {
+            document.getElementById('formPreviewScreen').style.display = 'block';
+            document.getElementById('printOutputArea').style.display = 'none';
+            document.querySelector('.print-signature-boxes').style.display = 'none';
+            document.querySelector('.borrower-thumbprint-boxes').style.display = 'none'; // Hide thumbprint boxes
+            document.querySelector('.preview-container h3').style.display = 'block';
+        };
+    </script>
+</body>
+</html>
